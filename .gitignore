@@ -1,2 +1,8 @@
-config/databases.yml
-log/
+web/bundles/
+app/bootstrap.php.cache
+app/config/parameters.yml
+app/cache/*
+app/logs/*
+build/
+vendor/
+composer.phar
