@@ -1,0 +1,39 @@
+Unsapa\IPWBundle\Entity\User:
+    type: entity
+    table: ipw_user
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        lastname:
+            type: string
+            length: '127'
+            nullable: true
+        firstname:
+            type: string
+            length: '127'
+            nullable: true
+        address:
+            type: string
+            length: '255'
+            nullable: true
+        zipcode:
+            type: string
+            length: '10'
+            nullable: true
+        city:
+            type: string
+            length: '127'
+            nullable: true
+        phone:
+            type: string
+            length: '15'
+            nullable: true
+    lifecycleCallbacks: {  }
+    manyToOne:
+        role:
+            targetEntity: Unsapa\IPWBundle\Entity\Role
+
+

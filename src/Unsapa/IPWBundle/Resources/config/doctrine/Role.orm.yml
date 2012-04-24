@@ -1,0 +1,13 @@
+Unsapa\IPWBundle\Entity\Role:
+    type: entity
+    table: ipw_role
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '64'
+    lifecycleCallbacks: {  }
