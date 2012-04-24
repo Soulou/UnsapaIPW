@@ -1,0 +1,25 @@
+Unsapa\IPWBundle\Entity\Exam:
+    type: entity
+    table: ipw_exam
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            type: string
+            length: '255'
+        desc:
+            type: text
+            length: null
+        exam_date:
+            type: date
+            length: null
+        coef:
+            type: float
+            length: null
+    lifecycleCallbacks: {  }
+    manyToOne:
+      promo:
+        targetEntity: Unsapa\IPWBundle\Entity\Promo
