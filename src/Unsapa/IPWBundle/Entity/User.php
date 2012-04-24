@@ -2,17 +2,18 @@
 
 namespace Unsapa\IPWBundle\Entity;
 
+use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Unsapa\IPWBundle\Entity\Student
+ * Unsapa\IPWBundle\Entity\User
  */
-class Student
+class User extends BaseUser
 {
     /**
      * @var integer $id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $lastname
@@ -44,6 +45,11 @@ class Student
      */
     private $phone;
 
+    /**
+     * @var Unsapa\IPWBundle\Entity\Role
+     */
+    private $role;
+
 
     /**
      * Get id
@@ -56,10 +62,32 @@ class Student
     }
 
     /**
+     * Set password
+     *
+     * @param string $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
      * Set lastname
      *
      * @param string $lastname
-     * @return Student
+     * @return User
      */
     public function setLastname($lastname)
     {
@@ -81,7 +109,7 @@ class Student
      * Set firstname
      *
      * @param string $firstname
-     * @return Student
+     * @return User
      */
     public function setFirstname($firstname)
     {
@@ -103,7 +131,7 @@ class Student
      * Set address
      *
      * @param string $address
-     * @return Student
+     * @return User
      */
     public function setAddress($address)
     {
@@ -125,7 +153,7 @@ class Student
      * Set zipcode
      *
      * @param string $zipcode
-     * @return Student
+     * @return User
      */
     public function setZipcode($zipcode)
     {
@@ -147,7 +175,7 @@ class Student
      * Set city
      *
      * @param string $city
-     * @return Student
+     * @return User
      */
     public function setCity($city)
     {
@@ -169,7 +197,7 @@ class Student
      * Set phone
      *
      * @param string $phone
-     * @return Student
+     * @return User
      */
     public function setPhone($phone)
     {
@@ -185,5 +213,27 @@ class Student
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set role
+     *
+     * @param Unsapa\IPWBundle\Entity\Role $role
+     * @return User
+     */
+    public function setRole(\Unsapa\IPWBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return Unsapa\IPWBundle\Entity\Role 
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }
