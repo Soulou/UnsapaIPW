@@ -1,0 +1,13 @@
+Unsapa\IPWBundle\Entity\Promo:
+    type: entity
+    table: ipw_promo
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '32'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,3 @@
+UnsapaIPWBundle_homepage:
+    pattern:  /ipw
+    defaults: { _controller: UnsapaIPWBundle:Application:index }

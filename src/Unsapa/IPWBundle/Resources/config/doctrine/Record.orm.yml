@@ -1,0 +1,19 @@
+Unsapa\IPWBundle\Entity\Record:
+    type: entity
+    table: ipw_record
+    id:
+      student:
+        associationKey: true
+      exam:
+        associationKey: true
+    fields:
+        mark:
+            type: integer
+            length: null
+    lifecycleCallbacks: {  }
+
+    manyToOne:
+      student:
+        targetEntity: Unsapa\IPWBundle\Entity\Student
+      exam:
+        targetEntity: Unsapa\IPWBundle\Entity\Exam
