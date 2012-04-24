@@ -9,7 +9,7 @@
     <body>
         <div id="symfony-wrapper">
             <div id="symfony-header">
-                <a href="{{ path('UnsapaIPWBundle_homepage') }}">
+                <a href="{{ path('homepage') }}">
                   Page d'accueil
                 </a>
             </div>
@@ -28,10 +28,10 @@
                 {% endblock %}
             </div>
 
-            {% if code is defined %}
-                <h2>Code behind this page</h2>
-                <div class="symfony-content">{{ code|raw }}</div>
-            {% endif %}
+            <div class="fos_user_content">
+                {% block fos_user_content %}
+                {% endblock %}
+            </div>
         </div>
     </body>
 </html>

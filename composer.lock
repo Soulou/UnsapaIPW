@@ -1,22 +1,27 @@
 {
-    "hash": "9f166bb300e1950423791597a6b42562",
+    "hash": "8ff144e2cd3e6924b92300c5372825f7",
     "packages": [
         {
             "package": "doctrine/common",
-            "version": "2.2.1"
+            "version": "2.2.2"
         },
         {
             "package": "doctrine/dbal",
-            "version": "2.2.1"
+            "version": "2.2.2"
         },
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "90e39fb7ff5b4c13577602dab7e08c90067160b4"
+            "source-reference": "b6f9a57c60a0acaaf931a77e833ffeb24a3bdbf1"
         },
         {
             "package": "doctrine/orm",
             "version": "2.2.0"
+        },
+        {
+            "package": "friendsofsymfony/user-bundle",
+            "version": "dev-master",
+            "source-reference": "bace028be1f5b6a6996a5aa720d10c8eeb0f5bbb"
         },
         {
             "package": "jms/aop-bundle",
@@ -41,40 +46,40 @@
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "2634d29cc193981761e3daf28e1afc6358bb43b1"
+            "source-reference": "3acfb6afa50dd1dca387a8dfb641cd3b98a8584d"
         },
         {
             "package": "monolog/monolog",
-            "version": "1.0.2"
+            "version": "1.1.0"
         },
         {
             "package": "sensio/distribution-bundle",
             "version": "dev-master",
-            "source-reference": "12882a093af81f89ac13078904e81c308784e883"
+            "source-reference": "a2f09ae4b38533d9f16083b740f6a77fb5efd313"
         },
         {
             "package": "sensio/framework-extra-bundle",
             "version": "dev-master",
-            "source-reference": "6e3cccb66d3577fdbd5b6935a5d6b8bed8d47768"
+            "source-reference": "94a9615c6e52a3d02ca7f44eee56f20e0c5c4622"
         },
         {
             "package": "sensio/generator-bundle",
             "version": "dev-master",
-            "source-reference": "43c5c95e42e451ac7250d6a863f0540c7f266e1d"
+            "source-reference": "5f2ded5e5679f66c604f128d5650715bb81d7d7c"
         },
         {
             "package": "swiftmailer/swiftmailer",
-            "version": "4.1.5"
+            "version": "4.1.6"
         },
         {
             "package": "symfony/assetic-bundle",
             "version": "dev-master",
-            "source-reference": "b9cff021abc3d9433a892fa9908d9856393c0d09"
+            "source-reference": "d370e914e86518e88aa00ab266796ee032b8262e"
         },
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "source-reference": "289442e385e7c0fe4aa2e8884d11e774a8f9ad99"
+            "source-reference": "c86ebe447cbef3b0454bd262c28729bae0862b0b"
         },
         {
             "package": "symfony/swiftmailer-bridge",
@@ -84,23 +89,26 @@
         {
             "package": "symfony/swiftmailer-bundle",
             "version": "dev-master",
-            "source-reference": "75f8f95c201922a966274547131b33291d15d51b"
+            "source-reference": "1c6b57fe57210e9dcb5b4586d6572f47d17a25d7"
         },
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "3d84153d687c285b1356683298531421ec108359",
+            "source-reference": "f209f4fc88149de0670cde7f91caa51ae030bf51",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
             "package": "twig/extensions",
             "version": "dev-master",
-            "source-reference": "1dfff8e793f50f651c4f74f796c2c68a4aee3147"
+            "source-reference": "446d870272cd87a720e95242eade38a2acf56eaa"
         },
         {
             "package": "twig/twig",
-            "version": "1.6.2"
+            "version": "dev-master",
+            "source-reference": "02f1c567b9376a1313a4f1ece941cf5fb73c2c3c",
+            "alias": "1.8.9999999.9999999-dev"
         }
     ],
+    "packages-dev": null,
     "aliases": []
 }
