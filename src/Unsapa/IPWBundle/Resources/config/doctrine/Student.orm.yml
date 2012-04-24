@@ -1,0 +1,28 @@
+Unsapa\IPWBundle\Entity\Student:
+    type: entity
+    table: ipw_student
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        lastname:
+            type: string
+            length: '127'
+        firstname:
+            type: string
+            length: '127'
+        address:
+            type: string
+            length: '255'
+        zipcode:
+            type: string
+            length: '10'
+        city:
+            type: string
+            length: '127'
+        phone:
+            type: string
+            length: '15'
+    lifecycleCallbacks: {  }
