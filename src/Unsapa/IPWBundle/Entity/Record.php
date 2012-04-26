@@ -52,7 +52,7 @@ class Record
         return $this->mark;
     }
     /**
-     * @var Unsapa\IPWBundle\Entity\Student
+     * @var Unsapa\IPWBundle\Entity\User
      */
     private $student;
 
@@ -65,10 +65,10 @@ class Record
     /**
      * Set student
      *
-     * @param Unsapa\IPWBundle\Entity\Student $student
+     * @param Unsapa\IPWBundle\Entity\User $student
      * @return Record
      */
-    public function setStudent(\Unsapa\IPWBundle\Entity\Student $student = null)
+    public function setStudent(\Unsapa\IPWBundle\Entity\User $student = null)
     {
         $this->student = $student;
         return $this;
@@ -77,7 +77,7 @@ class Record
     /**
      * Get student
      *
-     * @return Unsapa\IPWBundle\Entity\Student 
+     * @return Unsapa\IPWBundle\Entity\User 
      */
     public function getStudent()
     {
