@@ -45,11 +45,6 @@ class User extends BaseUser
      */
     private $phone;
 
-    /**
-     * @var Unsapa\IPWBundle\Entity\Role
-     */
-    private $role;
-
 
     /**
      * Get id
@@ -213,27 +208,5 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
-    }
-
-    /**
-     * Set role
-     *
-     * @param Unsapa\IPWBundle\Entity\Role $role
-     * @return User
-     */
-    public function setRole(\Unsapa\IPWBundle\Entity\Role $role = null)
-    {
-        $this->role = $role;
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return Unsapa\IPWBundle\Entity\Role 
-     */
-    public function getRole()
-    {
-        return $this->role;
     }
 }
