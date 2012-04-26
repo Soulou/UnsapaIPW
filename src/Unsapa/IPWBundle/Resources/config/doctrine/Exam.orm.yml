@@ -10,11 +10,11 @@ Unsapa\IPWBundle\Entity\Exam:
         title:
             type: string
             length: '255'
-        desc:
+        exam_desc:
             type: text
             length: null
         exam_date:
-            type: date
+            type: datetime
             length: null
         coef:
             type: float

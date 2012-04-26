@@ -4,34 +4,27 @@
         <meta charset="UTF-8" />
         <title>{% block title %}UnsapaIPW{% endblock %}</title>
         <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />
+        {% stylesheets '@UnsapaIPWBundle/Resources/public/css/application.css' %}
+          <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
     </head>
     <body>
-        <div id="symfony-wrapper">
-            <div id="symfony-header">
-                <a href="{{ path('homepage') }}">
-                  Page d'accueil
-                </a>
-            </div>
+        {% block menu %}
+        <nav>
+        <a alt="Mes examens" href="{{ path('exams') }}">
+          <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
+        </a>
+        </nav>
+        {% endblock %}
 
-            {% block content_header %}
-                <ul id="menu">
-                    {% block content_header_more %}
-                    {% endblock %}
-                </ul>
+        {% block content %}
+        {% endblock %}
 
-                <div style="clear: both"></div>
+        <div class="fos_user_content">
+            {% block fos_user_content %}
             {% endblock %}
-
-            <div class="symfony-content">
-                {% block content %}
-                {% endblock %}
-            </div>
-
-            <div class="fos_user_content">
-                {% block fos_user_content %}
-                {% endblock %}
-            </div>
         </div>
+
     </body>
 </html>

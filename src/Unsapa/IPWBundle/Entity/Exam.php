@@ -20,17 +20,12 @@ class Exam
     private $title;
 
     /**
-     * @var text $desc
+     * @var text $exam_desc
      */
-    private $desc;
+    private $exam_desc;
 
     /**
-     * @var integer $promo
-     */
-    private $promo;
-
-    /**
-     * @var date $exam_date
+     * @var datetime $exam_date
      */
     private $exam_date;
 
@@ -38,6 +33,11 @@ class Exam
      * @var float $coef
      */
     private $coef;
+
+    /**
+     * @var Unsapa\IPWBundle\Entity\Promo
+     */
+    private $promo;
 
 
     /**
@@ -73,53 +73,31 @@ class Exam
     }
 
     /**
-     * Set desc
+     * Set exam_desc
      *
-     * @param text $desc
+     * @param text $examDesc
      * @return Exam
      */
-    public function setDesc($desc)
+    public function setExamDesc($examDesc)
     {
-        $this->desc = $desc;
+        $this->exam_desc = $examDesc;
         return $this;
     }
 
     /**
-     * Get desc
+     * Get exam_desc
      *
      * @return text 
      */
-    public function getDesc()
+    public function getExamDesc()
     {
-        return $this->desc;
-    }
-
-    /**
-     * Set promo
-     *
-     * @param integer $promo
-     * @return Exam
-     */
-    public function setPromo($promo)
-    {
-        $this->promo = $promo;
-        return $this;
-    }
-
-    /**
-     * Get promo
-     *
-     * @return integer 
-     */
-    public function getPromo()
-    {
-        return $this->promo;
+        return $this->exam_desc;
     }
 
     /**
      * Set exam_date
      *
-     * @param date $examDate
+     * @param datetime $examDate
      * @return Exam
      */
     public function setExamDate($examDate)
@@ -131,7 +109,7 @@ class Exam
     /**
      * Get exam_date
      *
-     * @return date 
+     * @return datetime 
      */
     public function getExamDate()
     {
@@ -158,5 +136,27 @@ class Exam
     public function getCoef()
     {
         return $this->coef;
+    }
+
+    /**
+     * Set promo
+     *
+     * @param Unsapa\IPWBundle\Entity\Promo $promo
+     * @return Exam
+     */
+    public function setPromo(\Unsapa\IPWBundle\Entity\Promo $promo = null)
+    {
+        $this->promo = $promo;
+        return $this;
+    }
+
+    /**
+     * Get promo
+     *
+     * @return Unsapa\IPWBundle\Entity\Promo 
+     */
+    public function getPromo()
+    {
+        return $this->promo;
     }
 }
