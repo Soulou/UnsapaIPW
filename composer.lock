@@ -1,9 +1,14 @@
 {
-    "hash": "8ff144e2cd3e6924b92300c5372825f7",
+    "hash": "4b289c22b86c0308197f14a098bbc9d5",
     "packages": [
         {
             "package": "doctrine/common",
             "version": "2.2.2"
+        },
+        {
+            "package": "doctrine/data-fixtures",
+            "version": "dev-master",
+            "source-reference": "8fb90c55c0bfbf4e090adb8c0281f9a3c81735e7"
         },
         {
             "package": "doctrine/dbal",
@@ -13,6 +18,11 @@
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
             "source-reference": "b6f9a57c60a0acaaf931a77e833ffeb24a3bdbf1"
+        },
+        {
+            "package": "doctrine/doctrine-fixtures-bundle",
+            "version": "dev-master",
+            "source-reference": "33b267d3068d6c2f8daa0b417285cf76e7f82fc4"
         },
         {
             "package": "doctrine/orm",
@@ -65,7 +75,7 @@
         {
             "package": "sensio/generator-bundle",
             "version": "dev-master",
-            "source-reference": "5f2ded5e5679f66c604f128d5650715bb81d7d7c"
+            "source-reference": "5b59f6c5f52cc4fc8719640d7dadf2d6ddcc7ed2"
         },
         {
             "package": "swiftmailer/swiftmailer",
@@ -79,7 +89,7 @@
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "source-reference": "c86ebe447cbef3b0454bd262c28729bae0862b0b"
+            "source-reference": "120ef1707cd5d3c2af43357221771ac2db282655"
         },
         {
             "package": "symfony/swiftmailer-bridge",
@@ -94,7 +104,7 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "f209f4fc88149de0670cde7f91caa51ae030bf51",
+            "source-reference": "4e1e48809cbe0d23dde3ba8df7872a6f93fd3ef8",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
@@ -105,7 +115,7 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "02f1c567b9376a1313a4f1ece941cf5fb73c2c3c",
+            "source-reference": "75d97b4a275b90956df554fd7d8d7bc6e3d4ae73",
             "alias": "1.8.9999999.9999999-dev"
         }
     ],
