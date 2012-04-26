@@ -1,0 +1,11 @@
+{% extends "UnsapaIPWBundle::layout.html.twig" %}
+
+{% block content %}
+<div id="exams">
+  <ul>
+  {% for exam in exams %}
+    <li>{{ exam.mark }}</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
