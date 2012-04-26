@@ -32,8 +32,5 @@ Unsapa\IPWBundle\Entity\User:
             length: '15'
             nullable: true
     lifecycleCallbacks: {  }
-    manyToOne:
-        role:
-            targetEntity: Unsapa\IPWBundle\Entity\Role
 
 
