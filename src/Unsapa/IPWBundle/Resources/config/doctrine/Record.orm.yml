@@ -15,9 +15,6 @@ Unsapa\IPWBundle\Entity\Record:
             type: string
             length: 256
             nullable: true
-        state:
-            type: string
-            length: 64
 
     lifecycleCallbacks: {  }
 

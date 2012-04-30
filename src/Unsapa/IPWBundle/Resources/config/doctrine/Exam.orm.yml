@@ -19,6 +19,9 @@ Unsapa\IPWBundle\Entity\Exam:
         coef:
             type: float
             length: null
+        state:
+            type: string
+            length: 64
     lifecycleCallbacks: {  }
     manyToOne:
       promo:
