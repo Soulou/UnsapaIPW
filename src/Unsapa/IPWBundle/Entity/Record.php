@@ -105,4 +105,58 @@ class Record
     {
         return $this->exam;
     }
+    /**
+     * @var string $document
+     */
+    private $document;
+
+    /**
+     * @var string $state
+     */
+    private $state;
+
+
+    /**
+     * Set document
+     *
+     * @param string $document
+     * @return Record
+     */
+    public function setDocument($document)
+    {
+        $this->document = $document;
+        return $this;
+    }
+
+    /**
+     * Get document
+     *
+     * @return string 
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Record
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 }

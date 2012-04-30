@@ -23,3 +23,6 @@ Unsapa\IPWBundle\Entity\Exam:
     manyToOne:
       promo:
         targetEntity: Unsapa\IPWBundle\Entity\Promo
+    oneToOne:
+      resp:
+        targetEntity: Unsapa\IPWBundle\Entity\User
