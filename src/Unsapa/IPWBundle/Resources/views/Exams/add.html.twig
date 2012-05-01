@@ -5,19 +5,23 @@
 <form id="add_exam_form" method="post" action="{{ path("exam_add") }}">
   <fieldset>
     <label for="title">Titre : </label>
-    <input id="title" type="text" placeholder="Titre" /> <br>
+    <input name="title" id="title" type="text" placeholder="Titre" value="{{ exam.title }}"/> <br>
     <label for="promo">Promotion : </label>
     <select id="promo" name="promo">
       {% for promo in promos %}
-      <option value="{{ promo.name }}">{{ promo.name }}</option>
+        {% if promo == exam.promo %}
+          <option value="{{ promo.name }}" selected="selected">{{ promo.name }}</option>
+        {% else %}
+          <option value="{{ promo.name }}">{{ promo.name }}</option>
+        {% endif %}
       {% endfor %}
     </select><br>
     <label for="add_form_date">Échéance : </label>
-    <input type="text" name="date" placeholder="Date" id="add_form_date"/><br>
+    <input type="text" name="date" placeholder="Date" id="add_form_date" value="{{ exam.getExamDate() }}"/><br>
     <label for="desc">Description : </label>
-    <textarea name="desc" id="desc" placeholder="Description de l'évènement"></textarea><br>
+    <textarea name="desc" id="desc" placeholder="Description de l'évènement">{{ exam.getExamDesc() }}</textarea><br>
     <label for="coef">Coefficient : </label>
-    <input id="coef" name="coef" type="number" \><br>
+    <input id="coef" name="coef" type="number" value="{{ exam.coef }}"\><br>
     <input class="submit_button" type="submit" value="Valider" \>
   </fieldset>
 </form>
