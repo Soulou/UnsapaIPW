@@ -33,5 +33,6 @@ Unsapa\IPWBundle\Entity\User:
             nullable: true
     lifecycleCallbacks:
         prePersist: [ setDefaultRole ]
-
-
+    manyToOne:
+      promo:
+        targetEntity: Unsapa\IPWBundle\Entity\Promo

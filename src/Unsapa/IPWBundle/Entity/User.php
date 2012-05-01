@@ -206,4 +206,31 @@ class User extends BaseUser
     {
       return $this->getLastname() . " " . $this->getFirstname();
     }
+    /**
+     * @var Unsapa\IPWBundle\Entity\Promo
+     */
+    private $promo;
+
+
+    /**
+     * Set promo
+     *
+     * @param Unsapa\IPWBundle\Entity\Promo $promo
+     * @return User
+     */
+    public function setPromo(\Unsapa\IPWBundle\Entity\Promo $promo = null)
+    {
+        $this->promo = $promo;
+        return $this;
+    }
+
+    /**
+     * Get promo
+     *
+     * @return Unsapa\IPWBundle\Entity\Promo 
+     */
+    public function getPromo()
+    {
+        return $this->promo;
+    }
 }
