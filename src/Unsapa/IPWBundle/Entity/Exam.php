@@ -159,4 +159,68 @@ class Exam
     {
         return $this->promo;
     }
+
+    /**
+     * To string for user
+     * 
+     * @return String
+     */
+    public function __toString()
+    {
+      return $this->getTitle();
+    }
+    /**
+     * @var Unsapa\IPWBundle\Entity\User
+     */
+    private $resp;
+
+
+    /**
+     * Set resp
+     *
+     * @param Unsapa\IPWBundle\Entity\User $resp
+     * @return Exam
+     */
+    public function setResp(\Unsapa\IPWBundle\Entity\User $resp = null)
+    {
+        $this->resp = $resp;
+        return $this;
+    }
+
+    /**
+     * Get resp
+     *
+     * @return Unsapa\IPWBundle\Entity\User 
+     */
+    public function getResp()
+    {
+        return $this->resp;
+    }
+    /**
+     * @var string $state
+     */
+    private $state;
+
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Exam
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 }

@@ -187,4 +187,23 @@ class User extends BaseUser
     {
         return $this->phone;
     }
+
+    /**
+     * Set default role to ROLE_STUDENT
+     * 
+     */
+    public function setDefaultRole()
+    {
+      $this->addRole("ROLE_STUDENT");
+    }
+
+    /**
+     * To string for User
+     *
+     * @return String
+     */
+    public function __toString()
+    {
+      return $this->getLastname() . " " . $this->getFirstname();
+    }
 }

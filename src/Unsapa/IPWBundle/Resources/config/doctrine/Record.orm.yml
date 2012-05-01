@@ -1,5 +1,6 @@
 Unsapa\IPWBundle\Entity\Record:
     type: entity
+    repositoryClass: Unsapa\IPWBundle\Repository\RecordRepository
     table: ipw_record
     id:
       student:
@@ -10,6 +11,11 @@ Unsapa\IPWBundle\Entity\Record:
         mark:
             type: integer
             length: null
+        document:
+            type: string
+            length: 256
+            nullable: true
+
     lifecycleCallbacks: {  }
 
     manyToOne:

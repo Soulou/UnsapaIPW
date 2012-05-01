@@ -19,7 +19,13 @@ Unsapa\IPWBundle\Entity\Exam:
         coef:
             type: float
             length: null
+        state:
+            type: string
+            length: 64
     lifecycleCallbacks: {  }
     manyToOne:
       promo:
         targetEntity: Unsapa\IPWBundle\Entity\Promo
+    oneToOne:
+      resp:
+        targetEntity: Unsapa\IPWBundle\Entity\User
