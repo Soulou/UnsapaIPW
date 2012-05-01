@@ -11,20 +11,30 @@
     </head>
     <body>
         {% block menu %}
-        <nav>
-        <a alt="Mes examens" href="{{ path('exams') }}">
-          <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
-        </a>
-        </nav>
+            <nav>
+                <a alt="Mes examens" href="{{ path('exams') }}">
+                  <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
+                </a>
+                {% if is_granted('ROLE_TD') %}
+                <a alt="Ajouter Examen" href="{{ path('exams') }}/add">
+                  <img src="{{ asset('bundles/unsapaipw/images/adddocument.png') }}" width="75px" height="75px" alt="Ajouter un examen" />
+                </a>
+                {% endif %}
+            </nav>
         {% endblock %}
 
+        <div id="content">
         {% block content %}
         {% endblock %}
+        </div>
 
         <div class="fos_user_content">
             {% block fos_user_content %}
             {% endblock %}
         </div>
-
-    </body>
+        <footer>
+            {% block footer_js %}
+            {% endblock %}
+        </footer>
+      </body>
 </html>

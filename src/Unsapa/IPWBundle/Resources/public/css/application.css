@@ -22,8 +22,27 @@ nav
   width: 100px;
   background-color: #E4DDC5;
   text-align: center;
+  float: left;
 }
 
-#exams
+#content
 {
+  top: 0px;
+  margin-left:100px;
+  padding-left:30px;
+}
+
+#add_exam_form label
+{
+  float:left;
+  width:100px;
+}
+#add_exam_form input select textarea
+{
+  margin-left: 110px;
+}
+
+.submit_button
+{
+  margin: 15px 10px 10px 10px;
 }
