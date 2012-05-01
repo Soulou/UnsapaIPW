@@ -164,22 +164,36 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         for($i = 0; $i < count($users) ; $i++)
         {
             $record = new Record();
-            $record->setStudent($users[$j]);
+            $record->setStudent($users[$i]);
+            $record->setMark(rand(2,19));
             switch($users[$i]->getPromo()->getName())
             {
                 case "2012" :
-                  $users[$i]->setPromo($promo1);
+                  $record->setExam($exam1_1);
                   break;
                 case "2013" :
-                  $users[$i]->setPromo($promo2);
+                  $record->setExam($exam2);
                   break;
                 case "2014" :
-                  $users[$i]->setPromo($promo3);
+                  $record->setExam($exam3);
                   break;
             } 
-            $record->setMark(rand(2,19));
             $manager->persist($record);
             $manager->flush();
+        }
+        for($i = 0; $i < count($users) ; $i++)
+        {
+            $record = new Record();
+            $record->setStudent($users[$i]);
+            $record->setMark(rand(2,19));
+            switch($users[$i]->getPromo()->getName())
+            {
+                case "2012" :
+                  $record->setExam($exam1_2);
+                  $manager->persist($record);
+                  $manager->flush();
+                  break;
+            } 
         }
     }
 }
