@@ -144,10 +144,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $exam2->setCoef(2);
         $exam3->setCoef(1);
 
-        $exam1_1->setResp($tds[rand(0,9)]);
-        $exam1_2->setResp($tds[rand(0,9)]);
-        $exam2->setResp($tds[rand(0,9)]);
-        $exam3->setResp($tds[rand(0,9)]);
+        $exam1_1->setResp($tds[0]);
+        $exam1_2->setResp($tds[1]);
+        $exam2->setResp($tds[2]);
+        $exam3->setResp($tds[3]);
 
         $exam1_1->setState("FINISH");
         $exam1_2->setState("FINISH");
