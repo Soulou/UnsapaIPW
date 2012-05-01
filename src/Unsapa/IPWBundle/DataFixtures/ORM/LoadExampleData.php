@@ -142,6 +142,11 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $exam2->setResp($tds[rand(0,9)]);
         $exam3->setResp($tds[rand(0,9)]);
 
+        $exam1_1->setState("FINISH");
+        $exam1_2->setState("FINISH");
+        $exam2->setState("FINISH");
+        $exam3->setState("FINISH");
+
         $manager->persist($exam1_1);
         $manager->persist($exam1_2);
         $manager->persist($exam2);
@@ -156,7 +161,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
           $record->setStudent($users[$i-1]);
           $record->setExam($exam1_1);
           $record->setMark(rand(2,19));
-          $record->setState("FINISH");
           $manager->persist($record);
           $manager->flush();
         }
@@ -166,7 +170,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
           $record->setStudent($users[$i-1]);
           $record->setExam($exam1_2);
           $record->setMark(rand(2,19));
-          $record->setState("FINISH");
           $manager->persist($record);
           $manager->flush();
         }
@@ -176,7 +179,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
           $record->setStudent($users[$i-1]);
           $record->setExam($exam2);
           $record->setMark(rand(2,19));
-          $record->setState("FINISH");
           $manager->persist($record);
           $manager->flush();
         }
@@ -186,7 +188,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
           $record->setStudent($users[$i+7]);
           $record->setExam($exam3);
           $record->setMark(rand(2,19));
-          $record->setState("FINISH");
           $manager->persist($record);
           $manager->flush();
         }
