@@ -36,36 +36,43 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $promo2 = new Promo();
         $promo3 = new Promo();
 
-        $promo1->setName("2011");
-        $promo2->setName("2012");
-        $promo3->setName("2013");
+        $promo1->setName("2012");
+        $promo2->setName("2013");
+        $promo3->setName("2014");
 
         $manager->persist($promo1);
         $manager->persist($promo2);
         $manager->persist($promo3);
+        $manager->flush();
+
+        $promos = array($promo1, $promo2, $promo3);
 
         $userManager = $this->container->get('fos_user.user_manager');
         $users = array();
 
         for($i = 1; $i <= 10; $i++)
         {
-            $newUser = $userManager->createUser();
-            $newUser->setUsername("user" . $i);
-            $newUser->setUsernameCanonical("user" . $i);
-            $encoder = $this->container->get('security.encoder_factory')->getEncoder($newUser);
-            $password = $encoder->encodePassword('user' . $i, $newUser->getSalt());
-            $newUser->setPassword($password);
-            $newUser->setEmail("user" . $i . "@example.com");
-            $newUser->addRole("ROLE_USER");
-            $newUser->setEnabled(true);
-            $newUser->setFirstname("User" . $i);
-            $newUser->setLastname("Test");
-            $newUser->setAddress($i . " 5th Avenue");
-            $newUser->setZipCode($i . $i . $i . "NY");
-            $newUser->setCity("New York City");
-            $manager->persist($newUser);
-            $manager->flush();
-            array_push($users, $newUser);
+            for($j = 0; $j < count($promos) ; $j++)
+            {
+                $newUser = $userManager->createUser();
+                $newUser->setUsername("user" . $promos[$j]->getName() . $i);
+                $newUser->setUsernameCanonical("user" . $promos[$j]->getName() . $i);
+                $encoder = $this->container->get('security.encoder_factory')->getEncoder($newUser);
+                $password = $encoder->encodePassword('user' . $promos[$j]->getName() . $i, $newUser->getSalt());
+                $newUser->setPassword($password);
+                $newUser->setEmail("user" . $promos[$j]->getName() . $i . "@example.com");
+                $newUser->addRole("ROLE_USER");
+                $newUser->setEnabled(true);
+                $newUser->setFirstname("User" . $promos[$j]->getName() . $i);
+                $newUser->setLastname("Test");
+                $newUser->setAddress($i . " 5th Avenue");
+                $newUser->setZipCode($i . $i . $i . "NY");
+                $newUser->setCity("New York City");
+                $newUser->setPromo($promos[$j]);
+                $manager->persist($newUser);
+                $manager->flush();
+                array_push($users, $newUser);
+            }
         }
 
         $tds = array();
@@ -137,10 +144,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $exam2->setCoef(2);
         $exam3->setCoef(1);
 
-        $exam1_1->setResp($tds[rand(0,9)]);
-        $exam1_2->setResp($tds[rand(0,9)]);
-        $exam2->setResp($tds[rand(0,9)]);
-        $exam3->setResp($tds[rand(0,9)]);
+        $exam1_1->setResp($tds[0]);
+        $exam1_2->setResp($tds[1]);
+        $exam2->setResp($tds[2]);
+        $exam3->setResp($tds[3]);
 
         $exam1_1->setState("FINISH");
         $exam1_2->setState("FINISH");
@@ -154,42 +161,39 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
         $manager->flush();
 
-        for($i = 1; $i <= 5; $i++)
+        for($i = 0; $i < count($users) ; $i++)
         {
-          $manager->flush();
-          $record = new Record();
-          $record->setStudent($users[$i-1]);
-          $record->setExam($exam1_1);
-          $record->setMark(rand(2,19));
-          $manager->persist($record);
-          $manager->flush();
+            $record = new Record();
+            $record->setStudent($users[$i]);
+            $record->setMark(rand(2,19));
+            switch($users[$i]->getPromo()->getName())
+            {
+                case "2012" :
+                  $record->setExam($exam1_1);
+                  break;
+                case "2013" :
+                  $record->setExam($exam2);
+                  break;
+                case "2014" :
+                  $record->setExam($exam3);
+                  break;
+            } 
+            $manager->persist($record);
+            $manager->flush();
         }
-        for(; $i <= 8; $i++)
+        for($i = 0; $i < count($users) ; $i++)
         {
-          $record = new Record();
-          $record->setStudent($users[$i-1]);
-          $record->setExam($exam1_2);
-          $record->setMark(rand(2,19));
-          $manager->persist($record);
-          $manager->flush();
-        }
-        for(; $i <= 10; $i++)
-        {
-          $record = new Record();
-          $record->setStudent($users[$i-1]);
-          $record->setExam($exam2);
-          $record->setMark(rand(2,19));
-          $manager->persist($record);
-          $manager->flush();
-        }
-        for($i = 1; $i <=2; $i++)
-        {
-          $record = new Record();
-          $record->setStudent($users[$i+7]);
-          $record->setExam($exam3);
-          $record->setMark(rand(2,19));
-          $manager->persist($record);
-          $manager->flush();
+            $record = new Record();
+            $record->setStudent($users[$i]);
+            $record->setMark(rand(2,19));
+            switch($users[$i]->getPromo()->getName())
+            {
+                case "2012" :
+                  $record->setExam($exam1_2);
+                  $manager->persist($record);
+                  $manager->flush();
+                  break;
+            } 
         }
     }
 }

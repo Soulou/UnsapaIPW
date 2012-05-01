@@ -10,25 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Record
 {
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
      * @var integer $mark
      */
     private $mark;
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set mark

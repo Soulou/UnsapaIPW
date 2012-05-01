@@ -1,6 +1,5 @@
 Unsapa\IPWBundle\Entity\Record:
     type: entity
-#    repositoryClass: Unsapa\IPWBundle\Repository\RecordRepository
     table: ipw_record
     id:
       student:

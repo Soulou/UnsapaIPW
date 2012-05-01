@@ -17,7 +17,7 @@ class ExamsController extends Controller
 
         $promo = $this->getDoctrine()
           ->getRepository('UnsapaIPWBundle:Promo')
-          ->findOneByName($request->get('name'));
+          ->findOneByName($request->get('promo'));
 
         $exam->setTitle($request->get('title'));
         $exam->setPromo($promo);
@@ -25,6 +25,7 @@ class ExamsController extends Controller
         $exam->setExamDate(new \DateTime($request->get('date')));
         $exam->setCoef($request->get('coef'));
         $exam->setResp($this->get('security.context')->getToken()->getUser());
+        $exam->setState("PENDING");
 
         $errors = $validator->validate($exam);
 
@@ -35,6 +36,18 @@ class ExamsController extends Controller
           $manager = $this->get('doctrine')->getEntityManager();
           $manager->persist($exam);
           $manager->flush();
+
+          $users = $this->get('doctrine')
+            ->getRepository("UnsapaIPWBundle:User")
+            ->findByPromo($request->get('promo'));
+          foreach($users as $user)
+          {
+            $record = new Record();
+            $record->setStudent($user);
+            $record->setExam($exam);
+            $manager->persist($exam);
+            $manager->flush();
+          }
           return $this->redirect($this->generateUrl('exams'), 201);
         }
       }
