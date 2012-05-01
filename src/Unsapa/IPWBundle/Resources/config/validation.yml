@@ -1,0 +1,15 @@
+Unsapa\IPWBundle\Entity\Exam:
+    properties:
+        title:
+            - NotNull: ~
+            - MinLength:
+                limit: 3
+                message: "3 caractères minimums"
+        state:
+            - NotNull: ~
+        promo:
+            - NotNull: ~
+        resp:
+            - NotNull: ~
+        coef:
+            - Regex: "/\d+/"
