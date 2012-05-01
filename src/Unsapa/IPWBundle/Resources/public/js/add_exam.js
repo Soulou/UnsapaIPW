@@ -1,3 +1,3 @@
 $(function() {
-    $( "#add_form_date" ).datepicker();
+    $( "#form_exam_date" ).datepicker();
 });

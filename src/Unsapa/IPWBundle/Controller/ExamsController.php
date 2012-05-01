@@ -2,37 +2,44 @@
 
 namespace Unsapa\IPWBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
 
 class ExamsController extends Controller
 {
-    public function addAction()
+    public function addAction(Request $request)
     {
       $exam = new Exam();
-      $request = $this->getRequest();
-      if(count($request->request) != 0)
+      $form = $this->createFormBuilder($exam)
+        ->add('title', 'text', array('label' => "Titre : "))
+        ->add('promo', 'entity', array(
+            'label' => "Promotion : ", 
+            'class' => "UnsapaIPWBundle:Promo",
+            'property' => "name",
+            'query_builder' => 
+              function(EntityRepository $er) {
+                return $er->createQueryBuilder('p')->orderBy('p.name', 'ASC');
+              }
+            )
+          )
+        ->add('exam_desc','textarea', array('label' => "Description : ", 'required' => false))
+        ->add('exam_date', 'date', array('widget'=>'single_text', 'label' => "Échéance : "))
+        ->add('coef', 'number', array('label' => "Coefficient : "))
+        ->getForm();
+
+      if($request->getMethod() == "POST")
       {
-        $validator = $this->get('validator');
+        $form->bindRequest($request);
+        
 
-        $promo = $this->getDoctrine()
-          ->getRepository('UnsapaIPWBundle:Promo')
-          ->findOneByName($request->get('promo'));
-
-        $exam->setTitle($request->get('title'));
-        $exam->setPromo($promo);
-        $exam->setExamDesc($request->get('desc'));
-        $exam->setExamDate(new \DateTime($request->get('date')));
-        $exam->setCoef($request->get('coef'));
-        $exam->setResp($this->get('security.context')->getToken()->getUser());
-        $exam->setState("PENDING");
-
-        $errors = $validator->validate($exam);
-
-        if (count($errors) > 0)
-          return new Response(print_r($errors, true));
-        else
+        if($form->isValid());
         {
+          $exam->setResp($this->get('security.context')->getToken()->getUser());
+          $exam->setState("PENDING");
           $manager = $this->get('doctrine')->getEntityManager();
           $manager->persist($exam);
           $manager->flush();
@@ -40,6 +47,7 @@ class ExamsController extends Controller
           $users = $this->get('doctrine')
             ->getRepository("UnsapaIPWBundle:User")
             ->findByPromo($request->get('promo'));
+
           foreach($users as $user)
           {
             $record = new Record();
@@ -53,19 +61,25 @@ class ExamsController extends Controller
       }
       else
       {
-        $promos = $this->getDoctrine()
-          ->getRepository('UnsapaIPWBundle:Promo')
-          ->findAll();
-        return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('promos' => $promos,'exam' => $exam));
+        return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
       }
     }
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();
-      $records = $this->getDoctrine()
-        ->getRepository('UnsapaIPWBundle:Record')
-        ->findByStudent($user);
-
-      return $this->render('UnsapaIPWBundle:Exams:index.html.twig', array('records' => $records));
+      if($this->get('security.context')->isGranted("ROLE_TD"))
+      {
+        $exams = $this->getDoctrine()
+          ->getRepository('UnsapaIPWBundle:Exam')
+          ->findByResp($user);
+          return $this->render('UnsapaIPWBundle:Exams:index.html.twig', array('exams' => $exams));
+      }
+      else
+      {
+        $records = $this->getDoctrine()
+          ->getRepository('UnsapaIPWBundle:Record')
+          ->findByStudent($user);
+        return $this->render('UnsapaIPWBundle:Exams:index.html.twig', array('records' => $records));
+      }
     }
 }
