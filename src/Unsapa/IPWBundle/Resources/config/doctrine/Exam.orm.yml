@@ -22,6 +22,7 @@ Unsapa\IPWBundle\Entity\Exam:
     lifecycleCallbacks: {  }
     manyToOne:
       promo:
+        nullable: false
         targetEntity: Unsapa\IPWBundle\Entity\Promo
     oneToOne:
       resp:

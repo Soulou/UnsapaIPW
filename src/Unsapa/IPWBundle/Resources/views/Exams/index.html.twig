@@ -1,12 +1,14 @@
 {% extends "UnsapaIPWBundle::layout.html.twig" %}
 
+{% block title %}Ajout d'un examen{% endblock %}
+
 {% block content %}
 <p>Vous êtes inscrit à :</p>
 <div id="exams">
   <ul>
-  {% for exam in exams %}
+  {% for record in records %}
     <li>
-      {{ exam.exam }} (Note : {{ exam.mark }} )
+      {{ record.exam }} (Note : {{ record.mark }} )
     </li>
   {% endfor %}
   </ul>
