@@ -8,6 +8,11 @@
           <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
+        <link type="text/css" href="{{ asset("bundles/unsapaipw/css/lightness/jquery-ui-1.8.19.custom.css") }}" rel="Stylesheet" />  
+        <script type="text/javascript" src=" {{ asset("bundles/unsapaipw/js/jquery-1.7.1.min.js") }} "></script>
+        <script type="text/javascript" src="{{ asset("bundles/unsapaipw/js/jquery-ui-1.8.19.custom.min.js") }}"></script>
+        {% block header_js %}{% endblock %}
+
     </head>
     <body>
         {% block menu %}

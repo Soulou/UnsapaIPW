@@ -6,6 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ExamsController extends Controller
 {
+    public function addAction()
+    {
+      $promos = $this->getDoctrine()
+        ->getRepository('UnsapaIPWBundle:Promo')
+        ->findAll();
+
+      return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('promos' => $promos));
+    }
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();
