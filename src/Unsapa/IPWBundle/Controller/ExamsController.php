@@ -53,6 +53,6 @@ class ExamsController extends Controller
         ->getRepository('UnsapaIPWBundle:Record')
         ->findByStudent($user);
 
-      return $this->render('UnsapaIPWBundle:Exams:index.html.twig', array('exam' => $records));
+      return $this->render('UnsapaIPWBundle:Exams:index.html.twig', array('records' => $records));
     }
 }
