@@ -10,23 +10,28 @@ Unsapa\IPWBundle\Entity\Exam:
         title:
             type: string
             length: '255'
+            nullable: false
         exam_desc:
             type: text
             length: null
+            nullable: true
         exam_date:
             type: datetime
             length: null
+            nullable: true
         coef:
             type: float
             length: null
+            nullable: true
         state:
             type: string
             length: 64
+            nullable: false
     lifecycleCallbacks: {  }
     manyToOne:
       promo:
-        nullable: false
         targetEntity: Unsapa\IPWBundle\Entity\Promo
-    oneToOne:
+        nullable: false
       resp:
         targetEntity: Unsapa\IPWBundle\Entity\User
+        nullable: false
