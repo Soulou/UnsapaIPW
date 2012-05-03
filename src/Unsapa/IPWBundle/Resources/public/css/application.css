@@ -32,14 +32,19 @@ nav
   padding-left:30px;
 }
 
-#add_exam_form label
+#form label
 {
   float:left;
   width:100px;
 }
-#add_exam_form input select textarea
+#form input select textarea select
 {
   margin-left: 110px;
+}
+
+#form .required
+{
+  font-weight: 900;
 }
 
 .submit_button
