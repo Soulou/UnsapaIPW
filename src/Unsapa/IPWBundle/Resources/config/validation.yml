@@ -4,7 +4,7 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - MinLength:
                 limit: 3
-                message: "3 caractères minimums"
+                message: "3 caractères minimums."
         state:
             - NotNull: ~
         promo:
@@ -12,4 +12,8 @@ Unsapa\IPWBundle\Entity\Exam:
         resp:
             - NotNull: ~
         coef:
-            - Regex: "/\d+/"
+            - NotNull: ~
+            - Type: 
+                type: float
+                message: "Doit être un nombre."
+            

@@ -14,6 +14,8 @@ class ExamsController extends Controller
     public function addAction(Request $request)
     {
       $exam = new Exam();
+      $exam->setResp($this->get('security.context')->getToken()->getUser());
+      $exam->setState("PENDING");
       $form = $this->createFormBuilder($exam)
         ->add('title', 'text', array('label' => "Titre : "))
         ->add('promo', 'entity', array(
@@ -26,20 +28,17 @@ class ExamsController extends Controller
               }
             )
           )
-        ->add('exam_desc','textarea', array('label' => "Description : ", 'required' => false))
         ->add('exam_date', 'date', array('widget'=>'single_text', 'label' => "Échéance : "))
         ->add('coef', 'number', array('label' => "Coefficient : "))
+        ->add('exam_desc','textarea', array('label' => "Description : ", 'required' => false))
         ->getForm();
 
       if($request->getMethod() == "POST")
       {
         $form->bindRequest($request);
-        
 
-        if($form->isValid());
+        if($form->isValid())
         {
-          $exam->setResp($this->get('security.context')->getToken()->getUser());
-          $exam->setState("PENDING");
           $manager = $this->get('doctrine')->getEntityManager();
           $manager->persist($exam);
           $manager->flush();
@@ -59,10 +58,7 @@ class ExamsController extends Controller
           return $this->redirect($this->generateUrl('exams'), 201);
         }
       }
-      else
-      {
-        return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
-      }
+      return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
     }
     public function indexAction()
     {
