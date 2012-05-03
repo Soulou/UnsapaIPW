@@ -8,9 +8,9 @@
           <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
-        <link type="text/css" href="{{ asset("bundles/unsapaipw/css/lightness/jquery-ui-1.8.19.custom.css") }}" rel="Stylesheet" />  
+        <link type="text/css" href="{{ asset("bundles/unsapaipw/css/ui-lightness/jquery-ui-1.8.20.custom.css") }}" rel="Stylesheet" />  
         <script type="text/javascript" src=" {{ asset("bundles/unsapaipw/js/jquery-1.7.1.min.js") }} "></script>
-        <script type="text/javascript" src="{{ asset("bundles/unsapaipw/js/jquery-ui-1.8.19.custom.min.js") }}"></script>
+        <script type="text/javascript" src="{{ asset("bundles/unsapaipw/js/jquery-ui-1.8.20.custom.min.js") }}"></script>
         {% block header_js %}{% endblock %}
 
     </head>
@@ -20,11 +20,6 @@
                 <a alt="Mes examens" href="{{ path('exams') }}">
                   <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
                 </a>
-                {% if is_granted('ROLE_TD') %}
-                <a alt="Ajouter Examen" href="{{ path('exams') }}/add">
-                  <img src="{{ asset('bundles/unsapaipw/images/adddocument.png') }}" width="75px" height="75px" alt="Ajouter un examen" />
-                </a>
-                {% endif %}
             </nav>
         {% endblock %}
 
