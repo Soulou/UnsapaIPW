@@ -2,10 +2,6 @@ _site:
     pattern: /
     defaults: { _controller: UnsapaIPWBundle:Application:index }
 
-_welcome:
-    pattern:  /welcome
-    defaults: { _controller: AcmeDemoBundle:Welcome:index }
-
 # app/config/routing.yml
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
