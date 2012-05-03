@@ -32,6 +32,16 @@ nav
   padding-left:30px;
 }
 
+#exam_add
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  width: 400px;
+  background-color: #E4CAC5;
+}
+
 #form label
 {
   float:left;
