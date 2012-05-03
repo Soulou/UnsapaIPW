@@ -35,11 +35,12 @@ nav
 #form label
 {
   float:left;
-  width:100px;
+  width:120px;
 }
-#form input select textarea select
+
+#form ul
 {
-  margin-left: 110px;
+  margin-left: 130px;
 }
 
 #form .required
@@ -47,7 +48,7 @@ nav
   font-weight: 900;
 }
 
-.submit_button
+#form li 
 {
-  margin: 15px 10px 10px 10px;
+  color: red;
 }
