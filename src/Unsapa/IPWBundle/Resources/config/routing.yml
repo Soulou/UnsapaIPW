@@ -9,7 +9,15 @@ exams:
 exam_add:
     pattern: /exams/add
     defaults: { _controller: UnsapaIPWBundle:Exams:add }
+    
+admin:
+    pattern: /admin
+    defaults: { _controller: UnsapaIPWBundle:Admin:index }
 
+admin_add:
+    pattern: /admin/add
+    defaults: { _controller: UnsapaIPWBundle:Admin:add }
+    
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
