@@ -1,6 +1,10 @@
 homepage:
     pattern: /
     defaults: { _controller: UnsapaIPWBundle:Application:index }
+    
+admin:
+    pattern: /admin
+    defaults: { _controller: UnsapaIPWBundle:Admin:index }
 
 exams:
     pattern: /exams
@@ -9,14 +13,14 @@ exams:
 exam_add:
     pattern: /exams/add
     defaults: { _controller: UnsapaIPWBundle:Exams:add }
-    
-admin:
-    pattern: /admin
-    defaults: { _controller: UnsapaIPWBundle:Admin:index }
 
-admin_add:
-    pattern: /admin/add
-    defaults: { _controller: UnsapaIPWBundle:Admin:add }
+promos:
+    pattern: /promos
+    defaults: { _controller: UnsapaIPWBundle:Promos:index }
+    
+promos_add:
+    pattern: /promos/add
+    defaults: { _controller: UnsapaIPWBundle:Promos:add }
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

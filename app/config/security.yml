@@ -32,4 +32,5 @@ security:
         - { path: ^/exams$, role: ROLE_STUDENT }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/promos/add$, role: ROLE_ADMIN }

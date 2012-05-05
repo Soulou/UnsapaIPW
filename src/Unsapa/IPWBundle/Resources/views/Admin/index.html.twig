@@ -3,18 +3,7 @@
 {% block title %}Panneau d'administration{% endblock %}
 
 {% block content %}
-	
-	<ul>
-	{% for promo in promos %}
-		<li>{{ promo.name }}
-	{% endfor %}
-	</ul>
-	
-	<div id="admin_add">
-	  <a href="{{ path("admin_add") }}" alt="Ajouter une promotion">
-	    <img src="{{ asset("bundles/unsapaipw/images/plus.png") }}" width="16" alt="Image - Ajouter une promotion" \>
-	    <span class="link_img_text">Ajouter une promotion</span>
-	  </a>
-	</div>
-	
+	<a href="{{ path("promos") }}" alt="Administrer les promotions">
+		Administrer les promotions
+	</a>
 {% endblock %}
