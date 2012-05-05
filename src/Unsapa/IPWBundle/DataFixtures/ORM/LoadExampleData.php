@@ -177,6 +177,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                 case "2014" :
                   $record->setExam($exam3);
                   break;
+                default : 
+                  break;
             } 
             $manager->persist($record);
             $manager->flush();
@@ -192,6 +194,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                   $record->setExam($exam1_2);
                   $manager->persist($record);
                   $manager->flush();
+                  break;
+                default:
                   break;
             } 
         }
