@@ -15,5 +15,5 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - Type: 
                 type: float
-                message: "Doit être un nombre."
+                message: "Cette valeur doit être un nombre."
             

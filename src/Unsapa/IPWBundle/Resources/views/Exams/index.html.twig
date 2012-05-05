@@ -1,5 +1,0 @@
-{% if is_granted("ROLE_TD") %}
-  {% include "UnsapaIPWBundle:Exams:index_td.html.twig" %}
-{% elseif is_granted("ROLE_STUDENT") %}
-  {% include "UnsapaIPWBundle:Exams:index_student.html.twig" %}
-{% endif %}

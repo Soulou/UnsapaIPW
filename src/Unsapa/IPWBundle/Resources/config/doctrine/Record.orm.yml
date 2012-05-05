@@ -9,7 +9,8 @@ Unsapa\IPWBundle\Entity\Record:
     fields:
         mark:
             type: integer
-            length: null
+            length: null 
+            nullable: true
         document:
             type: string
             length: 256

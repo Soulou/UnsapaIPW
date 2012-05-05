@@ -3,14 +3,35 @@
 {% block title %}Ajout d'un examen{% endblock %}
 
 {% block content %}
-<p>Vous êtes inscrit à :</p>
-<div id="exams">
-  <ul>
-  {% for record in records %}
-    <li>
-      {{ record.exam }} (Note : {{ record.mark }} )
-    </li>
-  {% endfor %}
-  </ul>
-</div>
+  <h1>Mes examens</h1>
+  {% if records_pending|length > 0 %}
+    <div id="record_submit" class="submit_head">
+      <a href="{{ path("record_submit") }}" alt="Proposer un rendu">
+        <img src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
+        <span class="link_img_text">Proposer un rendu</span>
+      </a>
+    </div>
+    <p>Vous êtes inscrit à :</p>
+    <div id="exams_pending">
+      <ul>
+      {% for record in records_pending %}
+        <li>
+        {{ record.exam }} (Échéance : {{ record.exam.getExamDate().format("d M Y") }})
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  {% if records_ended|length > 0 %}
+    <p>Vous avez participé à :</p>
+    <div id="exams_ended">
+      <ul>
+      {% for record in records_ended %}
+        <li>
+          {{ record.exam }} (Note : {{ record.mark }} )
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 {% endblock %}
