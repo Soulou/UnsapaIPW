@@ -23,3 +23,7 @@ Unsapa\IPWBundle\Entity\Record:
         targetEntity: Unsapa\IPWBundle\Entity\User
       exam:
         targetEntity: Unsapa\IPWBundle\Entity\Exam
+        inversedBy: records
+        joinColumn:
+          name: exam_id
+          referencedColumnName: id
