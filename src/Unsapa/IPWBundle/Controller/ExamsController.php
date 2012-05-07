@@ -60,6 +60,14 @@ class ExamsController extends Controller
       }
       return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
     }
+    
+    
+    public function showAction($id)
+	{
+		return $this->getRecords();
+	}
+    
+    
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();
