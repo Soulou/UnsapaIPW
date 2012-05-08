@@ -11,3 +11,8 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: user_registration }
+    user_profile_form_type:
+        class: Unsapa\IPWBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: user_profile }
