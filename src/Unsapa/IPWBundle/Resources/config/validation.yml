@@ -27,7 +27,7 @@ Unsapa\IPWBundle\Entity\Record:
                 message: La note doit être un nombre.
         exam: 
             - NotNull: ~
-        document:
+        file:
             - NotNull: ~
             - File:
                 maxSize: 10M
