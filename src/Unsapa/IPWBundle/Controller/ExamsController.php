@@ -60,6 +60,59 @@ class ExamsController extends Controller
       }
       return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
     }
+
+    public function submitAction()
+    {
+    
+        $user = $this->get('security.context')->getToken()->getUser();
+        // We prepare a query_builder to get the records of the 
+        // current user with the state "PENDING"
+        $record = new Record();
+        $record->setStudent($user);
+  
+        $qb = $this->getDoctrine()->getEntityManager()
+          ->createQueryBuilder()
+          ->select('e')
+          ->from('UnsapaIPWBundle:Exam', 'e')
+          ->innerJoin('e.records', 'r')
+          ->where('r.student = :user and e.state = :state')
+          ->setParameters(array('user' => $user, 'state' => 'PENDING'))
+          ->orderBy('e.title', 'ASC');
+
+        $form = $this->createFormBuilder($record)
+          ->add('exam', 'entity', array(
+              'label' => "Examen : ", 
+              'class' => "UnsapaIPWBundle:Exam",
+              'property' => "title",
+              'query_builder' => $qb
+            ))
+          ->add('file','file', array('label' => "Fichier : "))
+          ->getForm();
+
+        if($this->getRequest()->getMethod() === 'POST')
+        {
+            $form->bindRequest($this->getRequest());
+
+            if($form->isValid())
+            {
+                $exam = $record->getExam();
+                $em = $this->getDoctrine()->getEntityManager();
+                $real_record = $em
+                  ->createQuery("SELECT r FROM UnsapaIPWBundle:Record r WHERE r.exam = :exam AND r.student = :user")
+                  ->setParameters(array("exam" => $exam, "user" => $user))
+                  ->setMaxResults(1)
+                  ->getResult();
+
+                $real_record[0]->setFile($record->getFile());
+                $real_record[0]->setDocument($real_record[0]->getDocumentName());
+                $em->persist($real_record[0]);
+                $em->flush();
+                return $this->redirect($this->generateUrl('exams'), 301);
+            }
+        }
+        return $this->render('UnsapaIPWBundle:Exams:submit.html.twig', array('form' => $form->createView()));
+    }
+
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();

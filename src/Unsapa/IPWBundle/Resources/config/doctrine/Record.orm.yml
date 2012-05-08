@@ -7,19 +7,28 @@ Unsapa\IPWBundle\Entity\Record:
       exam:
         associationKey: true
     fields:
+        document:
+            type: string
+            length: 255
+            nullable: true
         mark:
             type: integer
             length: null 
             nullable: true
-        document:
-            type: string
-            length: 256
-            nullable: true
 
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        preUpdate: [ preUpload ]
+        postPersist: [ upload ]
+        postUpdate: [ upload ]
+        postRemove: [ removeUpload ]
 
     manyToOne:
       student:
         targetEntity: Unsapa\IPWBundle\Entity\User
       exam:
         targetEntity: Unsapa\IPWBundle\Entity\Exam
+        inversedBy: records
+        joinColumn:
+          name: exam_id
+          referencedColumnName: id

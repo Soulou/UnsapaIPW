@@ -223,4 +223,33 @@ class Exam
     {
         return $this->state;
     }
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $records;
+
+    public function __construct()
+    {
+        $this->records = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add records
+     *
+     * @param Unsapa\IPWBundle\Entity\Record $records
+     */
+    public function addRecord(\Unsapa\IPWBundle\Entity\Record $records)
+    {
+        $this->records[] = $records;
+    }
+
+    /**
+     * Get records
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getRecords()
+    {
+        return $this->records;
+    }
 }

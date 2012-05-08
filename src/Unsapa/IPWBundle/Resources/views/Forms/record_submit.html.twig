@@ -1,0 +1,7 @@
+
+<form action="{{ path('exam_submit') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>
