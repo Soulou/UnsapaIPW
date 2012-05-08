@@ -4,23 +4,43 @@
         <meta charset="UTF-8" />
         <title>{% block title %}UnsapaIPW{% endblock %}</title>
         <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
-        {% stylesheets '@UnsapaIPWBundle/Resources/public/css/application.css' %}
-          <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+		{% stylesheets 
+			'@UnsapaIPWBundle/Resources/public/css/application.css' 
+			'@UnsapaIPWBundle/Resources/public/css/ui-lightness/jquery-ui-1.8.20.custom.css'
+		%}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+		{% endstylesheets %}
+		{% javascripts
+			'@UnsapaIPWBundle/Resources/public/js/jquery-1.7.1.min.js'
+			'@UnsapaIPWBundle/Resources/public/js/jquery-ui-1.8.20.custom.min.js'
+		%}
+			<script type="text/javascript" src="{{ asset_url }}" ></script>
+		{% endjavascripts %}
 
-        <link type="text/css" href="{{ asset("bundles/unsapaipw/css/ui-lightness/jquery-ui-1.8.20.custom.css") }}" rel="Stylesheet" />  
-        <script type="text/javascript" src=" {{ asset("bundles/unsapaipw/js/jquery-1.7.1.min.js") }} "></script>
-        <script type="text/javascript" src="{{ asset("bundles/unsapaipw/js/jquery-ui-1.8.20.custom.min.js") }}"></script>
         {% block header_js %}{% endblock %}
 
     </head>
-    <body>
+	<body>
+		{% block user_bar %}
+			<div id="user_nav">
+			{% if is_granted("ROLE_STUDENT") %}
+				<a href="{{ path("fos_user_profile_show") }}" alt="profil">Mon profil</a>
+				<span class="end_of_line">
+				<a href="{{ path("fos_user_security_logout") }}" alt="deconnexion">Déconnexion</a>
+				</span>
+			{% else %}
+				<a href="{{ path("fos_user_security_login") }}" alt="Connexion">Connexion</a>
+				<a href="{{ path("fos_user_registration_register") }}" alt="Connexion">S'enregistrer</a>
+			{% endif %}
+			</div>
+		{% endblock %}
+
         {% block menu %}
-            <nav>
-                <a alt="Mes examens" href="{{ path('exams') }}">
-                  <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
-                </a>
-            </nav>
+        <nav>
+            <a alt="Mes examens" href="{{ path('exams') }}">
+              <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
+            </a>
+        </nav>
         {% endblock %}
 
         <div id="content">
@@ -33,6 +53,11 @@
             {% endblock %}
         </div>
         <footer>
+			{% javascripts
+				'@UnsapaIPWBundle/Resources/public/js/application.js'
+			%}
+				<script type="text/javascript" src="{{ asset_url }}" ></script>
+			{% endjavascripts %}
             {% block footer_js %}
             {% endblock %}
         </footer>

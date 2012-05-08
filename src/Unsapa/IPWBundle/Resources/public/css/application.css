@@ -62,3 +62,14 @@ nav
 {
   color: red;
 }
+
+#user_nav
+{
+    width:100%;
+}
+
+.end_of_line
+{
+    text-align:right;
+    float:right;
+}
