@@ -182,8 +182,9 @@ class Record
      **/
     public function getDocumentName()
     {
+        $a_origname = explode('.', $this->file->getClientOriginalName());
         return sha1($this->file)
-             . "." . $this->file->guessExtension();
+             . "." . $a_origname[count($a_origname)-1];
     }
 
 

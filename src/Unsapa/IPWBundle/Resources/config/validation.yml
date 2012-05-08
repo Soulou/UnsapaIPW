@@ -31,5 +31,5 @@ Unsapa\IPWBundle\Entity\Record:
             - NotNull: ~
             - File:
                 maxSize: 10M
-                mimeTypes: [application/pdf, application/x-pdf]
-                mimeTypesMessage: Types de fichier valide : PDF
+                mimeTypes: [application/pdf, application/x-pdf, application/msword, application/zip]
+                mimeTypesMessage: Types de fichier valide : PDF - DOC - DOCX - ZIP
