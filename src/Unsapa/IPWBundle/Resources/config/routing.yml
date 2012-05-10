@@ -10,10 +10,6 @@ exam_add:
     pattern: /exams/add
     defaults: { _controller: UnsapaIPWBundle:Exams:add }
     
-exam_show:
-    pattern: /exams
-    defaults: { _controller: UnsapaIPWBundle:Exams:show }
-
 exam_submit:
     pattern: /exams/submit
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }
@@ -25,6 +21,10 @@ exam_show:
 exam_students:
     pattern: /exams/{id}/students
     defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
+
+exam_mark:
+    pattern: /exams/{id}/marks
+    defaults: { _controller: UnsapaIPWBundle:Attend:mark }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
