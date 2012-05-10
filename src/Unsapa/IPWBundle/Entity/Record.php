@@ -199,7 +199,7 @@ class Record
      **/
     public function getDocumentAbsolutePath()
     {
-        return $this->getDocumentUploadRootDir().'/'.$this->getDocumentName();
+        return $this->getDocumentUploadRootDir().'/'.$this->getDocument();
     }
 
     /**
@@ -209,7 +209,7 @@ class Record
      **/
     public function getDocumentWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getDocumentName();
+        return $this->getUploadDir().'/'.$this->getDocument();
     }
 
     /**
