@@ -114,8 +114,8 @@ class ExamsController extends Controller
     }
     
     public function showAction($id)
-  	{
-    	return $this->getRecords();
+    {
+      return $this->redirect($this->generateUrl("exams"));
   	}
     
     public function indexAction()
