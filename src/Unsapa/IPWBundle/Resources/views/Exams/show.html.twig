@@ -1,0 +1,16 @@
+{% extends "UnsapaIPWBundle::layout.html.twig" %}
+
+{% block title %}Détails de l'examen{% endblock %}
+
+{% block content %}
+<h1>Détails de l'examen</h1>
+
+<h2>{{ exam.title }} (id: {{ exam.id }})</h2>
+<ul>
+  <li> Description : {{ description }} </li>
+  <li> Echéance : {{ date.format("d-m-Y") }} </li>
+  <li> Coefficient : {{ coeff }} </li>
+  <li> Promo concernée : {{ promo }} </li>
+  <li> Responsable de l'examen : {{ resp }} </li>
+</ul>
+{% endblock %}
