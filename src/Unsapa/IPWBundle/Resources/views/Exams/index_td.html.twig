@@ -15,7 +15,7 @@
   <ul>
   {% for exam in exams %}
     <li>
-    {{ exam.title }} ( {{ exam.getExamDate().format('Y-m-d H:i:s') }} )
+    <a href="{{ path("exam_show", { 'id': exam.id } ) }}" alt="{{ exam.title }}"> {{ exam.title }} ( {{ exam.getExamDate().format('Y-m-d H:i:s') }} ) </a>
     </li>
   {% endfor %}
   </ul>

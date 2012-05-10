@@ -9,13 +9,17 @@ exams:
 exam_add:
     pattern: /exams/add
     defaults: { _controller: UnsapaIPWBundle:Exams:add }
+    
+exam_show:
+    pattern: /exams
+    defaults: { _controller: UnsapaIPWBundle:Exams:show }
 
 exam_submit:
     pattern: /exams/submit
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }
 
 exam_show:
-    pattern: /exams/:id
+    pattern: /exams/{id}
     defaults: { _controller: UnsapaIPWBundle:Exams:show }
 
 fos_user_security:
