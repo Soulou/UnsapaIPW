@@ -169,7 +169,7 @@ class Record
      */
     public function removeUpload()
     {
-        if($file = $this->getAbsolutePath())
+        if($file = $this->getDocumentAbsolutePath())
         {
             unset($file);
         }
@@ -182,9 +182,13 @@ class Record
      **/
     public function getDocumentName()
     {
+      if($this->file !== NULL)
+      {
         $a_origname = explode('.', $this->file->getClientOriginalName());
         return sha1($this->file)
-             . "." . $a_origname[count($a_origname)-1];
+          . "." . $a_origname[count($a_origname)-1];
+      }
+      return NULL;
     }
 
 
@@ -195,7 +199,7 @@ class Record
      **/
     public function getDocumentAbsolutePath()
     {
-        return $this->getUploadRootDir().'/'.$this->getDocumentName();
+        return $this->getDocumentUploadRootDir().'/'.$this->getDocumentName();
     }
 
     /**
