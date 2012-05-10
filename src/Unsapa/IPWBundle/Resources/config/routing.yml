@@ -19,7 +19,7 @@ exam_submit:
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }
 
 exam_show:
-    pattern: /exams/:id
+    pattern: /exams/{id}
     defaults: { _controller: UnsapaIPWBundle:Exams:show }
 
 fos_user_security:
