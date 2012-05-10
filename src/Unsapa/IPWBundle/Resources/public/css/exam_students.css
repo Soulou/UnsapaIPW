@@ -1,0 +1,10 @@
+#exam_students
+{
+  float: left;
+}
+
+#non_exam_students
+{
+  position: relative;
+  left: 120px;
+}
