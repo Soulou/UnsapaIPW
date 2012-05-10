@@ -126,7 +126,18 @@ class ExamsController extends Controller
         $exams = $this->getDoctrine()
           ->getRepository('UnsapaIPWBundle:Exam')
           ->findByResp($user);
-          return $this->render('UnsapaIPWBundle:Exams:index_td.html.twig', array('exams' => $exams));
+
+        $exams_pending = array();
+        $exams_ended = array();
+        foreach($exams as $exam)
+        {
+          if($exam->getState() == "PENDING")
+            array_push($exams_pending, $exam);
+          if($exam->getState() == "FINISH")
+            array_push($exams_ended, $exam);
+        }
+        return $this->render('UnsapaIPWBundle:Exams:index_td.html.twig',
+          array('exams_pending' => $exams_pending, 'exams_ended' => $exams_ended));
       }
       else
       {

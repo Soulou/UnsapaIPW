@@ -10,13 +10,23 @@
     <span class="link_img_text">Ajouter un examen</span>
   </a>
 </div>
-<p>Les examens dont vous êtes responsable :</p>
-<div id="exams">
+<p>Les examens <strong>en cours</strong> dont vous êtes responsable :</p>
+<div id="exams_pending">
   <ul>
-  {% for exam in exams %}
+  {% for exam in exams_pending %}
     <li>
     <a href="{{ path("exam_show", { 'id': exam.id } ) }}" alt="{{ exam.title }}"> {{ exam.title }}</a> ( {{ exam.getExamDate().format('Y-m-d') }} )
     <a href="{{ path("exam_students", { 'id': exam.id }) }}" alt="gérer les étudiants">Étudiants concernés</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<p>Les examens <strong>terminés</strong> dont vous êtes responsable :</p>
+<div id="exams_ended">
+  <ul>
+  {% for exam in exams_ended %}
+    <li>
+    <a href="{{ path("exam_show", { 'id': exam.id } ) }}" alt="{{ exam.title }}"> {{ exam.title }}</a> ( {{ exam.getExamDate().format('Y-m-d') }} )
     </li>
   {% endfor %}
   </ul>
