@@ -114,9 +114,19 @@ class ExamsController extends Controller
     }
     
     public function showAction($id)
-  	{
-    	return $this->getRecords();
-  	}
+	{
+		$exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
+		
+		if(!$exam)
+		{
+  			throw $this->createNotFoundException('Cet examen n\'existe pas');
+  		}
+		else
+		{
+   			$records = $exam->getRecords();
+  			return $this->render("UnsapaIPWBundle:Exams:show.html.twig", array("exam" => $exam, "records" => $records ));
+		}
+	}
     
     public function indexAction()
     {
