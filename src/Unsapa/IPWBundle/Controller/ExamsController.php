@@ -123,8 +123,7 @@ class ExamsController extends Controller
   		}
 		else
 		{
-   			$records = $exam->getRecords();
-  			return $this->render("UnsapaIPWBundle:Exams:show.html.twig", array("exam" => $exam, "records" => $records ));
+  			return $this->render("UnsapaIPWBundle:Exams:show.html.twig", array("exam" => $exam, "description" => $exam->getExamDesc(), "date" => $exam->getExamDate(), "coeff"  => $exam->getCoef(), "promo"  => $exam->getPromo(), "resp"  => $exam->getResp() ));
 		}
 	}
     
