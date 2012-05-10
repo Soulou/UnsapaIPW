@@ -15,6 +15,11 @@ use Unsapa\IPWBundle\Entity\Promo;
  */
 class AttendController extends Controller
 {
+  /**
+   * When the form is posted, get the data and compare them to the database
+   *
+   * @param id ID of the current exam
+   */
   public function examAttributeStudents($id)
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
@@ -66,14 +71,12 @@ class AttendController extends Controller
     }
   }
 
+  /**
+   * route : /exam/:id/students
+   * Manage the students who attend an exam
+   */
   public function examChoiceAction($id)
   {
-    if($this->getRequest()->getMethod() == "POST")
-    {
-      $this->examAttributeStudents($id);
-      return $this->redirect($this->generateUrl('exams'), 301);
-    }
-
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
     if(!$exam)
       throw $this->createNotFoundException('Cet examen n\'existe pas');
@@ -83,6 +86,12 @@ class AttendController extends Controller
 
     if($exam->getExamDate() < new \DateTime('now'))
       throw new AccessDeniedHttpException("Vous ne pouvez modifier cet exam, il est terminé.");
+
+    if($this->getRequest()->getMethod() == "POST")
+    {
+      $this->examAttributeStudents($id);
+      return $this->redirect($this->generateUrl('exams'), 301);
+    }
 
     $records = $exam->getRecords();
 
