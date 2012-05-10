@@ -1,0 +1,27 @@
+{% extends "UnsapaIPWBundle::layout.html.twig" %}
+
+{% block css %}
+		{% stylesheets 
+			'@UnsapaIPWBundle/Resources/public/css/exam_students.css' 
+		%}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+  <h1>Gestion des étudiants</h1>
+  <h2>Pour l'examen {{ exam.title }}</h2>
+  <form method="POST" action="{{ path("exam_students", { 'id': exam.id }) }}" >
+    <div id="exam_students">
+      {% for user in exam_users %}
+        <input type="checkbox" name="student{{user.id}}" selected="selected" value="{{ user.id }}" checked/>{{ user.firstname }} {{ user.lastname }}<br>
+      {% endfor %}
+      <br><input type="submit"/>
+    </div>
+    <div id="non_exam_students">
+      {% for user in not_exam_users %}
+        <input type="checkbox" name="student{{user.id}}" selected="selected" value="{{ user.id }}" />{{ user.firstname }} {{ user.lastname }}<br>
+      {% endfor %}
+    </div>
+  </form>
+{% endblock %}
