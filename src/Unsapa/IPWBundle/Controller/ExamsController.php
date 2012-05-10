@@ -63,7 +63,6 @@ class ExamsController extends Controller
 
     public function submitAction()
     {
-    
         $user = $this->get('security.context')->getToken()->getUser();
         // We prepare a query_builder to get the records of the 
         // current user with the state "PENDING"

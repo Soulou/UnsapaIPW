@@ -22,6 +22,14 @@ exam_students:
     pattern: /exams/{id}/students
     defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
 
+exam_mark:
+    pattern: /exams/{id}/mark
+    defaults: { _controller: UnsapaIPWBundle:Attend:mark }
+
+download_record:
+    pattern: /download/{userid}/{examid}
+    defaults: { _controller: UnsapaIPWBundle:Attend:download }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

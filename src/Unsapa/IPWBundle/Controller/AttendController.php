@@ -4,6 +4,8 @@ namespace Unsapa\IPWBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Response;
 
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
@@ -73,7 +75,8 @@ class AttendController extends Controller
 
   /**
    * route : /exam/:id/students
-   * Manage the students who attend an exam
+   * Manage the students who attend an exam 
+   * @param id ID of the current exam
    */
   public function examChoiceAction($id)
   {
@@ -103,8 +106,57 @@ class AttendController extends Controller
     }
     $not_exam_users = array_diff($promo_users, $exam_users);
 
-    return $this->render("UnsapaIPWBundle:Attend:exam_choice.html.twig", 
+    return $this->render("UnsapaIPWBundle:Attend:choice.html.twig", 
       array('exam_users' => $exam_users, 'not_exam_users' => $not_exam_users, 'exam' => $exam));
+  }
+
+  /**
+   * route : /exam/:id/students
+   * Manage the students who attend an exam 
+   * @param id ID of the current exam
+   */
+  public function markAction($id)
+  {
+    $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
+    if(!$exam)
+      throw $this->createNotFoundException('Cet examen n\'existe pas');
+
+    $records = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Record")->findByExam($exam);
+    
+    return $this->render("UnsapaIPWBundle:Attend:mark.html.twig", array('records' => $records, 'exam' => $exam)); 
+  }
+
+  /**
+   * route : /download/:userid/:examid
+   * Download the file uploaded by the user 
+   * @param userid parameter of the record id
+   * @param examid 2nd parameter of the record id
+   */
+  public function downloadAction($userid, $examid)
+  {
+    $current_user = $this->get('security.context')->getToken()->getUser();
+    $record = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Record")->findByExamAndStudentId($examid, $userid);
+    if(!$current_user || !$record || ($userid != $current_user->getId() && $current_user != $record->getExam()->getResp()))
+      throw $this->createNotFoundException("Fichier inconnu");
+
+    $filename = $record->getDocumentAbsolutePath();
+    $record->setFile(new File($filename));
+
+    $r = new Response();
+    $r->setStatusCode(200);
+    $r->headers->set('Content-Type', $record->getFile()->getMimeType());
+    $r->headers->set('Content-Transfer-Encoding', 'binary');
+    $r->headers->set('Content-Disposition', 'attachment;filename=' 
+      . $record->getStudent()->getFirstName()
+      . $record->getStudent()->getLastName()
+      . $record->getExam()->getTitle() . "."
+      . $record->getFile()->getExtension()
+    );
+    $r->headers->set('Content-Length', filesize($filename));
+    $r->setContent(file_get_contents($filename));
+    $r->send();
+
+    return $r;
   }
 }
 

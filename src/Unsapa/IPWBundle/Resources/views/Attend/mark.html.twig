@@ -1,0 +1,16 @@
+{% extends "UnsapaIPWBundle::layout.html.twig" %}
+
+{% block content %}
+<h1>Notation des étudiants</h1>
+
+<p>
+{% for record in records %}
+  {% if record.document %}
+    {{ record.student.firstname }} {{ record.student.lastname }}
+    <a alt="télécharger le document" href="{{ path('download_record', 
+      {'userid': record.student.id, 'examid': record.exam.id })}}">Télécharger le document</a>
+  {% endif %}
+{% endfor %}
+</p>
+
+{% endblock %}
