@@ -2,7 +2,7 @@ $('#exam_add').click(
 	function()
 	{
 		url = $('#add_exam_link').attr("href");
-		window.location = $(this).attr(url);
+		window.location = url;
 		return false;
 	});
 
@@ -18,7 +18,7 @@ $('#record_submit').click(
 	function()
 	{
 		url = $('#add_record_link').attr("href");
-		window.location = $(this).attr(url);
+		window.location = url;
 		return false;
 	});
 	
