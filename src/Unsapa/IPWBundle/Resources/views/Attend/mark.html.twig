@@ -2,15 +2,25 @@
 
 {% block content %}
 <h1>Notation des étudiants</h1>
+<h2>Examen : <a alt="{{ exam.title }}" href="{{ path("exam_show", {'id':exam.id})}}">{{ exam.title }}</a></h2>
 
-<p>
-{% for record in records %}
-  {% if record.document %}
-    {{ record.student.firstname }} {{ record.student.lastname }}
+{% if records|length == 0 %}
+Aucun étudiant n'a effectué un rendu.
+<a alt="gérer les étudiant" href="{{ path("exam_students", {'id':exam.id})}}">Gérer les étudiants inscrits</a>
+{% endif %}
+
+<form method="POST" action="{{ path('exam_mark', {'id':exam.id})}}">
+  <p>
+  {% for record in records %}
+    {{ record.student.firstname }} {{ record.student.lastname }} : 
     <a alt="télécharger le document" href="{{ path('download_record', 
-      {'userid': record.student.id, 'examid': record.exam.id })}}">Télécharger le document</a>
-  {% endif %}
-{% endfor %}
-</p>
+      {'userid': record.student.id, 'examid': record.exam.id })}}">
+      <img src="{{asset("bundles/unsapaipw/images/download.png")}}" width="30" alt="Télécharger le fichier"/>
+    </a>&nbsp;
+    <input type="number" name="{{record.student.id}}" value="{{ record.mark }}" min="0" max="20" step="0.5"/>
+  {% endfor %}
+  </p>
+  <input type="submit" />
+</form>
 
 {% endblock %}

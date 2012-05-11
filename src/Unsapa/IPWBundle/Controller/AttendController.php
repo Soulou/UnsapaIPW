@@ -17,12 +17,30 @@ use Unsapa\IPWBundle\Entity\Promo;
  */
 class AttendController extends Controller
 {
+
+  /**
+   * Perform different tests to see if the current user can modify the exam
+   *
+   * @param $exam to check
+   */
+  protected function securityCheckExam($exam)
+  {
+    if(!$exam)
+      throw $this->createNotFoundException('Cet examen n\'existe pas');
+
+    if($exam->getResp() != $this->get('security.context')->getToken()->getUser())
+      throw new AccessDeniedHttpException("Vous n'êtes pas responsable de cet examen.");
+
+    if($exam->getExamDate() < new \DateTime('now'))
+      throw new AccessDeniedHttpException("Vous ne pouvez modifier cet exam, il est terminé.");
+  }
+
   /**
    * When the form is posted, get the data and compare them to the database
    *
-   * @param id ID of the current exam
+   * @param $id ID of the current exam
    */
-  public function examAttributeStudents($id)
+  protected function examAttributeStudents($id)
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
     $promo_users = $this->getDoctrine()->getRepository("UnsapaIPWBundle:User")->findByPromo($exam->getPromo());
@@ -76,19 +94,12 @@ class AttendController extends Controller
   /**
    * route : /exam/:id/students
    * Manage the students who attend an exam 
-   * @param id ID of the current exam
+   * @param $id ID of the current exam
    */
   public function examChoiceAction($id)
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
-    if(!$exam)
-      throw $this->createNotFoundException('Cet examen n\'existe pas');
-
-    if($exam->getResp() != $this->get('security.context')->getToken()->getUser())
-      throw new AccessDeniedHttpException("Vous n'êtes pas responsable de cet examen.");
-
-    if($exam->getExamDate() < new \DateTime('now'))
-      throw new AccessDeniedHttpException("Vous ne pouvez modifier cet exam, il est terminé.");
+    $this->securityCheckExam($exam);
 
     if($this->getRequest()->getMethod() == "POST")
     {
@@ -111,17 +122,55 @@ class AttendController extends Controller
   }
 
   /**
+   * When a user post /exams/:id/mark we modify the mark of the students
+   *
+   * @param $exam concerned exam
+   */
+  protected function markStudents($exam)
+  {
+    $student_ids = $this->getRequest()->request->keys();
+    $em = $this->getDoctrine()->getEntityManager();
+    for($i = 0; $i < count($student_ids); $i++)
+    {
+      $record = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Record")->findByExamAndStudentId($exam->getId(), $student_ids[$i]);
+      if($record === NULL)
+        throw $this->createNotFoundException("Étudiant inexistant.");
+
+      $mark = floatval($this->getRequest()->request->get($student_ids[$i]));
+      if(empty($mark))
+        $record->setMark(NULL);
+      else
+        $record->setMark($mark);
+
+      echo $this->getRequest()->request->get($student_ids[$i]);
+
+      $validator = $this->get('validator');
+      $errors = $validator->validate($record);
+      if(count($errors) > 0)
+        return new Response(print_r($errors, true));
+
+      $em->persist($record);
+      $em->flush();
+    }
+  }
+
+  /**
    * route : /exam/:id/students
    * Manage the students who attend an exam 
-   * @param id ID of the current exam
+   * @param $id ID of the current exam
    */
   public function markAction($id)
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
-    if(!$exam)
-      throw $this->createNotFoundException('Cet examen n\'existe pas');
+    $this->securityCheckExam($exam);
 
-    $records = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Record")->findByExam($exam);
+    if($this->getRequest()->getMethod() == "POST")
+      $this->markStudents($exam);
+
+    $records = $this->getDoctrine()->getEntityManager()
+      ->createQuery("SELECT r FROM UnsapaIPWBundle:Record r WHERE r.exam = :exam AND r.document IS NOT NULL")
+      ->setParameter('exam', $exam)
+      ->getResult();
     
     return $this->render("UnsapaIPWBundle:Attend:mark.html.twig", array('records' => $records, 'exam' => $exam)); 
   }

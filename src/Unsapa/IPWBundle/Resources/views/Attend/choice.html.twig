@@ -10,7 +10,7 @@
 
 {% block content %}
   <h1>Gestion des étudiants</h1>
-  <h2>Pour l'examen {{ exam.title }}</h2>
+  <h2>Examen : <a alt="{{ exam.title }}" href="{{ path("exam_show", {'id':exam.id})}}">{{ exam.title }}</a></h2>
   <form method="POST" action="{{ path("exam_students", { 'id': exam.id }) }}" >
     <div id="exam_students">
       {% for user in exam_users %}
