@@ -16,7 +16,7 @@
       <ul>
       {% for record in records_pending %}
         <li>
-        {{ record.exam }} (Échéance : {{ record.exam.getExamDate().format("d M Y") }})
+        {{ record.exam }} (Échéance : {{ record.exam.getFormatExamDate() }})
         </li>
       {% endfor %}
       </ul>

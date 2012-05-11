@@ -162,6 +162,7 @@ class ExamsController extends Controller
           if($record->getExam()->getState() == "FINISH")
             array_push($records_ended, $record);
         }
+
         return $this->render('UnsapaIPWBundle:Exams:index_student.html.twig', 
           array('records_pending' => $records_pending, 'records_ended' => $records_ended));
       }
