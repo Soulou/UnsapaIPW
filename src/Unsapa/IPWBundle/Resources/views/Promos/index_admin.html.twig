@@ -6,7 +6,7 @@
 	
 	<ul>
 	{% for promo in promos %}
-		<li>{{ promo.name }}
+		<li>{{ promo.name }} <a href="{{ path('promos_edit', { 'id': promo.id }) }}">Editer</a>
 	{% endfor %}
 	</ul>
 	
