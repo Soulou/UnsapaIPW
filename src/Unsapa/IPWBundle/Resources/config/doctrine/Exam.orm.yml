@@ -35,3 +35,10 @@ Unsapa\IPWBundle\Entity\Exam:
       resp:
         targetEntity: Unsapa\IPWBundle\Entity\User
         nullable: false
+    oneToMany:
+      records:
+        targetEntity: Unsapa\IPWBundle\Entity\Record
+        mappedBy: exam 
+          
+
+        

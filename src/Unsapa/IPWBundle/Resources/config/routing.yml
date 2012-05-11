@@ -22,6 +22,14 @@ promos_add:
     pattern: /promos/add
     defaults: { _controller: UnsapaIPWBundle:Promos:add }
     
+exam_submit:
+    pattern: /exams/submit
+    defaults: { _controller: UnsapaIPWBundle:Exams:submit }
+
+exam_show:
+    pattern: /exams/:id
+    defaults: { _controller: UnsapaIPWBundle:Exams:show }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

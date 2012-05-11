@@ -4,7 +4,7 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - MinLength:
                 limit: 3
-                message: "3 caractères minimums."
+                message: 3 caractères minimums.
         state:
             - NotNull: ~
         promo:
@@ -15,5 +15,21 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - Type: 
                 type: float
-                message: "Doit être un nombre."
-            
+                message: Le coefficient doit être un nombre.
+
+Unsapa\IPWBundle\Entity\Record:
+    properties:
+        student:
+            - NotNull: ~
+        mark:
+            - Type:
+                type: float
+                message: La note doit être un nombre.
+        exam: 
+            - NotNull: ~
+        file:
+            - NotNull: ~
+            - File:
+                maxSize: 10M
+                mimeTypes: [application/pdf, application/x-pdf, application/msword, application/zip]
+                mimeTypesMessage: Types de fichier valide : PDF - DOC - DOCX - ZIP

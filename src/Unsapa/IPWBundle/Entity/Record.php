@@ -10,9 +10,29 @@ use Doctrine\ORM\Mapping as ORM;
 class Record
 {
     /**
+     * @var Unsapa\IPWBundle\Entity\User
+     */
+    private $student;
+
+    /**
+     * @var Unsapa\IPWBundle\Entity\Exam
+     */
+    private $exam;
+
+    /**
+     * @var string $document
+     */
+    private $document;
+
+    /**
      * @var integer $mark
      */
     private $mark;
+
+    /**
+     * @var file $file
+     */
+    private $file;
 
     /**
      * Set mark
@@ -35,16 +55,6 @@ class Record
     {
         return $this->mark;
     }
-    /**
-     * @var Unsapa\IPWBundle\Entity\User
-     */
-    private $student;
-
-    /**
-     * @var Unsapa\IPWBundle\Entity\Exam
-     */
-    private $exam;
-
 
     /**
      * Set student
@@ -89,16 +99,6 @@ class Record
     {
         return $this->exam;
     }
-    /**
-     * @var string $document
-     */
-    private $document;
-
-    /**
-     * @var string $state
-     */
-    private $state;
-
 
     /**
      * Set document
@@ -123,24 +123,118 @@ class Record
     }
 
     /**
-     * Set state
+     * Get File
      *
-     * @param string $state
-     * @return Record
+     * @return file
      */
-    public function setState($state)
+    public function getFile()
     {
-        $this->state = $state;
-        return $this;
+        return $this->file;
     }
 
     /**
-     * Get state
-     *
-     * @return string 
+     * Set File
      */
-    public function getState()
+    public function setFile($file)
     {
-        return $this->state;
+        $this->file = $file;
     }
+
+    /**
+     * Event, before adding a document
+     */ 
+    public function preUpload()
+    {
+        if(null !== $this->file)
+        {
+            $this->document = $this->getDocumentName();
+        }
+    }
+
+    /**
+     * Event, during the upload
+     */ 
+    public function upload()
+    {
+        if(null === $this->file)
+        {
+            return;
+        }
+        $this->file->move($this->getDocumentUploadRootDir(), $this->document);
+        unset($this->file);
+    }
+
+    /**
+     * When deleting a record
+     */
+    public function removeUpload()
+    {
+        if($file = $this->getAbsolutePath())
+        {
+            unset($file);
+        }
+    }
+
+    /**
+     * Get filename of the document linked to the record
+     *
+     * @return string
+     **/
+    public function getDocumentName()
+    {
+        $a_origname = explode('.', $this->file->getClientOriginalName());
+        return sha1($this->file)
+             . "." . $a_origname[count($a_origname)-1];
+    }
+
+
+    /**
+     * Get absolute path
+     *
+     * @return string
+     **/
+    public function getDocumentAbsolutePath()
+    {
+        return $this->getUploadRootDir().'/'.$this->getDocumentName();
+    }
+
+    /**
+     * Get Web path
+     *
+     * @return string
+     **/
+    public function getDocumentWebPath()
+    {
+        return $this->getUploadDir().'/'.$this->getDocumentName();
+    }
+
+    /**
+     * Get absolute path to upload dir
+     *
+     * @return string
+     **/
+    protected function getDocumentUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getDocumentUploadDir();
+    }
+
+    /**
+     * Get relative path to upload dir
+     *
+     * @return string
+     **/
+    protected function getDocumentUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/records';
+    }
+
+    /**
+     * ToString
+     */
+    public function __toString()
+    {
+        return "[" . $this->getStudent() . " - " . $this->getExam() . "]";
+    }  
 }
