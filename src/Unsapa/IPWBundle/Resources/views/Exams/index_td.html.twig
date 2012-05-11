@@ -5,9 +5,10 @@
 {% block content %}
 <h1>Mes examens</h1>
 <div id="exam_add" class="submit_head" >
-  <a href="{{ path("exam_add") }}" alt="Ajouter un examen">
-    <img src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
-    <span class="link_img_text">Ajouter un examen</span>
+  <a id="add_exam_link" class="link_img_text" href="{{ path("exam_add") }}" alt="Ajouter un examen">
+    <img class="float_img" src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
+    </br>
+    Ajouter un examen
   </a>
 </div>
 <p>Les examens <strong>en cours</strong> dont vous êtes responsable :</p>
@@ -32,4 +33,12 @@
   {% endfor %}
   </ul>
 </div>
+{% endblock %}
+
+{% block footer_js %}
+	{% javascripts
+		'@UnsapaIPWBundle/Resources/public/js/exam_index.js'
+	%}
+		<script type="text/javascript" src="{{ asset_url }}" ></script>
+	{% endjavascripts %}
 {% endblock %}

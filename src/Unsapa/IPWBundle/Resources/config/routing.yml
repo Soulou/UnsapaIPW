@@ -23,7 +23,7 @@ exam_students:
     defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
 
 exam_mark:
-    pattern: /exams/{id}/mark
+    pattern: /exams/{id}/marks
     defaults: { _controller: UnsapaIPWBundle:Attend:mark }
 
 download_record:
