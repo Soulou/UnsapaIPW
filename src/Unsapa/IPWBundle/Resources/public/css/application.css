@@ -19,7 +19,7 @@ nav
   padding-top: 70px;
   padding-bottom: 50px;
   height: 100%;
-  width: 100px;
+  width: 110px;
   background-color: #E4DDC5;
   text-align: center;
   float: left;
@@ -29,7 +29,7 @@ nav
 {
   position: absolute;
   top: 60px;
-  margin-left:100px;
+  margin-left:120px;
   padding-left:30px;
 }
 
@@ -105,6 +105,14 @@ nav
   text-align:center;
   font-family: serif;
   font-size:20px;
+}
+
+.link_my_exams
+{
+  color: black;
+  text-align:center;
+  font-family: serif;
+  font-size:18px;
 }
 
 .float_img
