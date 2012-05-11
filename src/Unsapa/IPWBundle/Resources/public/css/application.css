@@ -47,8 +47,10 @@ nav
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
-  width: 400px;
+  width: 300px;
   background-color: #E4CAC5;
+  padding-top: 5px;
+  padding-bottom: 25px;
 }
 
 #form label
@@ -89,11 +91,26 @@ nav
 
 #user_nav a
 {
+  color: black;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.link_img_text
+{
   margin-left: 20px;
   margin-right: 20px;
   color: black;
   font-weight: bold;
+  text-align:center;
   font-family: serif;
+  font-size:20px;
+}
+
+.float_img
+{
+  float: left;
+  margin-right: 20px;
 }
 
 .end_of_line
