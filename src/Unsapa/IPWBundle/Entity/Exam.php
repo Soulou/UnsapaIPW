@@ -252,4 +252,24 @@ class Exam
     {
         return $this->records;
     }
+
+    /**
+     * Get a french formatted string to print the datetime
+     *
+     * @return string
+     */
+    public function getFormatExamDate()
+    {
+      return ucfirst(strftime("%A %d %B %G", $this->getExamDate()->getTimestamp()));
+    }
+
+    /**
+     * Get a french formatted string to print the datetime (small version)
+     *
+     * @return string
+     */
+    public function getSmallFormatExamDate()
+    {
+      return ucfirst(strftime("%d/%m/%G", $this->getExamDate()->getTimestamp()));
+    }
 }
