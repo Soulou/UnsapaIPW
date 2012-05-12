@@ -2,10 +2,10 @@
 
 namespace Unsapa\IPWBundle\Controller;
 
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Unsapa\IPWBundle\Form\Type\ExamType;
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
 
@@ -16,22 +16,7 @@ class ExamsController extends Controller
       $exam = new Exam();
       $exam->setResp($this->get('security.context')->getToken()->getUser());
       $exam->setState("PENDING");
-      $form = $this->createFormBuilder($exam)
-        ->add('title', 'text', array('label' => "Titre : "))
-        ->add('promo', 'entity', array(
-            'label' => "Promotion : ", 
-            'class' => "UnsapaIPWBundle:Promo",
-            'property' => "name",
-            'query_builder' => 
-              function(EntityRepository $er) {
-                return $er->createQueryBuilder('p')->orderBy('p.name', 'ASC');
-              }
-            )
-          )
-        ->add('exam_date', 'date', array('widget'=>'single_text', 'label' => "Échéance : "))
-        ->add('coef', 'number', array('label' => "Coefficient : "))
-        ->add('exam_desc','textarea', array('label' => "Description : ", 'required' => false))
-        ->getForm();
+      $form = $this->createForm(new ExamType(), $exam);
 
       if($request->getMethod() == "POST")
       {
