@@ -28,7 +28,6 @@ Unsapa\IPWBundle\Entity\Record:
         exam: 
             - NotNull: ~
         file:
-            - NotNull: ~
             - File:
                 maxSize: 10M
                 mimeTypes: [application/pdf, application/x-pdf, application/msword, application/zip]
