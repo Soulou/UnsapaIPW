@@ -1,10 +1,32 @@
+Unsapa\IPWBundle\Entity\User:
+    properties:
+        promo:
+            - NotNull: ~
+        firstname:
+            - MinLength: 
+                limit: 3
+            - MaxLength: 
+                limit: 64
+        lastname: 
+            - MinLength: 
+                limit: 3
+            - MaxLength: 
+                limit: 64
+        phone:
+            - Type:
+                type: integer
+            - MinLength:
+                limit: 10 
+            - MaxLength:
+                limit: 14
+        
+
 Unsapa\IPWBundle\Entity\Exam:
     properties:
         title:
             - NotNull: ~
             - MinLength:
                 limit: 3
-                message: 3 caractères minimums.
         state:
             - NotNull: ~
         promo:

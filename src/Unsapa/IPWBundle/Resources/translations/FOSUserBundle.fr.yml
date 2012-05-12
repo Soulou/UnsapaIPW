@@ -1,0 +1,9 @@
+fos_user_registration_form_username: "Nom d'utilisateur :"
+fos_user_registration_form_lastname: "Nom :"
+fos_user_registration_form_firstname: "Prénom :"
+fos_user_registration_form_address: "Adresse :"
+fos_user_registration_form_zipcode: "Code postal :"
+fos_user_registration_form_city: "Ville :"
+fos_user_registration_form_phone: "Téléphone :"
+fos_user_registration_form_promo: "Promotion :"
+
