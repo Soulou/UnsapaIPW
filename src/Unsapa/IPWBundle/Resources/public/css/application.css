@@ -123,7 +123,26 @@ nav
 
 .end_of_line
 {
-    padding-right: 100px;
-    text-align:right;
-    float:right;
+  padding-right: 100px;
+  text-align:right;
+  float:right;
+}
+
+.warn
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #ffdbdb;
+  margin: 10px 10px 10px 10px;
+  padding: 0px 10px 15px 10px;
+  display:block;
+  font-weight:bold;
+  color: red;
+}
+
+.warn a
+{
+  color: black;
 }
