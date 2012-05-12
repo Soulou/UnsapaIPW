@@ -9,7 +9,11 @@ exams:
 exam_add:
     pattern: /exams/add
     defaults: { _controller: UnsapaIPWBundle:Exams:add }
-    
+   
+exam_add_students:
+    pattern: /exams/add/students
+    defaults: { _controller: UnsapaIPWBundle:Promo:listStudents }
+
 exam_submit:
     pattern: /exams/submit
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }

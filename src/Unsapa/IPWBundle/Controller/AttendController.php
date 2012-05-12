@@ -192,6 +192,7 @@ class AttendController extends Controller
 
     return $r;
   }
+
 }
 
 ?>

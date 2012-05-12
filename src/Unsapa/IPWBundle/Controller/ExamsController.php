@@ -28,9 +28,27 @@ class ExamsController extends Controller
           $manager->persist($exam);
           $manager->flush();
 
-          $users = $this->get('doctrine')
-            ->getRepository("UnsapaIPWBundle:User")
-            ->findByPromo($exam->getPromo());
+          $keys = $this->getRequest()->request->keys();
+          $users = array();
+          for($i = 0; $i < count($keys); $i++)
+          {
+            if(substr($keys[$i], 0, 4) == "user")
+            {
+              $id = substr($keys[$i], 4);
+              $user = $this->getDoctrine()->getRepository("UnsapaIPWBundle:User")->find($id);
+              if($user)
+              {
+                array_push($users, $user);
+              }
+            }
+          }
+
+          if(count($users) == 0)
+          {
+            $users = $this->get('doctrine')
+              ->getRepository("UnsapaIPWBundle:User")
+              ->findByPromo($exam->getPromo());
+          }
 
           foreach($users as $user)
           {
