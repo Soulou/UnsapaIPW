@@ -17,7 +17,8 @@
       <ul>
       {% for record in records_pending %}
         <li>
-        {{ record.exam }} (Échéance : {{ record.exam.getFormatExamDate() }})
+        <a href="{{ path("exam_show", { 'id': record.exam.id } ) }}" alt="{{ record.exam.title }}"> {{ record.exam }} </a>
+         (Échéance : {{ record.exam.getFormatExamDate() }})
         </li>
       {% endfor %}
       </ul>
@@ -29,7 +30,8 @@
       <ul>
       {% for record in records_ended %}
         <li>
-          {{ record.exam }} (Note : {{ record.mark }} )
+          <a href="{{ path("exam_show", { 'id': record.exam.id } ) }}" alt="{{ record.exam.title }}"> {{ record.exam }} </a>
+          (Note : {{ record.mark }} )
         </li>
       {% endfor %}
       </ul>
