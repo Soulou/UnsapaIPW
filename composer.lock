@@ -8,7 +8,7 @@
         {
             "package": "doctrine/data-fixtures",
             "version": "dev-master",
-            "source-reference": "ffbd5614ddce9e902abda1c7f059c3f20e06e6aa"
+            "source-reference": "31040a8501c486e0a550a204a7097690340153ae"
         },
         {
             "package": "doctrine/dbal",
@@ -17,7 +17,7 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "9c8cdd383be8d8a9fd8113289cd36e3453c81e1c"
+            "source-reference": "342c7dd0a1bfe9a1156a190a303b8bea49fdd4fb"
         },
         {
             "package": "doctrine/doctrine-fixtures-bundle",
@@ -31,7 +31,7 @@
         {
             "package": "friendsofsymfony/user-bundle",
             "version": "dev-master",
-            "source-reference": "107cce6ab528ca74f53b7a5a6518c6fec108639a"
+            "source-reference": "6fb81861d84d460f1d070ceb8ec180aac841f7fa"
         },
         {
             "package": "jms/aop-bundle",
@@ -96,7 +96,7 @@
         {
             "package": "symfony/swiftmailer-bridge",
             "version": "dev-master",
-            "source-reference": "463536de4b149e1560bd764582cbf50dc9936ebd"
+            "source-reference": "509901cb13f43a6319a55804f787d206aa649ab4"
         },
         {
             "package": "symfony/swiftmailer-bundle",
@@ -106,7 +106,7 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "fae4523f3baf1595b1c632e4953f667e93149f9b",
+            "source-reference": "e1934527424732305f931739f02510b186d880fe",
             "alias": "2.1.9999999.9999999-dev"
         },
         {
@@ -117,7 +117,7 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "e445192f06f9b590a694819dc20ba5c891f3c6cf",
+            "source-reference": "d661c2a2f654ba8f2bddeeac0b8a80dcd59649ab",
             "alias": "1.9.9999999.9999999-dev"
         }
     ],
