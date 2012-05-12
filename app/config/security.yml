@@ -36,3 +36,4 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/download/, role: ROLE_STUDENT }
         - { path: ^/record/, role: ROLE_STUDENT }
+        - { path: ^/stats$, role: IS_AUTHENTICATED_ANONYMOUSLY }
