@@ -6,9 +6,10 @@
   <h1>Mes examens</h1>
   {% if records_pending|length > 0 %}
     <div id="record_submit" class="submit_head">
-      <a href="{{ path("exam_submit") }}" alt="Proposer un rendu">
-        <img src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
-        <span class="link_img_text">Proposer un rendu</span>
+      <a id="add_record_link" class="link_img_text" href="{{ path("exam_submit") }}" alt="Proposer un rendu">
+        <img class="float_img" src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
+        </br>
+        Proposer un rendu
       </a>
     </div>
     <p>Vous êtes inscrit à :</p>
@@ -34,4 +35,12 @@
       </ul>
     </div>
   {% endif %}
+{% endblock %}
+
+{% block footer_js %}
+	{% javascripts
+		'@UnsapaIPWBundle/Resources/public/js/exam_index.js'
+	%}
+		<script type="text/javascript" src="{{ asset_url }}" ></script>
+	{% endjavascripts %}
 {% endblock %}
