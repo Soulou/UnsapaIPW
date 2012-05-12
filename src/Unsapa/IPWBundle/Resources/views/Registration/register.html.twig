@@ -1,0 +1,11 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}Inscription à UnsapaIPW{% endblock %}
+
+{% block fos_user_content %}
+<div id="user_registration">
+  <h2>Inscription à UnsapaIPW</h2>
+  {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+</div>
+{% endblock fos_user_content %}
+

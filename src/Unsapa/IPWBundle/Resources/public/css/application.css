@@ -66,7 +66,45 @@ nav
 
 .required
 {
-  font-weight: 900;
+  font-weight: bold;
+}
+
+[required]
+{
+  border: 2px dotted orange;
+}
+
+#user_registration label
+{
+  float:left;
+  width:150px;
+}
+
+.required_header
+{
+  display:block;
+  text-align:right;
+  position: relative;
+  top: 10px;
+  font-weight:bolder;
+  color: #440000;
+  font-size:20px;
+
+}
+
+#user_registration_required
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 15px 15px 15px 15px;
+}
+
+#user_registration_fields
+{
+  padding: 15px 15px 15px 15px;
 }
 
 #form li 
