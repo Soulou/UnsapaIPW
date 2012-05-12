@@ -4,3 +4,7 @@
   <h1>Proposer un rendu</h1>
   {% include "UnsapaIPWBundle:Forms:record_submit.html.twig" %}
 {% endblock %}
+
+{% block footer_js %}
+  <script type="text/javascript" src="{{ asset("bundles/unsapaipw/js/submit_exam.js")}}"></script>
+{% endblock %}

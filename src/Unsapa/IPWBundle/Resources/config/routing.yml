@@ -26,6 +26,10 @@ exam_mark:
     pattern: /exams/{id}/marks
     defaults: { _controller: UnsapaIPWBundle:Attend:mark }
 
+record_fromexam:
+    pattern: /record/{examid}
+    defaults: { _controller: UnsapaIPWBundle:Record:fromExam }
+
 download_record:
     pattern: /download/{userid}/{examid}
     defaults: { _controller: UnsapaIPWBundle:Attend:download }

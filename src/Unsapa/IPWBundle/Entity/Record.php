@@ -239,6 +239,10 @@ class Record
      */
     public function __toString()
     {
-        return "[" . $this->getStudent() . " - " . $this->getExam() . "]";
-    }  
+      return json_encode(
+        array('exam' => $this->exam->getId(),
+              'student' => $this->student->getId(),
+              'mark' => $this->mark,
+              'document' => isset($this->document)));
+    }
 }

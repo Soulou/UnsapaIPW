@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 
+use Unsapa\IPWBundle\Helper\ExamCheckHelper;
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
 use Unsapa\IPWBundle\Entity\User;
@@ -17,24 +18,6 @@ use Unsapa\IPWBundle\Entity\Promo;
  */
 class AttendController extends Controller
 {
-
-  /**
-   * Perform different tests to see if the current user can modify the exam
-   *
-   * @param $exam to check
-   */
-  protected function securityCheckExam($exam)
-  {
-    if(!$exam)
-      throw $this->createNotFoundException('Cet examen n\'existe pas');
-
-    if($exam->getResp() != $this->get('security.context')->getToken()->getUser())
-      throw new AccessDeniedHttpException("Vous n'êtes pas responsable de cet examen.");
-
-    if($exam->getExamDate() < new \DateTime('now'))
-      throw new AccessDeniedHttpException("Vous ne pouvez modifier cet exam, il est terminé.");
-  }
-
   /**
    * When the form is posted, get the data and compare them to the database
    *
@@ -99,7 +82,8 @@ class AttendController extends Controller
   public function examChoiceAction($id)
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
-    $this->securityCheckExam($exam);
+    $user = $this->get('security.context')->getToken()->getUser();
+    ExamCheckHelper::securityCheckExam($exam, $user);
 
     if($this->getRequest()->getMethod() == "POST")
     {
@@ -162,7 +146,8 @@ class AttendController extends Controller
   public function markAction($id)
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
-    $this->securityCheckExam($exam);
+    $user = $this->get('security.context')->getToken()->getUser();
+    ExamCheckHelper::securityCheckExam($exam, $user);
 
     if($this->getRequest()->getMethod() == "POST")
       $this->markStudents($exam);
