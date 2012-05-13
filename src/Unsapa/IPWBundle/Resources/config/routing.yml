@@ -13,6 +13,10 @@ exams:
 exam_add:
     pattern: /exams/add
     defaults: { _controller: UnsapaIPWBundle:Exams:add }
+   
+exam_add_students:
+    pattern: /exams/add/students
+    defaults: { _controller: UnsapaIPWBundle:Promo:listStudents }
 
 promos:
     pattern: /promos
@@ -31,8 +35,24 @@ exam_submit:
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }
 
 exam_show:
-    pattern: /exams/:id
+    pattern: /exams/{id}
     defaults: { _controller: UnsapaIPWBundle:Exams:show }
+
+exam_students:
+    pattern: /exams/{id}/students
+    defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
+
+exam_mark:
+    pattern: /exams/{id}/marks
+    defaults: { _controller: UnsapaIPWBundle:Attend:mark }
+
+record_fromexam:
+    pattern: /record/{examid}
+    defaults: { _controller: UnsapaIPWBundle:Record:fromExam }
+
+download_record:
+    pattern: /download/{userid}/{examid}
+    defaults: { _controller: UnsapaIPWBundle:Attend:download }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

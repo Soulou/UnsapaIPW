@@ -2,10 +2,10 @@
 
 namespace Unsapa\IPWBundle\Controller;
 
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Unsapa\IPWBundle\Form\Type\ExamType;
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
 
@@ -16,22 +16,7 @@ class ExamsController extends Controller
       $exam = new Exam();
       $exam->setResp($this->get('security.context')->getToken()->getUser());
       $exam->setState("PENDING");
-      $form = $this->createFormBuilder($exam)
-        ->add('title', 'text', array('label' => "Titre : "))
-        ->add('promo', 'entity', array(
-            'label' => "Promotion : ", 
-            'class' => "UnsapaIPWBundle:Promo",
-            'property' => "name",
-            'query_builder' => 
-              function(EntityRepository $er) {
-                return $er->createQueryBuilder('p')->orderBy('p.name', 'ASC');
-              }
-            )
-          )
-        ->add('exam_date', 'date', array('widget'=>'single_text', 'label' => "Échéance : "))
-        ->add('coef', 'number', array('label' => "Coefficient : "))
-        ->add('exam_desc','textarea', array('label' => "Description : ", 'required' => false))
-        ->getForm();
+      $form = $this->createForm(new ExamType(), $exam);
 
       if($request->getMethod() == "POST")
       {
@@ -43,9 +28,27 @@ class ExamsController extends Controller
           $manager->persist($exam);
           $manager->flush();
 
-          $users = $this->get('doctrine')
-            ->getRepository("UnsapaIPWBundle:User")
-            ->findByPromo($exam->getPromo());
+          $keys = $this->getRequest()->request->keys();
+          $users = array();
+          for($i = 0; $i < count($keys); $i++)
+          {
+            if(substr($keys[$i], 0, 4) == "user")
+            {
+              $id = substr($keys[$i], 4);
+              $user = $this->getDoctrine()->getRepository("UnsapaIPWBundle:User")->find($id);
+              if($user)
+              {
+                array_push($users, $user);
+              }
+            }
+          }
+
+          if(count($users) == 0)
+          {
+            $users = $this->get('doctrine')
+              ->getRepository("UnsapaIPWBundle:User")
+              ->findByPromo($exam->getPromo());
+          }
 
           foreach($users as $user)
           {
@@ -63,7 +66,6 @@ class ExamsController extends Controller
 
     public function submitAction()
     {
-    
         $user = $this->get('security.context')->getToken()->getUser();
         // We prepare a query_builder to get the records of the 
         // current user with the state "PENDING"
@@ -112,7 +114,21 @@ class ExamsController extends Controller
         }
         return $this->render('UnsapaIPWBundle:Exams:submit.html.twig', array('form' => $form->createView()));
     }
-
+    
+    public function showAction($id)
+    {
+      $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
+      
+      if(!$exam)
+      {
+        throw $this->createNotFoundException('Cet examen n\'existe pas');
+      }
+      else
+      {
+          return $this->render("UnsapaIPWBundle:Exams:show.html.twig", array("exam" => $exam, "description" => $exam->getExamDesc(), "date" => $exam->getExamDate(), "coeff"  => $exam->getCoef(), "promo"  => $exam->getPromo(), "resp"  => $exam->getResp() ));
+      }
+    }
+    
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();
@@ -121,7 +137,18 @@ class ExamsController extends Controller
         $exams = $this->getDoctrine()
           ->getRepository('UnsapaIPWBundle:Exam')
           ->findByResp($user);
-          return $this->render('UnsapaIPWBundle:Exams:index_td.html.twig', array('exams' => $exams));
+
+        $exams_pending = array();
+        $exams_ended = array();
+        foreach($exams as $exam)
+        {
+          if($exam->getState() == "PENDING")
+            array_push($exams_pending, $exam);
+          if($exam->getState() == "FINISH")
+            array_push($exams_ended, $exam);
+        }
+        return $this->render('UnsapaIPWBundle:Exams:index_td.html.twig',
+          array('exams_pending' => $exams_pending, 'exams_ended' => $exams_ended));
       }
       else
       {
@@ -138,6 +165,7 @@ class ExamsController extends Controller
           if($record->getExam()->getState() == "FINISH")
             array_push($records_ended, $record);
         }
+
         return $this->render('UnsapaIPWBundle:Exams:index_student.html.twig', 
           array('records_pending' => $records_pending, 'records_ended' => $records_ended));
       }

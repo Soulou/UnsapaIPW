@@ -5,19 +5,40 @@
 {% block content %}
 <h1>Mes examens</h1>
 <div id="exam_add" class="submit_head" >
-  <a href="{{ path("exam_add") }}" alt="Ajouter un examen">
-    <img src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
-    <span class="link_img_text">Ajouter un examen</span>
+  <a id="add_exam_link" class="link_img_text" href="{{ path("exam_add") }}" alt="Ajouter un examen">
+    <img class="float_img" src="{{ asset("bundles/unsapaipw/images/adddocument.png") }}" width="64" alt="Image - Ajouter un examen" \>
+    </br>
+    Ajouter un examen
   </a>
 </div>
-<p>Les examens dont vous êtes responsable :</p>
-<div id="exams">
+<p>Les examens <strong>en cours</strong> dont vous êtes responsable :</p>
+<div id="exams_pending">
   <ul>
-  {% for exam in exams %}
+  {% for exam in exams_pending %}
     <li>
-    {{ exam.title }} ( {{ exam.getExamDate().format('Y-m-d H:i:s') }} )
+    <a href="{{ path("exam_show", { 'id': exam.id } ) }}" alt="{{ exam.title }}"> {{ exam.title }}</a> ( {{ exam.getFormatExamDate() }} )
+    <a href="{{ path("exam_students", { 'id': exam.id }) }}" alt="gérer les étudiants">Étudiants concernés</a>&nbsp;
+    <a href="{{ path('exam_mark', { 'id' : exam.id }) }}" alt="noter les étudiants">Noter les étudiants</a>
     </li>
   {% endfor %}
   </ul>
 </div>
+<p>Les examens <strong>terminés</strong> dont vous êtes responsable :</p>
+<div id="exams_ended">
+  <ul>
+  {% for exam in exams_ended %}
+    <li>
+    <a href="{{ path("exam_show", { 'id': exam.id } ) }}" alt="{{ exam.title }}"> {{ exam.title }}</a> ( {{ exam.getFormatExamDate() }} )
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+{% block footer_js %}
+	{% javascripts
+		'@UnsapaIPWBundle/Resources/public/js/exam_index.js'
+	%}
+		<script type="text/javascript" src="{{ asset_url }}" ></script>
+	{% endjavascripts %}
 {% endblock %}

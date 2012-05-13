@@ -1,6 +1,6 @@
 <?php
 
-namespace Unsapa\IPWBundle\Form;
+namespace Unsapa\IPWBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;

@@ -119,6 +119,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $exam2 = new Exam();
         $exam3 = new Exam();
 
+        $exams = array($exam1_1, $exam1_2, $exam2, $exam3);
+
         $exam1_1->setPromo($promo1);
         $exam1_2->setPromo($promo1);
         $exam2->setPromo($promo2);
@@ -144,15 +146,16 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $exam2->setCoef(2);
         $exam3->setCoef(1);
 
-        $exam1_1->setResp($tds[0]);
-        $exam1_2->setResp($tds[1]);
-        $exam2->setResp($tds[2]);
-        $exam3->setResp($tds[3]);
+        for($i = 0 ; $i < count($exams) ; $i++)
+          $exams[$i]->setResp($tds[$i]);
 
-        $exam1_1->setState("FINISH");
-        $exam1_2->setState("FINISH");
-        $exam2->setState("FINISH");
-        $exam3->setState("FINISH");
+        foreach($exams as $exam)
+        {
+          if((new \DateTime('now')) > $exam->getExamDate())
+            $exam->setState("FINISH");
+          else
+            $exam->setState("PENDING");
+        }
 
         $manager->persist($exam1_1);
         $manager->persist($exam1_2);

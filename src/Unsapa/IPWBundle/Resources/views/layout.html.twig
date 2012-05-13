@@ -8,8 +8,10 @@
 			'@UnsapaIPWBundle/Resources/public/css/application.css' 
 			'@UnsapaIPWBundle/Resources/public/css/ui-lightness/jquery-ui-1.8.20.custom.css'
 		%}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-		{% endstylesheets %}
+       <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% block css %}{% endblock %}
+
 		{% javascripts
 			'@UnsapaIPWBundle/Resources/public/js/jquery-1.7.1.min.js'
 			'@UnsapaIPWBundle/Resources/public/js/jquery-ui-1.8.20.custom.min.js'
@@ -37,8 +39,8 @@
 
         {% block menu %}
         <nav>
-            <a alt="Mes examens" href="{{ path('exams') }}">
-              <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="75px" height="75px" alt="Mes examens" />
+            <a class="link_my_exams" alt="Mes examens" href="{{ path('exams') }}">
+              <img src="{{ asset('bundles/unsapaipw/images/documents.png') }}" width="85px" height="95px" alt="Mes examens" />
             </a>
         </nav>
         {% endblock %}

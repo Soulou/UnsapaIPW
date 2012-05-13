@@ -1,8 +1,28 @@
 <h1>Ajout d'un examen</h1>
 
-<form action="{{ path('exam_add') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_errors(form) }}
-    {{ form_widget(form) }}
+<form id="exam_add" action="{{ path('exam_add') }}" method="post" {{ form_enctype(form) }}>
 
-    <input type="submit" />
+  {{ form_errors(form.title) }}
+  {{ form_label(form.title) }}
+  {{ form_widget(form.title) }}
+  <br>
+  {{ form_errors(form.promo) }}
+  {{ form_label(form.promo) }}
+  {{ form_widget(form.promo) }} 
+  <span id="promo_detail">Détails → </span>
+  <div id="promo_detail_dialog"></div>
+  <br>
+  {{ form_errors(form.exam_date) }}
+  {{ form_label(form.exam_date) }}
+  {{ form_widget(form.exam_date) }}
+  <br>
+  {{ form_errors(form.coef) }}
+  {{ form_label(form.coef) }}
+  {{ form_widget(form.coef) }}
+  <br>
+  {{ form_errors(form.exam_desc) }}
+  {{ form_label(form.exam_desc) }}
+  {{ form_widget(form.exam_desc) }}
+  <br>
+  <input type="submit" />
 </form>
