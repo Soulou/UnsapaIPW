@@ -130,7 +130,7 @@ nav
   padding-top: 5px;
   background-image: url('../../bundles/unsapaipw/images/user_nav.png');
   font-size:20px;
-  box-shadow: 15px 10px 5px #888;
+  box-shadow: 15px 10px 15px #888;
 }
 
 #user_nav a
