@@ -1,6 +1,12 @@
 
-<form action="{{ path('exam_submit') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_errors(form) }}
-    {{ form_widget(form) }}
+<form id="record_submit_form" action="{{ path('exam_submit') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form.exam) }}
+    {{ form_label(form.exam) }}
+    {{ form_widget(form.exam) }}
+    <br>
+    {{ form_errors(form.file) }}
+    {{ form_label(form.file) }}
+    {{ form_widget(form.file) }}
+    <br>
     <input type="submit" />
 </form>
