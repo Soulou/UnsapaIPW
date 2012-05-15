@@ -45,6 +45,11 @@
             <a class="link_stats" alt="Stats" href="{{ path('stats') }}">
               <img src="{{ asset('bundles/unsapaipw/images/stats.png') }}" width="60px" height="80px" alt="Stats" />
             </a>
+            {% if is_granted("ROLE_ADMIN") %}
+            <a class="link_admin" alt="Admin" href="{{ path('admin') }}">
+              <img src="{{ asset('bundles/unsapaipw/images/admin_cog.png') }}" width="60px" height="80px" alt="Admin" />
+            </a>
+            {% endif %}
         </nav>
         {% endblock %}
 
