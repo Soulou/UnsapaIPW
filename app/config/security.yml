@@ -28,8 +28,8 @@ security:
             anonymous: true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/exams$, role: ROLE_STUDENT }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/exams, role: ROLE_STUDENT }
         - { path: ^/exams/add$, role: ROLE_TD }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
