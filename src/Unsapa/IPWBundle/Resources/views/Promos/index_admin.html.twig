@@ -1,0 +1,20 @@
+{% extends 'UnsapaIPWBundle::layout.html.twig' %}
+ 
+{% block title %}Promotions{% endblock %}
+
+{% block content %}
+	
+	<ul>
+	{% for promo in promos %}
+		<li>{{ promo.name }} <a href="{{ path('promos_edit', { 'id': promo.id }) }}">Editer</a>
+	{% endfor %}
+	</ul>
+	
+	<div id="promos_add">
+	  <a href="{{ path("promos_add") }}" alt="Ajouter une promotion">
+	    <img src="{{ asset("bundles/unsapaipw/images/plus.png") }}" width="16" alt="Image - Ajouter une promotion" \>
+	    <span class="link_img_text">Ajouter une promotion</span>
+	  </a>
+	</div>
+	
+{% endblock %}

@@ -1,6 +1,10 @@
 homepage:
     pattern: /
     defaults: { _controller: UnsapaIPWBundle:Application:index }
+    
+admin:
+    pattern: /admin
+    defaults: { _controller: UnsapaIPWBundle:Admin:index }
 
 exams:
     pattern: /exams
@@ -13,6 +17,18 @@ exam_add:
 exam_add_students:
     pattern: /exams/add/students	  	
     defaults: { _controller: UnsapaIPWBundle:Promo:listStudents }
+
+promos:
+    pattern: /promos
+    defaults: { _controller: UnsapaIPWBundle:Promos:index }
+    
+promos_add:
+    pattern: /promos/add
+    defaults: { _controller: UnsapaIPWBundle:Promos:add }
+    
+promos_edit:
+    pattern: /promos/{id}/edit
+    defaults: { _controller: UnsapaIPWBundle:Promos:edit }
     
 exam_submit:
     pattern: /exams/submit

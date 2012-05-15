@@ -1,0 +1,8 @@
+<h1>Ajout d'une promotion</h1>
+
+<form action="{{ path('promos_add') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>

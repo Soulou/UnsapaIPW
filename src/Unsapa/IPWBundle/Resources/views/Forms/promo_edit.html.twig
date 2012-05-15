@@ -1,0 +1,8 @@
+<h1>Edition d'une promotion</h1>
+
+<form action="{{ path('promos_edit', { 'id': promo.id }) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>	
