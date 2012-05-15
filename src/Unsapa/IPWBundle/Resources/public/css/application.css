@@ -28,6 +28,11 @@ nav
   float: left;
 }
 
+h1
+{
+	text-indent: 20px;
+}
+
 h2
 {
 	text-indent: 40px;
@@ -84,7 +89,7 @@ h2
 }
 
 
-/* Formulaire de login */
+/* Formulaires de login et d'enregistrement utilisateur */
 
 #login_form
 {
@@ -107,30 +112,6 @@ h2
 {
 	margin-top: 10px;
 	font-size: 18px;
-}
-
-
-/* Autres formulaires */
-
-#exam_add label
-{
-  float:left;
-  width:120px;
-}
-
-#form ul
-{
-  margin-left: 130px;
-}
-
-.required
-{
-  font-weight: bold;
-}
-
-[required]
-{
-  border: 2px dotted orange;
 }
 
 #user_registration label
@@ -172,6 +153,79 @@ h2
   padding: 15px 15px 15px 15px;
 }
 
+
+/* Formulaire de proposition de rendu */
+
+#record_submit_form
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 18px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+#record_submit_form label
+{
+  float:left;
+  width:100px;
+}
+
+#record_submit_form input[type="submit"]
+{
+	margin-top: 8px;
+	font-size: 18px;
+}
+
+
+/* Formulaire d'ajout d'examen */
+
+#exam_add_form
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 18px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+#exam_add_form label
+{
+  float:left;
+  width:120px;
+}
+
+#exam_add_form input[type="submit"]
+{
+	margin-top: 8px;
+	font-size: 18px;
+}
+
+/* Autres formulaires */
+
+#form ul
+{
+  margin-left: 130px;
+}
+
+.required
+{
+  font-weight: bold;
+}
+
+[required]
+{
+  border: 2px dotted orange;
+}
+
 #form li 
 {
   color: red;
@@ -209,7 +263,7 @@ h2
 }
 
 
-/* Proposer un rendu ou ajouter un examen */
+/* Bouton Proposer un rendu ou ajouter un examen */
 
 .submit_head
 {
