@@ -12,12 +12,23 @@ use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Promo;
 use Unsapa\IPWBundle\Form\PromoForm;
 
+/**
+ * Manage actions where promotions are concerned
+ */
 class PromosController extends Controller
 {
     public function indexAction()
     {
     	$promos = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->findAll();
-    	return $this->render('UnsapaIPWBundle:Promos:index.html.twig', array("promos"=>$promos));
+    	
+    	if($this->get('security.context')->isGranted("ROLE_ADMIN"))
+    	{
+    		return $this->render('UnsapaIPWBundle:Promos:index_admin.html.twig', array("promos"=>$promos));
+    	}
+    	else
+    	{
+    		return $this->render('UnsapaIPWBundle:Promos:index_user.html.twig', array("promos"=>$promos));
+    	}
     }
     
     public function addAction(Request $request)
@@ -70,5 +81,42 @@ class PromosController extends Controller
     			'form' => $form->createView()
     			));
     	 
+    }
+    
+    /**
+     * route : /exams/add/students
+     * Get the list of students for the current Promo
+     * In JSON format
+     */
+    public function listStudentsAction()
+    {
+    	$r = $this->getRequest()->request;
+    
+    	if(!$r->has('promo'))
+    		throw $this->createNotFoundException("Cette promo n'existe pas");
+    
+    	$promo = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->find($r->get('promo'));
+    	$users = $this->getDoctrine()->getRepository("UnsapaIPWBundle:User")->findByPromo($promo);
+    
+    	$users_return = array();
+    	foreach($users as $user)
+    	{
+    		$user_a = array("id" => $user->getId(), "firstname" => $user->getFirstName(), "lastname" => $user->getLastName());
+    		array_push($users_return, $user_a);
+    	}
+    
+    	return new Response(json_encode($users_return));
+    }
+    
+    /**
+     * route : /stats
+     * Get the averages of all the Promos
+     */
+    public function statsAction()
+    {
+    	 
+    	 
+    	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
+    			array());
     }
 }
