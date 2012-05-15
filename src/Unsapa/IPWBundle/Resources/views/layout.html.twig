@@ -28,7 +28,7 @@
 			{% if is_granted("ROLE_STUDENT") %}
 				<a href="{{ path("fos_user_profile_show") }}" alt="profil">Mon profil</a>
 				<span class="end_of_line">
-				<a href="{{ path("fos_user_security_logout") }}" alt="deconnexion">Déconnexion</a>
+				<a id="deconnexion" href="{{ path("fos_user_security_logout") }}" alt="deconnexion">Déconnexion</a>
 				</span>
 			{% else %}
 				<a href="{{ path("fos_user_security_login") }}" alt="Connexion">Connexion</a>

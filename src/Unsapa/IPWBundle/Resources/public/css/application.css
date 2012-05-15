@@ -3,9 +3,12 @@
 /**
  * application.css
  *
- * @author Léo
+ * @author Léo / Lucas
  * @version 2012/04/25
  */
+
+
+/* Général */
 
 nav
 {
@@ -25,6 +28,16 @@ nav
   float: left;
 }
 
+h1
+{
+	text-indent: 20px;
+}
+
+h2
+{
+	text-indent: 40px;
+}
+
 #content
 {
   position: absolute;
@@ -41,23 +54,162 @@ nav
   padding-left: 30px;
 }
 
-.submit_head
+#user_nav
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+  text-indent: 60px;
+  padding-top: 5px;
+  background-image: url('../../bundles/unsapaipw/images/user_nav.png');
+  font-size:20px;
+  box-shadow: 15px 10px 15px #888;
+}
+
+#user_nav a
+{
+  color: black;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.link_my_exams
+{
+  color: black;
+  text-align:center;
+  font-family: serif;
+  font-size:18px;
+}
+
+#deconnexion
+{
+	margin-right: 30px;
+}
+
+
+/* Formulaires de login et d'enregistrement utilisateur */
+
+#login_form
 {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
-  width: 300px;
-  background-color: #E4CAC5;
-  padding-top: 5px;
-  padding-bottom: 25px;
+  background-color: #eeeebb;
+  padding: 18px;
+  margin: 25px;
 }
 
-#exam_add label
+#login_form label
+{
+  float:left;
+  width:150px;
+}
+
+#login_form input[type="submit"]
+{
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+#user_registration label
+{
+  float:left;
+  width:150px;
+}
+
+.required_header
+{
+  display:block;
+  text-align:right;
+  position: relative;
+  top: 12px;
+  right: 18px;
+  font-weight:bolder;
+  color: #440000;
+  font-size:20px;
+
+}
+
+.fos_user_registration_register
+{
+	margin: 25px;
+}
+
+#user_registration_required
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 22px 15px 15px 15px;
+}
+
+#user_registration_fields
+{
+  padding: 15px 15px 15px 15px;
+}
+
+
+/* Formulaire de proposition de rendu */
+
+#record_submit_form
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 18px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+#record_submit_form label
+{
+  float:left;
+  width:100px;
+}
+
+#record_submit_form input[type="submit"]
+{
+	margin-top: 8px;
+	font-size: 18px;
+}
+
+
+/* Formulaire d'ajout d'examen */
+
+#exam_add_form
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 18px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+#exam_add_form label
 {
   float:left;
   width:120px;
 }
+
+#exam_add_form input[type="submit"]
+{
+	margin-top: 8px;
+	font-size: 18px;
+}
+
+/* Autres formulaires */
 
 #form ul
 {
@@ -74,43 +226,13 @@ nav
   border: 2px dotted orange;
 }
 
-#user_registration label
-{
-  float:left;
-  width:150px;
-}
-
-.required_header
-{
-  display:block;
-  text-align:right;
-  position: relative;
-  top: 10px;
-  font-weight:bolder;
-  color: #440000;
-  font-size:20px;
-
-}
-
-#user_registration_required
-{
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  background-color: #eeeebb;
-  padding: 15px 15px 15px 15px;
-}
-
-#user_registration_fields
-{
-  padding: 15px 15px 15px 15px;
-}
-
 #form li 
 {
   color: red;
 }
+
+
+/* Détails promo */
 
 #promo_detail
 {
@@ -119,27 +241,8 @@ nav
   text-decoration: underline;
 }
 
-#user_nav
-{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 40px;
-  width:100%;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 5px;
-  background-image: url('../../bundles/unsapaipw/images/user_nav.png');
-  font-size:20px;
-  box-shadow: 15px 10px 15px #888;
-}
 
-#user_nav a
-{
-  color: black;
-  font-weight: bold;
-  font-family: serif;
-}
+/* Page Exams */
 
 .link_img_text
 {
@@ -152,19 +255,30 @@ nav
   font-size:20px;
 }
 
-.link_my_exams
-{
-  color: black;
-  text-align:center;
-  font-family: serif;
-  font-size:18px;
-}
-
 .float_img
 {
   float: left;
-  margin-right: 20px;
+  margin-right: 25px;
+  margin-left: 10px;
 }
+
+
+/* Bouton Proposer un rendu ou ajouter un examen */
+
+.submit_head
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  width: 300px;
+  background-color: #E4CAC5;
+  padding-top: 5px;
+  padding-bottom: 25px;
+}
+
+
+/* Autre */
 
 .end_of_line
 {
@@ -191,3 +305,4 @@ nav
 {
   color: black;
 }
+
