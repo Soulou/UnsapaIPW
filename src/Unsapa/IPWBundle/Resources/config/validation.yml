@@ -13,8 +13,6 @@ Unsapa\IPWBundle\Entity\User:
             - MaxLength: 
                 limit: 64
         phone:
-            - Type:
-                type: integer
             - MinLength:
                 limit: 10 
             - MaxLength:
@@ -44,6 +42,12 @@ Unsapa\IPWBundle\Entity\Record:
         student:
             - NotNull: ~
         mark:
+            - Min:
+                limit: 0
+                message: La note doit être supérieure à 0
+            - Max:
+                limit: 20
+                message: La note doit être inférieure à 20
             - Type:
                 type: float
                 message: La note doit être un nombre.
