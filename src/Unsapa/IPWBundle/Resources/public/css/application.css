@@ -3,9 +3,12 @@
 /**
  * application.css
  *
- * @author Léo
+ * @author Léo / Lucas
  * @version 2012/04/25
  */
+
+
+/* Général */
 
 nav
 {
@@ -46,17 +49,68 @@ h2
   padding-left: 30px;
 }
 
-.submit_head
+#user_nav
+{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+  text-indent: 60px;
+  padding-top: 5px;
+  background-image: url('../../bundles/unsapaipw/images/user_nav.png');
+  font-size:20px;
+  box-shadow: 15px 10px 15px #888;
+}
+
+#user_nav a
+{
+  color: black;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.link_my_exams
+{
+  color: black;
+  text-align:center;
+  font-family: serif;
+  font-size:18px;
+}
+
+#deconnexion
+{
+	margin-right: 30px;
+}
+
+
+/* Formulaire de login */
+
+#login_form
 {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
-  width: 300px;
-  background-color: #E4CAC5;
-  padding-top: 5px;
-  padding-bottom: 25px;
+  background-color: #eeeebb;
+  padding: 18px;
+  margin: 25px;
 }
+
+#login_form label
+{
+  float:left;
+  width:150px;
+}
+
+#login_form input[type="submit"]
+{
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+
+/* Autres formulaires */
 
 #exam_add label
 {
@@ -78,7 +132,6 @@ h2
 {
   border: 2px dotted orange;
 }
-
 
 #user_registration label
 {
@@ -124,6 +177,9 @@ h2
   color: red;
 }
 
+
+/* Détails promo */
+
 #promo_detail
 {
   margin-left:60px;
@@ -131,26 +187,8 @@ h2
   text-decoration: underline;
 }
 
-#user_nav
-{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 40px;
-  width: 100%;
-  text-indent: 60px;
-  padding-top: 5px;
-  background-image: url('../../bundles/unsapaipw/images/user_nav.png');
-  font-size:20px;
-  box-shadow: 15px 10px 15px #888;
-}
 
-#user_nav a
-{
-  color: black;
-  font-weight: bold;
-  font-family: serif;
-}
+/* Page Exams */
 
 .link_img_text
 {
@@ -163,19 +201,30 @@ h2
   font-size:20px;
 }
 
-.link_my_exams
-{
-  color: black;
-  text-align:center;
-  font-family: serif;
-  font-size:18px;
-}
-
 .float_img
 {
   float: left;
-  margin-right: 20px;
+  margin-right: 25px;
+  margin-left: 10px;
 }
+
+
+/* Proposer un rendu ou ajouter un examen */
+
+.submit_head
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  width: 300px;
+  background-color: #E4CAC5;
+  padding-top: 5px;
+  padding-bottom: 25px;
+}
+
+
+/* Autre */
 
 .end_of_line
 {
@@ -203,30 +252,3 @@ h2
   color: black;
 }
 
-#deconnexion
-{
-	margin-right: 40px;
-}
-
-#login_form
-{
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
-  background-color: #eeeebb;
-  padding: 18px;
-  margin: 25px;
-}
-
-#login_form label
-{
-  float:left;
-  width:150px;
-}
-
-#login_form input[type="submit"]
-{
-	margin-top: 10px;
-	font-size: 18px;
-}
