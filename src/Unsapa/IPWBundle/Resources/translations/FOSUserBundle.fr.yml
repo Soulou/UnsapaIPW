@@ -7,3 +7,23 @@ fos_user_registration_form_city: "Ville :"
 fos_user_registration_form_phone: "Téléphone :"
 fos_user_registration_form_promo: "Promotion :"
 
+fos_user_profile_form_user_email: "Adresse e-mail :"
+fos_user_profile_form_user_password: "Mot de passe :"
+fos_user_profile_form_user_username: "Nom d'utilisateur :"
+fos_user_profile_form_user_lastname: "Nom :"
+fos_user_profile_form_user_firstname: "Prénom :"
+fos_user_profile_form_user_address: "Adresse :"
+fos_user_profile_form_user_zipcode: "Code postal :"
+fos_user_profile_form_user_city: "Ville :"
+fos_user_profile_form_user_phone: "Téléphone :"
+fos_user_profile_form_user_promo: "Promotion :"
+fos_user_profile_form_current: "Mot de passe (Validation) :"
+
+profile:
+    show:
+        firstname: Prénom
+        lastname: Nom
+        phone: Téléphone
+        address: Adresse
+        zipcode: Code postal
+        city: Ville
