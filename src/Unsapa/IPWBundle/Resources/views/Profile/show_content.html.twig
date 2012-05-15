@@ -1,0 +1,17 @@
+<div class="fos_user_user_show">
+    <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
+    <p>{{ 'profile.show.lastname'|trans({}, 'FOSUserBundle') }}: {{ user.lastname }}</p>
+    <p>{{ 'profile.show.firstname'|trans({}, 'FOSUserBundle') }}: {{ user.firstname }}</p>
+    <p>{{ 'profile.show.address'|trans({}, 'FOSUserBundle') }}: {{ user.address }}</p>
+    <p>{{ 'profile.show.zipcode'|trans({}, 'FOSUserBundle') }}: {{ user.zipcode }}</p>
+    <p>{{ 'profile.show.city'|trans({}, 'FOSUserBundle') }}: {{ user.city }}</p>
+    <p>{{ 'profile.show.phone'|trans({}, 'FOSUserBundle') }}: {{ user.phone }}</p>
+
+    <form method="GET" action="{{ path("fos_user_profile_edit") }}">
+      <input type="submit" value="Éditer le profil" />
+    </form>
+    <form method="GET" action="{{ path("fos_user_change_password") }}">
+      <input type="submit" value="Changer mon mot de passe" />
+    </form>
+</div>

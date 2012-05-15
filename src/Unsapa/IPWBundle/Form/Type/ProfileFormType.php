@@ -11,9 +11,8 @@ class ProfileFormType extends BaseType
     {
         $builder
             ->add('email')
-            ->add('password')
-            ->add('lastname')
-            ->add('firstname')
+            ->add('lastname', 'text', array('required'=>true))
+            ->add('firstname', 'text', array('required'=>true))
             ->add('address')
             ->add('zipcode')
             ->add('city')
