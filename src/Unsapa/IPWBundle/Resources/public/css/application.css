@@ -25,6 +25,11 @@ nav
   float: left;
 }
 
+h2
+{
+	text-indent: 40px;
+}
+
 #content
 {
   position: absolute;
@@ -74,6 +79,7 @@ nav
   border: 2px dotted orange;
 }
 
+
 #user_registration label
 {
   float:left;
@@ -85,11 +91,17 @@ nav
   display:block;
   text-align:right;
   position: relative;
-  top: 10px;
+  top: 12px;
+  right: 18px;
   font-weight:bolder;
   color: #440000;
   font-size:20px;
 
+}
+
+.fos_user_registration_register
+{
+	margin: 25px;
 }
 
 #user_registration_required
@@ -99,7 +111,7 @@ nav
   -o-border-radius: 10px;
   border-radius: 10px;
   background-color: #eeeebb;
-  padding: 15px 15px 15px 15px;
+  padding: 22px 15px 15px 15px;
 }
 
 #user_registration_fields
@@ -194,4 +206,27 @@ nav
 #deconnexion
 {
 	margin-right: 40px;
+}
+
+#login_form
+{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eeeebb;
+  padding: 18px;
+  margin: 25px;
+}
+
+#login_form label
+{
+  float:left;
+  width:150px;
+}
+
+#login_form input[type="submit"]
+{
+	margin-top: 10px;
+	font-size: 18px;
 }
