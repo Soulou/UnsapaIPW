@@ -299,6 +299,14 @@ h2
   display:block;
   font-weight:bold;
   color: red;
+  text-align:center;
+}
+
+.warn img
+{
+  position: relative;
+  top: 20px;
+  padding-right: 10px;
 }
 
 .warn a
