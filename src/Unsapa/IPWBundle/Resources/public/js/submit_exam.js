@@ -12,9 +12,11 @@ function get_record_data()
         if(data.document)
         {
           $('#form_exam').after( 
-            "<span class=\"warn\" id=\"exam_submit_warn\"><br>" +
+            "<span class=\"warn\" id=\"exam_submit_warn\">" +
+              "<img alt=\"Warning\" src=\"../../bundles/unsapaipw/images/warning.png\" width=\"35\"/>" +
               "Vous avez déjà soumis un document pour cet examen : " + 
               "<a alt=\"Télécharger le document\" href=\"../download/" + data.student + "/" + data.exam + "\">Télécharger</a>" +
+              "<br>Il sera écrasé si vous choisissez un nouveau fichier."+ 
             "</span>"
           );
         }
