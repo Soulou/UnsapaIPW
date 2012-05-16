@@ -28,6 +28,11 @@ nav
   float: left;
 }
 
+nav a img
+{
+  margin-bottom: 100%;
+}
+
 h1
 {
 	text-indent: 20px;
