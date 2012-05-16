@@ -16,7 +16,7 @@ exam_add:
     
 exam_add_students:
     pattern: /exams/add/students	  	
-    defaults: { _controller: UnsapaIPWBundle:Promo:listStudents }
+    defaults: { _controller: UnsapaIPWBundle:Promos:listStudents }
 
 promos:
     pattern: /promos
@@ -56,7 +56,7 @@ download_record:
     
 stats:
     pattern: /stats
-    defaults: { _controller: UnsapaIPWBundle:Promo:stats }
+    defaults: { _controller: UnsapaIPWBundle:Promos:stats }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
