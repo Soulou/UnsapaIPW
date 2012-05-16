@@ -35,7 +35,10 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - Type: 
                 type: float
-                message: Le coefficient doit être un nombre.
+        exam_date:
+            - DateTime: ~
+            - Unsapa\IPWBundle\Validator\Constraints\MinDate: 
+                limit: "now"
 
 Unsapa\IPWBundle\Entity\Record:
     properties:
@@ -44,13 +47,10 @@ Unsapa\IPWBundle\Entity\Record:
         mark:
             - Min:
                 limit: 0
-                message: La note doit être supérieure à 0
             - Max:
                 limit: 20
-                message: La note doit être inférieure à 20
             - Type:
                 type: float
-                message: La note doit être un nombre.
         exam: 
             - NotNull: ~
         file:

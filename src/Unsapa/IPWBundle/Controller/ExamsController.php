@@ -3,6 +3,7 @@
 namespace Unsapa\IPWBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 use Unsapa\IPWBundle\Form\Type\ExamType;
@@ -11,18 +12,34 @@ use Unsapa\IPWBundle\Entity\Exam;
 
 class ExamsController extends Controller
 {
-    public function addAction(Request $request)
+    /**
+     * Route /exams/add 
+     * When a td resp wants to add an exam
+     */
+    public function addAction()
     {
       $exam = new Exam();
       $exam->setResp($this->get('security.context')->getToken()->getUser());
       $exam->setState("PENDING");
       $form = $this->createForm(new ExamType(), $exam);
 
-      if($request->getMethod() == "POST")
+      if($this->getRequest()->getMethod() == "POST")
       {
-        $form->bindRequest($request);
+        try
+        {
+          $form->bindRequest($this->getRequest());
+          $error_date = false;
+        } catch (\ErrorException $e)
+        {
+          if($form->has("exam_date"))
+          {
+            $child = $form->get("exam_date");
+            $child->addError(new FormError("La date n'est pas valide"));
+            $error_date = true;
+          }
+        }
 
-        if($form->isValid())
+        if(!$error_date && $form->isValid())
         {
           $manager = $this->get('doctrine')->getEntityManager();
           $manager->persist($exam);
