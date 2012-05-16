@@ -213,14 +213,21 @@ h2
 
 #exam_add_form label
 {
-  float:left;
-  width:120px;
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin-right: 20px;
 }
 
 #exam_add_form input[type="submit"]
 {
 	margin-top: 8px;
 	font-size: 18px;
+}
+
+#promo_detail:hover
+{
+	cursor: pointer;
 }
 
 /* Autres formulaires */
@@ -246,12 +253,45 @@ h2
 }
 
 
+/* Mon profil */
+
+#profil
+{
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  width: 130%;
+  background-color: #FCCA88;
+  margin-top: 11px;
+  margin-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  text-indent: 8%;
+}
+
+#profil input[value="Éditer le profil"]
+{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.profil_label
+{
+	font-weight: bold;
+	float: left;
+	width: 40%;
+	text-align: right;
+}
+
+
 /* Détails promo */
 
 #promo_detail
 {
   margin-left:60px;
-  font-width: bold;
+  font-weight: bold;
   text-decoration: underline;
 }
 
