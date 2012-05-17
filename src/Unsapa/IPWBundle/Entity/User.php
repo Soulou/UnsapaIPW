@@ -44,6 +44,11 @@ class User extends BaseUser
      * @var string $phone
      */
     private $phone;
+    
+    /**
+     * @var Unsapa\IPWBundle\Entity\Promo
+     */
+    private $promo;
 
 
     /**
@@ -206,11 +211,6 @@ class User extends BaseUser
     {
       return $this->getLastname() . " " . $this->getFirstname();
     }
-    /**
-     * @var Unsapa\IPWBundle\Entity\Promo
-     */
-    private $promo;
-
 
     /**
      * Set promo
