@@ -113,33 +113,46 @@ class AttendController extends Controller
    * When a user post /exams/:id/mark we modify the mark of the students
    *
    * @param $exam concerned exam
+   * @return array of Record
    */
   protected function markStudents($exam)
   {
     $student_ids = $this->getRequest()->request->keys();
     $em = $this->getDoctrine()->getEntityManager();
+    $invalid_records = array();
     for($i = 0; $i < count($student_ids); $i++)
     {
       $record = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Record")->findByExamAndStudentId($exam->getId(), $student_ids[$i]);
+
       if($record === NULL)
         throw $this->createNotFoundException("Étudiant inexistant.");
 
       $mark = floatval($this->getRequest()->request->get($student_ids[$i]));
-      if(empty($mark))
-        $record->setMark(NULL);
-      else
-        $record->setMark($mark);
+      $unpersistant_record = new Record();
+      $unpersistant_record->setExam($record->getExam());
+      $unpersistant_record->setStudent($record->getStudent());
+      $unpersistant_record->setDocument($record->getDocument());
+      $unpersistant_record->setMark($record->getMark());
 
-      echo $this->getRequest()->request->get($student_ids[$i]);
+      if(empty($mark))
+        $unpersistant_record->setMark(NULL);
+      else
+        $unpersistant_record->setMark($mark);
 
       $validator = $this->get('validator');
-      $errors = $validator->validate($record);
+      $errors = $validator->validate($unpersistant_record);
       if(count($errors) > 0)
-        return new Response(print_r($errors, true));
-
-      $em->persist($record);
-      $em->flush();
+      {
+        array_push($invalid_records, $record);
+      }
+      else
+      {
+        $record->setMark($unpersistant_record->getMark());
+        $em->persist($record);
+        $em->flush();
+      }
     }
+    return $invalid_records;
   }
 
   /**
@@ -151,17 +164,19 @@ class AttendController extends Controller
   {
     $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
     $user = $this->get('security.context')->getToken()->getUser();
+    $invalid_records = array();
+
     ExamCheckHelper::securityCheckExam($exam, $user);
 
     if($this->getRequest()->getMethod() == "POST")
-      $this->markStudents($exam);
+      $invalid_records = $this->markStudents($exam);
 
     $records = $this->getDoctrine()->getEntityManager()
       ->createQuery("SELECT r FROM UnsapaIPWBundle:Record r WHERE r.exam = :exam AND r.document IS NOT NULL")
       ->setParameter('exam', $exam)
       ->getResult();
     
-    return $this->render("UnsapaIPWBundle:Attend:mark.html.twig", array('records' => $records, 'exam' => $exam)); 
+    return $this->render("UnsapaIPWBundle:Attend:mark.html.twig", array('records' => $records, 'exam' => $exam, 'invalid_records' => $invalid_records)); 
   }
 
   /**

@@ -13,7 +13,7 @@ Unsapa\IPWBundle\Entity\Record:
             length: 255
             nullable: true
         mark:
-            type: integer
+            type: float
             length: null 
             nullable: true
 

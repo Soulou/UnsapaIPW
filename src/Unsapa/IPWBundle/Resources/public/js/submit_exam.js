@@ -16,7 +16,7 @@ function get_record_data()
               "<img alt=\"Warning\" src=\"../../bundles/unsapaipw/images/warning.png\" width=\"35\"/>" +
               "Vous avez déjà soumis un document pour cet examen : " + 
               "<a alt=\"Télécharger le document\" href=\"../download/" + data.student + "/" + data.exam + "\">Télécharger</a>" +
-              "<br>Il sera écrasé si vous choisissez un nouveau fichier."+ 
+              "<br>Il sera écrasé si vous choisissez un nouveau fichier.<br><br>"+ 
             "</span>"
           );
         }
