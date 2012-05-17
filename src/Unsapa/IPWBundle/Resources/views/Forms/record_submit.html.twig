@@ -1,5 +1,7 @@
 
 <form id="record_submit_form" action="{{ path('exam_submit') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
     {{ form_errors(form.exam) }}
     {{ form_label(form.exam) }}
     {{ form_widget(form.exam) }}

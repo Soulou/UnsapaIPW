@@ -22,8 +22,13 @@ function load_data()
 }
 
 $(function() {
-    $("#exam_exam_date").datepicker({ dateFormat: "dd/mm/yy" });
+    var min_date = new Date();
+    min_date.setDate(min_date.getDate()+1);
     $("#promo_detail_dialog").dialog({ title: "Étudiants concernés", autoOpen: false });
+    $("#exam_exam_date").datepicker({ 
+      dateFormat: "dd/mm/yy" ,
+      minDate: min_date
+    });
     $("#promo_detail").click(
       function()
       {

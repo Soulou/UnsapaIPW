@@ -1,4 +1,10 @@
 <?php
+/**
+ * User.php
+ * 
+ * @date 04/24/2012
+ * @package Unsapa\IPWBundle\Entity
+ */
 
 namespace Unsapa\IPWBundle\Entity;
 
@@ -7,40 +13,55 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Unsapa\IPWBundle\Entity\User
+ * Inheritated user fomr the FOSUserBundle where are include the other fields
+ * Password/Username/Email/Roles etc.
  */
 class User extends BaseUser
 {
     /**
+     * Identifier of the user
      * @var integer $id
      */
     protected $id;
 
     /**
+     * Lastname of the user
      * @var string $lastname
      */
     private $lastname;
 
     /**
+     * Firstname of the user
      * @var string $firstname
      */
     private $firstname;
 
     /**
+     * Promotion which contains the user
+     * @var Unsapa\IPWBundle\Entity\Promo
+     */
+    private $promo;
+
+    /**
+     * Address of the user
      * @var string $address
      */
     private $address;
 
     /**
+     * Zip code of the address' user
      * @var string $zipcode
      */
     private $zipcode;
 
     /**
+     * City of the address' user
      * @var string $city
      */
     private $city;
 
     /**
+     * Phone number of the user
      * @var string $phone
      */
     private $phone;
@@ -206,19 +227,14 @@ class User extends BaseUser
     {
       return $this->getLastname() . " " . $this->getFirstname();
     }
-    /**
-     * @var Unsapa\IPWBundle\Entity\Promo
-     */
-    private $promo;
-
 
     /**
      * Set promo
      *
-     * @param Unsapa\IPWBundle\Entity\Promo $promo
+     * @param Promo $promo
      * @return User
      */
-    public function setPromo(\Unsapa\IPWBundle\Entity\Promo $promo = null)
+    public function setPromo(Promo $promo = null)
     {
         $this->promo = $promo;
         return $this;

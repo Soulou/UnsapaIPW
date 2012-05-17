@@ -2,8 +2,9 @@
 /**
  * LoadExampleData.php
  *
- * @author Léo
+ * @author leo@soulou.fr
  * @date 2012/04/26
+ * @package Unsapa\IPWBundle\DataFixtures\ORM
  */
 
 namespace Unsapa\IPWBundle\DataFixtures\ORM;
@@ -21,15 +22,29 @@ use Unsapa\IPWBundle\Entity\Exam;
 use Unsapa\IPWBundle\Entity\Promo;
 use Unsapa\IPWBundle\Entity\Record;
 
+/**
+ * Define some fixtures to test the application
+ */
 class LoadUserData implements FixtureInterface, ContainerAwareInterface
 {
+    /**
+     * Container for the ContainerAwareInterface
+     */
     private $container;
 
+    /**
+     * Set default container
+     * @param ContainerInterface $container
+     */
     public function setContainer(ContainerInterface $container = null)
     {
        $this->container = $container;
     }
 
+    /**
+     * Function called to load the data to the database
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $promo1 = new Promo();

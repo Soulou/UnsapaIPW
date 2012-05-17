@@ -1,5 +1,6 @@
 imports:
-    - { resource: config_dev.yml }
+    - { resource: parameters_test.yml }
+    - { resource: config.yml }
 
 framework:
     test: ~
@@ -12,3 +13,14 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug

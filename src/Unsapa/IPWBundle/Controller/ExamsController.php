@@ -1,28 +1,53 @@
 <?php
+/**
+ * ExamsController.php
+ *
+ * @date 04/25/2012
+ * @package Unsapa\IPWBundle\Controller
+ */
 
 namespace Unsapa\IPWBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 use Unsapa\IPWBundle\Form\Type\ExamType;
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
 
+/**
+ * Define actions of the entity Exam
+ */
 class ExamsController extends Controller
 {
-    public function addAction(Request $request)
+    /**
+     * When a td resp wants to add an exam
+     * Route /exams/add 
+     */
+    public function addAction()
     {
       $exam = new Exam();
       $exam->setResp($this->get('security.context')->getToken()->getUser());
-      $exam->setState("PENDING");
       $form = $this->createForm(new ExamType(), $exam);
 
-      if($request->getMethod() == "POST")
+      if($this->getRequest()->getMethod() == "POST")
       {
-        $form->bindRequest($request);
+        try
+        {
+          $form->bindRequest($this->getRequest());
+          $error_date = false;
+        } catch (\ErrorException $e)
+        {
+          if($form->has("exam_date"))
+          {
+            $child = $form->get("exam_date");
+            $child->addError(new FormError("La date n'est pas valide"));
+            $error_date = true;
+          }
+        }
 
-        if($form->isValid())
+        if(!$error_date && $form->isValid())
         {
           $manager = $this->get('doctrine')->getEntityManager();
           $manager->persist($exam);
@@ -64,11 +89,14 @@ class ExamsController extends Controller
       return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
     }
 
+    /**
+     * When a student wants add a document to an exam he's concerned with
+     * Route /exams/submit
+     */
     public function submitAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
-        // We prepare a query_builder to get the records of the 
-        // current user with the state "PENDING"
+        // We prepare a query_builder to get the records of the current user
         $record = new Record();
         $record->setStudent($user);
   
@@ -77,8 +105,8 @@ class ExamsController extends Controller
           ->select('e')
           ->from('UnsapaIPWBundle:Exam', 'e')
           ->innerJoin('e.records', 'r')
-          ->where('r.student = :user and e.state = :state')
-          ->setParameters(array('user' => $user, 'state' => 'PENDING'))
+          ->where('r.student = :user and e.exam_date >= :date')
+          ->setParameters(array('user' => $user, 'date' => new \DateTime('now')))
           ->orderBy('e.title', 'ASC');
 
         $form = $this->createFormBuilder($record)
@@ -114,7 +142,11 @@ class ExamsController extends Controller
         }
         return $this->render('UnsapaIPWBundle:Exams:submit.html.twig', array('form' => $form->createView()));
     }
-    
+
+    /**
+     * Show details for a precise exam
+     * @param integer $id Identifier of the exam
+     */
     public function showAction($id)
     {
       $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
@@ -128,7 +160,12 @@ class ExamsController extends Controller
           return $this->render("UnsapaIPWBundle:Exams:show.html.twig", array("exam" => $exam, "description" => $exam->getExamDesc(), "date" => $exam->getExamDate(), "coeff"  => $exam->getCoef(), "promo"  => $exam->getPromo(), "resp"  => $exam->getResp() ));
       }
     }
-    
+
+    /**
+     * Show the details to the exams the user is concerned with
+     * For a Student it prints the exams he is concerned with
+     * For a TD Manager, it prints the exams he is responsible
+     */
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();
@@ -140,11 +177,12 @@ class ExamsController extends Controller
 
         $exams_pending = array();
         $exams_ended = array();
+        $now = new \DateTime('now');
         foreach($exams as $exam)
         {
-          if($exam->getState() == "PENDING")
+          if($exam->getExamDate() >= $now)
             array_push($exams_pending, $exam);
-          if($exam->getState() == "FINISH")
+          if($exam->getExamDate() < $now)
             array_push($exams_ended, $exam);
         }
         return $this->render('UnsapaIPWBundle:Exams:index_td.html.twig',
@@ -158,11 +196,12 @@ class ExamsController extends Controller
           ->getResult();
         $records_pending = array();
         $records_ended = array();
+        $now = new \DateTime('now');
         foreach($records as $record)
         {
-          if($record->getExam()->getState() == "PENDING")
+          if($record->getExam()->getExamDate() >= $now)
             array_push($records_pending, $record);
-          if($record->getExam()->getState() == "FINISH")
+          if($record->getExam()->getExamDate() < $now)
             array_push($records_ended, $record);
         }
 

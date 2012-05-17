@@ -1,4 +1,8 @@
 <?php
+/**
+ * Manage Form add/edit Exam
+ * @package Unsapa\IPWBundle\Form\Type
+ */
 
 namespace Unsapa\IPWBundle\Form\Type;
 
@@ -6,8 +10,16 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+/**
+ * Class which inheritates from AbstractType to define a new Form
+ */
 class ExamType extends AbstractType
 {
+    /**
+     * Build the form to add/edit Exam
+     * @param FormBuilder $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
@@ -27,6 +39,9 @@ class ExamType extends AbstractType
         ->add('exam_desc','textarea', array('label' => "Description : ", 'required' => false));
     }
 
+    /**
+     * Get the name of the form
+     */
     public function getName()
     {
         return 'exam';

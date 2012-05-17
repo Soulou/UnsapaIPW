@@ -1,19 +1,29 @@
 <?php
+/**
+ * Sanity check about who can access an Exam
+ * @package Unsapa\IPWBundle\Helper
+ */
 
 namespace Unsapa\IPWBundle\Helper;
 
 use Unsapa\IPWBundle\Entity\Exam;
+use Unsapa\IPWBundle\Entity\User;
+
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundException;
 
+/**
+ * Helper to perform basical sanity check over exam entity
+ */
 class ExamCheckHelper
 {
-  /*
+  /**
    * Perform different tests to see if the current user can modify the exam
    *
-   * @param $exam to check
+   * @param Exam $exam to check
+   * @param User $user who wants to access the exam
    */
-  public static function securityCheckExam($exam, $user)
+  public static function securityCheckExam(Exam $exam, User $user)
   {
     if(!$exam)
       throw new NotFoundException('Cet examen n\'existe pas');
