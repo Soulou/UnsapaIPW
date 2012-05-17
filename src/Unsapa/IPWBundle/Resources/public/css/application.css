@@ -301,8 +301,8 @@ h2
   -o-border-radius: 10px;
   border-radius: 10px;
   background-color: rgb(255,234,210); //#ffdbdb;
-  margin: 10px 10px 10px 10px;
-  padding: 0px 10px 15px 10px;
+  margin: 0px 10px 10px 10px;
+  padding: 5px 10px 5px 10px;
   display:block;
   font-weight:bold;
   color: red;
@@ -319,5 +319,24 @@ h2
 .warn a
 {
   color: black;
+}
+
+#mark_student_form a
+{
+  color: black;
+}
+
+#mark_student_form a:hover
+{
+  font-weight: bold;
+}
+
+#mark_student_form .download_image
+{
+  margin: 10px 5px 5px 10px;
+  width: 30px;
+  position: relative;
+  top: 10px;
+  text-decoration:none;
 }
 
