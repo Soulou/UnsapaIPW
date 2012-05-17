@@ -1,4 +1,10 @@
 <?php
+/**
+ * ExamsController.php
+ *
+ * @date 04/25/2012
+ * @package Unsapa\IPWBundle\Controller
+ */
 
 namespace Unsapa\IPWBundle\Controller;
 
@@ -10,11 +16,14 @@ use Unsapa\IPWBundle\Form\Type\ExamType;
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Exam;
 
+/**
+ * Define actions of the entity Exam
+ */
 class ExamsController extends Controller
 {
     /**
-     * Route /exams/add 
      * When a td resp wants to add an exam
+     * Route /exams/add 
      */
     public function addAction()
     {
@@ -81,6 +90,10 @@ class ExamsController extends Controller
       return $this->render('UnsapaIPWBundle:Exams:add.html.twig', array('exam' => $exam, 'form' => $form->createView()));
     }
 
+    /**
+     * When a student wants add a document to an exam he's concerned with
+     * Route /exams/submit
+     */
     public function submitAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
@@ -131,7 +144,11 @@ class ExamsController extends Controller
         }
         return $this->render('UnsapaIPWBundle:Exams:submit.html.twig', array('form' => $form->createView()));
     }
-    
+
+    /**
+     * Show details for a precise exam
+     * @param integer $id Identifier of the exam
+     */
     public function showAction($id)
     {
       $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
@@ -145,7 +162,12 @@ class ExamsController extends Controller
           return $this->render("UnsapaIPWBundle:Exams:show.html.twig", array("exam" => $exam, "description" => $exam->getExamDesc(), "date" => $exam->getExamDate(), "coeff"  => $exam->getCoef(), "promo"  => $exam->getPromo(), "resp"  => $exam->getResp() ));
       }
     }
-    
+
+    /**
+     * Show the details to the exams the user is concerned with
+     * For a Student it prints the exams he is concerned with
+     * For a TD Manager, it prints the exams he is responsible
+     */
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();

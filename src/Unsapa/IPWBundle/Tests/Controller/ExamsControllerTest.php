@@ -1,4 +1,8 @@
 <?php
+/**
+ * Testing the ExamController
+ * @package Unsapa\IPWBundle\Tests\Controller
+ */
 
 namespace Unsapa\IPWBundle\Tests\Controller;
 
@@ -9,8 +13,15 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 use Application\FaxServerBundle\DataFixtures\ORM\NetworkConfigurationData;
 
+/**
+ * Class to test the ExamsController
+ * @see Unsapa\IPWBundle\Controller\ExamsController
+ */
 class ExamsControllerTest extends WebTestCase
 {
+  /**
+   * Set up test env
+   */
   public function setUp()
   {
     parent::setUp();
@@ -21,6 +32,9 @@ class ExamsControllerTest extends WebTestCase
     $this->assertTrue(TRUE);
   }
 
+  /**
+   * Tear down test env
+   */
   public function tearDown()
   {
     parent::tearDown();

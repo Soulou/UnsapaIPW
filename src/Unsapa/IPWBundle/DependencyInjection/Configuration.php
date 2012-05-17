@@ -1,4 +1,9 @@
 <?php
+/**
+ * Configuration.php
+ *
+ * @package Unsapa\IPWBundle\DependencyInkection
+ */
 
 namespace Unsapa\IPWBundle\DependencyInjection;
 

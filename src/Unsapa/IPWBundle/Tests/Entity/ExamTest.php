@@ -1,6 +1,9 @@
 <?php
-
-namespace Unsapa\IPWBundle\Tests\Controller;
+/**
+ * Testing the Exam Entity
+ * @package Unsapa\IPWBundle\Tests\Entity
+ */
+namespace Unsapa\IPWBundle\Tests\Entity;
 
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -8,12 +11,32 @@ use Unsapa\IPWBundle\Entity\Exam;
 use Unsapa\IPWBundle\Entity\Promo;
 use Unsapa\IPWBundle\Entity\User;
 
+/**
+ * { @inheritdoc }
+ * @see Unsapa\IPWBundle\Entity\Exam
+ */
 class ExamsTest extends WebTestCase
 {
+  /**
+   * Doctrine EntityManager
+   */
   private $em;
+  /**
+   * Browser client for functional testing
+   */
   private $client;
+  /**
+   * Sample Promo for the tests
+   */
   private $promo;
+  /**
+   * Sample TD for the tests
+   */
+  private $td;
 
+  /**
+   * Create the sample promo
+   */
   private function createPromo()
   {
     $this->promo = new Promo();
@@ -22,6 +45,9 @@ class ExamsTest extends WebTestCase
     $this->em->flush();
   }
 
+  /**
+   * Create the sample TD manager
+   */
   private function createRespTD()
   {
     $this->td = new User();
@@ -34,6 +60,10 @@ class ExamsTest extends WebTestCase
     $this->em->flush();
   }
 
+  /**
+   * Initialize Doctrine
+   * Destroy/Create Database Schema
+   */
   public function setUp()
   {
     $client = $this->createClient();
@@ -89,5 +119,4 @@ class ExamsTest extends WebTestCase
 
     $this->assertRegExp('/[0-9]+/', $exam->getId() . "");
   }
-
 }

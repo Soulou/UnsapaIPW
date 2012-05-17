@@ -1,4 +1,8 @@
 <?php
+/**
+ * Action on the entity Record
+ * @package Unsapa\IPWBundle\Controller
+ */
 
 namespace Unsapa\IPWBundle\Controller;
 
