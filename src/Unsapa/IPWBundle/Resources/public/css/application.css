@@ -339,6 +339,37 @@ h2
 
 
 
+/* Admin */
+
+#admin
+{
+	margin-top: 25px;
+	margin-left: 10px;
+	padding-top: 30px;
+	padding-left: 30px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#promos_list_admin
+{
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  background-color: #FCCA88;
+  padding: 20px;
+  margin-top: 25px;
+  margin-left: 10px;
+  font-size: 18px; 
+}
+
+.float_img_plus
+{
+  float: left;
+  margin-left: 10px;
+}
 
 /* Détails promo */
 
@@ -414,6 +445,9 @@ h2
 {
   color: black;
 }
+
+
+/* ---------- */ 
 
 #mark_student_form a
 {
