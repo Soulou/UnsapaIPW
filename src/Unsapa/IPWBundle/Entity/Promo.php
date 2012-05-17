@@ -7,7 +7,6 @@
  */
 
 namespace Unsapa\IPWBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
