@@ -5,6 +5,18 @@ homepage:
 admin:
     pattern: /admin
     defaults: { _controller: UnsapaIPWBundle:Admin:index }
+    
+users:
+    pattern: /users
+    defaults: { _controller: UnsapaIPWBundle:Users:index } 
+    
+users_show:
+    pattern: /users/{id}
+    defaults: { _controller: UnsapaIPWBundle:MyProfile:showId }
+    
+users_edit:
+    pattern: /users/{id}/edit
+    defaults: { _controller: UnsapaIPWBundle:MyProfile:editId }
 
 exams:
     pattern: /exams
@@ -56,7 +68,7 @@ download_record:
     
 stats:
     pattern: /stats
-    defaults: { _controller: UnsapaIPWBundle:Stats:averages }
+    defaults: { _controller: UnsapaIPWBundle:Promos:stats }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -76,4 +88,3 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-

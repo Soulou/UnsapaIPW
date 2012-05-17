@@ -35,7 +35,10 @@
     <form method="GET" action="{{ path("fos_user_profile_edit") }}">
       <input type="submit" value="Éditer le profil" />
     </form>
+    {% endif %}
+    {% if app.user==user %}
     <form method="GET" action="{{ path("fos_user_change_password") }}">
       <input type="submit" value="Changer mon mot de passe" />
     </form>
+    {% endif %}
 </div>

@@ -65,6 +65,11 @@ class User extends BaseUser
      * @var string $phone
      */
     private $phone;
+    
+    /**
+     * @var Unsapa\IPWBundle\Entity\Promo
+     */
+    private $promo;
 
     /**
      * The user object must be created with FOSUserBundle UserManager
