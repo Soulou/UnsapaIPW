@@ -6,13 +6,21 @@ services:
 #        class: %unsapa_ipw.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
 
-    user_registration_form_type:
+    unsapa_user.registration.form.type:
         class: Unsapa\IPWBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: user_registration }
-    user_profile_form_type:
+   
+    unsapa_user.profile.form.type:
         class: Unsapa\IPWBundle\Form\Type\ProfileFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: user_profile }
+    
+    unsapa_user.profile.form.handler.default:
+        class: Unsapa\IPWBundle\Form\Handler\ProfileFormHandler
+        scope: request
+        #public: false
+        arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager"]
+        

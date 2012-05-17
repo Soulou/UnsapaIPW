@@ -1,8 +1,20 @@
 {% form_theme form theme %}
 
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_errors(form) }}
-    {{ form_widget(form) }}
+	
+	{{ form_row(form.user.email) }}
+    {{ form_row(form.user.lastname) }}
+    {{ form_row(form.user.firstname) }}
+    {{ form_row(form.user.address) }}
+    {{ form_row(form.user.zipcode) }}
+    {{ form_row(form.user.city) }}    
+    {{ form_row(form.user.phone) }}
+    
+	{% if is_granted("ROLE_ADMIN") %}  
+		{{ form_row(form.user.promo) }}  
+	{% endif %} 	
+    
+	<br/>
     <div>
         <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
     </div>
