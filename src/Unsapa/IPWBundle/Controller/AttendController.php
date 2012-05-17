@@ -1,4 +1,8 @@
 <?php
+/**
+ * Make the linke between Exam and User, through Records
+ * @package Unsapa\IPWBundle\Controller
+ */
 
 namespace Unsapa\IPWBundle\Controller;
 
@@ -21,7 +25,7 @@ class AttendController extends Controller
   /**
    * When the form is posted, get the data and compare them to the database
    *
-   * @param $id ID of the current exam
+   * @param integer $id ID of the current exam
    */
   protected function examAttributeStudents($id)
   {
@@ -75,9 +79,9 @@ class AttendController extends Controller
   }
 
   /**
-   * route : /exam/:id/students
    * Manage the students who attend an exam 
-   * @param $id ID of the current exam
+   * @param integer $id ID of the current exam
+   * Route : /exam/:id/students
    */
   public function examChoiceAction($id)
   {
@@ -139,9 +143,9 @@ class AttendController extends Controller
   }
 
   /**
-   * route : /exam/:id/students
    * Manage the students who attend an exam 
-   * @param $id ID of the current exam
+   * @param integer $id ID of the current exam
+   * Route : /exam/:id/students
    */
   public function markAction($id)
   {
@@ -161,10 +165,10 @@ class AttendController extends Controller
   }
 
   /**
-   * route : /download/:userid/:examid
    * Download the file uploaded by the user 
-   * @param userid parameter of the record id
-   * @param examid 2nd parameter of the record id
+   * @param integer $userid parameter of the record id
+   * @param integer $examid 2nd parameter of the record id
+   * Route : /download/:userid/:examid
    */
   public function downloadAction($userid, $examid)
   {
@@ -192,7 +196,5 @@ class AttendController extends Controller
 
     return $r;
   }
-
 }
-
 ?>

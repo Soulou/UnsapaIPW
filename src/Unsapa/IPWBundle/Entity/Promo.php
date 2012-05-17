@@ -1,4 +1,10 @@
 <?php
+/**
+ * Promo.php
+ *
+ * @date 04/24/2012
+ * @package Unsapa\IPWBundle\ENtity
+ */
 
 namespace Unsapa\IPWBundle\Entity;
 
@@ -10,11 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Promo
 {
     /**
+     * Identifier of the promotion
      * @var integer $id
      */
     private $id;
 
     /**
+     * Name of this promotion
      * @var string $name
      */
     private $name;
