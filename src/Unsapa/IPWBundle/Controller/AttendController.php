@@ -123,23 +123,31 @@ class AttendController extends Controller
     for($i = 0; $i < count($student_ids); $i++)
     {
       $record = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Record")->findByExamAndStudentId($exam->getId(), $student_ids[$i]);
+
       if($record === NULL)
         throw $this->createNotFoundException("Étudiant inexistant.");
 
       $mark = floatval($this->getRequest()->request->get($student_ids[$i]));
+      $unpersistant_record = new Record();
+      $unpersistant_record->setExam($record->getExam());
+      $unpersistant_record->setStudent($record->getStudent());
+      $unpersistant_record->setDocument($record->getDocument());
+      $unpersistant_record->setMark($record->getMark());
+
       if(empty($mark))
-        $record->setMark(NULL);
+        $unpersistant_record->setMark(NULL);
       else
-        $record->setMark($mark);
+        $unpersistant_record->setMark($mark);
 
       $validator = $this->get('validator');
-      $errors = $validator->validate($record);
+      $errors = $validator->validate($unpersistant_record);
       if(count($errors) > 0)
       {
         array_push($invalid_records, $record);
       }
       else
       {
+        $record->setMark($unpersistant_record->getMark());
         $em->persist($record);
         $em->flush();
       }
