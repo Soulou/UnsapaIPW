@@ -213,33 +213,6 @@ class Exam
     {
         return $this->resp;
     }
-    /**
-     * @var string $state
-     */
-    private $state;
-
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     * @return Exam
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string 
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
     
     /**
      * Add records

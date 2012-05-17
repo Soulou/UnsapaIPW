@@ -29,7 +29,6 @@ class ExamsController extends Controller
     {
       $exam = new Exam();
       $exam->setResp($this->get('security.context')->getToken()->getUser());
-      $exam->setState("PENDING");
       $form = $this->createForm(new ExamType(), $exam);
 
       if($this->getRequest()->getMethod() == "POST")
@@ -97,8 +96,7 @@ class ExamsController extends Controller
     public function submitAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
-        // We prepare a query_builder to get the records of the 
-        // current user with the state "PENDING"
+        // We prepare a query_builder to get the records of the current user
         $record = new Record();
         $record->setStudent($user);
   
@@ -107,8 +105,8 @@ class ExamsController extends Controller
           ->select('e')
           ->from('UnsapaIPWBundle:Exam', 'e')
           ->innerJoin('e.records', 'r')
-          ->where('r.student = :user and e.state = :state')
-          ->setParameters(array('user' => $user, 'state' => 'PENDING'))
+          ->where('r.student = :user and e.exam_date >= :date')
+          ->setParameters(array('user' => $user, 'date' => new \DateTime('now')))
           ->orderBy('e.title', 'ASC');
 
         $form = $this->createFormBuilder($record)
@@ -179,11 +177,12 @@ class ExamsController extends Controller
 
         $exams_pending = array();
         $exams_ended = array();
+        $now = new \DateTime('now');
         foreach($exams as $exam)
         {
-          if($exam->getState() == "PENDING")
+          if($exam->getExamDate() >= $now)
             array_push($exams_pending, $exam);
-          if($exam->getState() == "FINISH")
+          if($exam->getExamDate() < $now)
             array_push($exams_ended, $exam);
         }
         return $this->render('UnsapaIPWBundle:Exams:index_td.html.twig',
@@ -197,11 +196,12 @@ class ExamsController extends Controller
           ->getResult();
         $records_pending = array();
         $records_ended = array();
+        $now = new \DateTime('now');
         foreach($records as $record)
         {
-          if($record->getExam()->getState() == "PENDING")
+          if($record->getExam()->getExamDate() >= $now)
             array_push($records_pending, $record);
-          if($record->getExam()->getState() == "FINISH")
+          if($record->getExam()->getExamDate() < $now)
             array_push($records_ended, $record);
         }
 
