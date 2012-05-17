@@ -111,27 +111,34 @@ h2
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
+  
   background-color: rgb(255,223,157); //#eeeebb;
   padding: 18px;
   margin: 25px;
+  line-height: 28px;
 }
 
 #login_form label
 {
   float:left;
-  width:150px;
+  width: 130px;
+  padding-right: 20px;
+  text-align: right;
 }
 
 #login_form input[type="submit"]
 {
-	margin-top: 10px;
+	margin-top: 5px;
 	font-size: 18px;
+	margin-left: 190px;
 }
 
 #user_registration label
 {
   float:left;
-  width:150px;
+  width:125px;
+  padding-right: 20px;
+  text-align: right;
 }
 
 .required_header
@@ -150,6 +157,13 @@ h2
 .fos_user_registration_register
 {
 	margin: 25px;
+}
+
+.fos_user_registration_register input[type="submit"]
+{
+	margin-top: 10px;
+	font-size: 18px;
+	margin-left: 210px;
 }
 
 #user_registration_required
