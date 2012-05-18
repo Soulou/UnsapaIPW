@@ -47,11 +47,17 @@ class StatsController extends Controller
         	array_push($nb_records, count($records));
         	
         	$tmp_sum = 0;
+        	$tmp_nb_marks = 0;
         	foreach($records as $record)
         	{
-        		$tmp_sum += $record->getMark();
+        		if ($record->getMark() != NULL)
+        		{
+        			$tmp_nb_marks += 1;
+        			$tmp_sum += $record->getMark();
+        		}
         	}
-        	array_push($exams_averages, $tmp_sum/count($records));
+        	$average = $tmp_sum/$tmp_nb_marks;
+        	array_push($exams_averages, $average);
         }
     	
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
