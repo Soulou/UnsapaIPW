@@ -31,6 +31,7 @@ class StatsController extends Controller
     	$promos = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->findAll();
     	$exams = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->findAll();
     	$exams_ended = array();
+    	$nb_records = array();
     	$now = new \DateTime('now');
     	
     	foreach($exams as $exam)
@@ -42,7 +43,7 @@ class StatsController extends Controller
         foreach($exams_ended as $exam)
         {
         	$records = $exam->getRecords();
-        	$nb_records =  $records->count();
+        	array_push($nb_records, count($records));
         }
     	
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
