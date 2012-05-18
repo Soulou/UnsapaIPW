@@ -463,12 +463,25 @@ h2
   font-weight: bold;
 }
 
-#mark_student_form .download_image
+.download_image
 {
-  margin: 10px 5px 5px 10px;
+  margin: 0px 5px 5px 10px;
   width: 30px;
   position: relative;
   top: 10px;
   text-decoration:none;
 }
 
+#download_records
+{
+  margin-top: 40px;
+  float: left;
+}
+#download_records a
+{
+  color: black;
+}
+#download_records a:hover
+{
+  font-weight: bold;
+}

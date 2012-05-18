@@ -106,7 +106,7 @@ class AttendController extends Controller
     $not_exam_users = array_diff($promo_users, $exam_users);
 
     return $this->render("UnsapaIPWBundle:Attend:choice.html.twig", 
-      array('exam_users' => $exam_users, 'not_exam_users' => $not_exam_users, 'exam' => $exam));
+      array('exam_users' => $exam_users, 'not_exam_users' => $not_exam_users, 'exam' => $exam, 'records' => $records));
   }
 
   /**
@@ -166,17 +166,23 @@ class AttendController extends Controller
     $user = $this->get('security.context')->getToken()->getUser();
     $invalid_records = array();
 
-    ExamCheckHelper::securityCheckExam($exam, $user);
+    ExamCheckHelper::securityCheckExam($exam, $user, __FUNCTION__);
 
     if($this->getRequest()->getMethod() == "POST")
       $invalid_records = $this->markStudents($exam);
 
-    $records = $this->getDoctrine()->getEntityManager()
+    $records_document = $this->getDoctrine()->getEntityManager()
       ->createQuery("SELECT r FROM UnsapaIPWBundle:Record r WHERE r.exam = :exam AND r.document IS NOT NULL")
       ->setParameter('exam', $exam)
       ->getResult();
+    $records_empty = $this->getDoctrine()->getEntityManager()
+      ->createQuery("SELECT r FROM UnsapaIPWBundle:Record r WHERE r.exam = :exam AND r.document IS NULL")
+      ->setParameter('exam', $exam)
+      ->getResult();
     
-    return $this->render("UnsapaIPWBundle:Attend:mark.html.twig", array('records' => $records, 'exam' => $exam, 'invalid_records' => $invalid_records)); 
+    return $this->render("UnsapaIPWBundle:Attend:mark.html.twig", 
+      array('records_document' => $records_document, 'records_empty' => $records_empty,
+            'exam' => $exam, 'invalid_records' => $invalid_records)); 
   }
 
   /**
