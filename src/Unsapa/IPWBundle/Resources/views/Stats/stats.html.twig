@@ -20,7 +20,7 @@
 	Liste des examens terminés : <br>
 	<ul>
 		{% for exam in exams_ended %}
-			<li>{{ exam }} : {{ nb_records[loop.index0] }} rendus, moyenne : {{ exams_averages[loop.index0] }} </li>
+			<li>{{ exam }} : {{ nb_records[loop.index0] }} rendus, moyenne : {{ exams_averages[loop.index0] }}</li>
 		{% endfor %}
 	</ul>
 </p>
