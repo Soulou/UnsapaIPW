@@ -50,13 +50,19 @@ class StatsController extends Controller
         	$tmp_nb_marks = 0;
         	foreach($records as $record)
         	{
-        		if ($record->getMark() != NULL)
+        		if (($record->getMark()) != NULL)
         		{
         			$tmp_nb_marks += 1;
         			$tmp_sum += $record->getMark();
         		}
         	}
-        	$average = $tmp_sum/$tmp_nb_marks;
+        	
+        	if ($tmp_nb_marks != 0)
+        	{
+        		$average = $tmp_sum/$tmp_nb_marks;
+        	}
+        	else $average = NULL;
+        	
         	array_push($exams_averages, $average);
         }
     	
