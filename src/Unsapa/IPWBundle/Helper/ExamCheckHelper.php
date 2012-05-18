@@ -22,8 +22,9 @@ class ExamCheckHelper
    *
    * @param Exam $exam to check
    * @param User $user who wants to access the exam
+   * @param string $function Name of the function which is using this helper
    */
-  public static function securityCheckExam(Exam $exam, User $user)
+  public static function securityCheckExam(Exam $exam, User $user, $function = NULL)
   {
     if(!$exam)
       throw new NotFoundException('Cet examen n\'existe pas');
@@ -31,7 +32,14 @@ class ExamCheckHelper
     if(in_array("ROLE_TD", $user->getRoles()) && $exam->getResp() != $user)
       throw new AccessDeniedHttpException("Vous n'êtes pas responsable de cet examen.");
 
-    if($exam->getExamDate() < new \DateTime('now'))
-      throw new AccessDeniedHttpException("Vous ne pouvez modifier cet exam, il est terminé.");
+    if($function == "markAction")
+    {
+      if($exam->getExamDate() >= new \DateTime('now'))
+      {
+        throw new AccessDeniedHttpException("Vous ne pouvez noter cet examen, il est encore en cours.");
+      }
+    }
+    else if($exam->getExamDate() < new \DateTime('now'))
+      throw new AccessDeniedHttpException("Vous ne pouvez modifier cet examen, il est terminé.");
   }
 }
