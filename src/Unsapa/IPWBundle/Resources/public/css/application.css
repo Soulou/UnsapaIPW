@@ -111,36 +111,40 @@ h2
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
+  
   background-color: rgb(255,223,157); //#eeeebb;
   padding: 18px;
   margin: 25px;
+  line-height: 28px;
 }
 
 #login_form label
 {
   float:left;
-  width:150px;
+  width: 130px;
+  padding-right: 20px;
+  text-align: right;
 }
 
 #login_form input[type="submit"]
 {
-	margin-top: 10px;
+	margin-top: 5px;
 	font-size: 18px;
+	margin-left: 190px;
 }
 
 #user_registration label
 {
   float:left;
-  width:150px;
+  width:125px;
+  padding-right: 20px;
+  text-align: right;
 }
 
 .required_header
 {
   display:block;
-  text-align:right;
-  position: relative;
-  top: 12px;
-  right: 18px;
+  margin-bottom: 10px;
   font-weight:bolder;
   color: #440000;
   font-size:20px;
@@ -149,7 +153,21 @@ h2
 
 .fos_user_registration_register
 {
-	margin: 25px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  margin: 25px;
+  padding-bottom: 15px;
+  border: 1px inset black;
+}
+
+.fos_user_registration_register input[type="submit"]
+{
+	margin-top: 8px;
+	font-size: 18px;
+	margin-left: 210px;
 }
 
 #user_registration_required
@@ -159,7 +177,7 @@ h2
   -o-border-radius: 10px;
   border-radius: 10px;
   background-color: rgb(255,223,157); //#eeeebb;
-  padding: 22px 15px 15px 15px;
+  padding: 15px;
 }
 
 #user_registration_fields
@@ -191,8 +209,10 @@ h2
 
 #record_submit_form input[type="submit"]
 {
-	margin-top: 8px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 	font-size: 18px;
+	margin-left: 450px;
 }
 
 
@@ -213,14 +233,22 @@ h2
 
 #exam_add_form label
 {
-  float:left;
-  width:120px;
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin-right: 20px;
 }
 
 #exam_add_form input[type="submit"]
 {
 	margin-top: 8px;
 	font-size: 18px;
+	margin-left: 220px;
+}
+
+#promo_detail:hover
+{
+	cursor: pointer;
 }
 
 /* Autres formulaires */
@@ -246,12 +274,140 @@ h2
 }
 
 
+/* Mon profil */
+
+#profil
+{
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  width: 130%;
+  background-color: #FCCA88;
+  margin-top: 25px;
+  margin-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  text-indent: 8%;
+}
+
+#profil input[value="Éditer le profil"]
+{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.profil_label
+{
+	font-weight: bold;
+	float: left;
+	width: 40%;
+	text-align: right;
+}
+
+
+/* Editer le profil */
+
+.fos_user_profile_edit
+{
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  width: 130%;
+  background-color: #FCCA88;
+  margin-top: 25px;
+  margin-left: 10px;
+  padding: 15px;
+  text-indent: 8%;
+}
+
+.fos_user_profile_edit label
+{
+	font-weight: bold;
+	float: left;
+	width: 30%;
+	text-align: right;
+}
+
+.fos_user_profile_edit input[type="submit"]
+{
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+
+/* Changer le mot de passe */
+
+.fos_user_change_password
+{
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  width: 400px;
+  background-color: #FCCA88;
+  margin-top: 25px;
+  margin-left: 10px;
+  padding: 15px;
+  text-indent: 8%;
+}
+
+.fos_user_change_password label
+{
+	float: left;
+	width: 190px;
+	text-align: right;
+}
+
+.fos_user_change_password input[type="submit"]
+{
+	margin-top: 12px;
+	margin-left: 180px;
+}
+
+
+/* Admin */
+
+#admin
+{
+	margin-top: 25px;
+	margin-left: 10px;
+	padding-top: 30px;
+	padding-left: 30px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#promos_list_admin
+{
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  background-color: #FCCA88;
+  padding: 20px;
+  margin-top: 25px;
+  margin-left: 10px;
+  font-size: 18px; 
+}
+
+.float_img_plus
+{
+  float: left;
+  margin-left: 10px;
+}
+
 /* Détails promo */
 
 #promo_detail
 {
   margin-left:60px;
-  font-width: bold;
+  font-weight: bold;
   text-decoration: underline;
 }
 
@@ -321,6 +477,9 @@ h2
   color: black;
 }
 
+
+/* ---------- */ 
+
 #mark_student_form a
 {
   color: black;
@@ -345,10 +504,12 @@ h2
   margin-top: 40px;
   float: left;
 }
+
 #download_records a
 {
   color: black;
 }
+
 #download_records a:hover
 {
   font-weight: bold;
