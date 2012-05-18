@@ -490,7 +490,7 @@ h2
   font-weight: bold;
 }
 
-#mark_student_form .download_image
+.download_image
 {
   margin: 0px 5px 5px 10px;
   width: 30px;
