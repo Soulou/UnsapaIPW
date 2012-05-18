@@ -32,6 +32,7 @@ class StatsController extends Controller
     	$exams = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->findAll();
     	$exams_ended = array();
     	$nb_records = array();
+    	$exams_averages = array();
     	$now = new \DateTime('now');
     	
     	foreach($exams as $exam)
@@ -44,9 +45,16 @@ class StatsController extends Controller
         {
         	$records = $exam->getRecords();
         	array_push($nb_records, count($records));
+        	
+        	$tmp_sum = 0;
+        	foreach($records as $record)
+        	{
+        		$tmp_sum += $record->getMark();
+        	}
+        	array_push($exams_averages, $tmp_sum/count($records));
         }
     	
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
-    			array('promos'=>$promos, 'exams_ended'=>$exams_ended, 'nb_records'=>$nb_records));
+    			array('promos'=>$promos, 'exams_ended'=>$exams_ended, 'nb_records'=>$nb_records, $exams_averages=>'exams_averages'));
     }
 }
