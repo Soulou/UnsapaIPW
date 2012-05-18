@@ -2,8 +2,8 @@
 
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
   {{ form_errors(form) }}
-    <span class="required_header">Champs requis</span>
     <div id="user_registration_required">
+      <span class="required_header">Champs requis</span>
       {{ form_label(form.username) }}
       {{ form_widget(form.username) }}
       {{ form_errors(form.username) }}

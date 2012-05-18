@@ -144,10 +144,7 @@ h2
 .required_header
 {
   display:block;
-  text-align:right;
-  position: relative;
-  top: 12px;
-  right: 18px;
+  margin-bottom: 10px;
   font-weight:bolder;
   color: #440000;
   font-size:20px;
@@ -156,12 +153,19 @@ h2
 
 .fos_user_registration_register
 {
-	margin: 25px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  
+  margin: 25px;
+  padding-bottom: 15px;
+  border: 1px inset black;
 }
 
 .fos_user_registration_register input[type="submit"]
 {
-	margin-top: 10px;
+	margin-top: 8px;
 	font-size: 18px;
 	margin-left: 210px;
 }
@@ -173,7 +177,7 @@ h2
   -o-border-radius: 10px;
   border-radius: 10px;
   background-color: rgb(255,223,157); //#eeeebb;
-  padding: 22px 15px 15px 15px;
+  padding: 15px;
 }
 
 #user_registration_fields
