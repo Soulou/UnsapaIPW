@@ -3,10 +3,26 @@
 {% block title %}Statistiques{% endblock %}
 
 {% block content %}
+
 <h1>Statistiques</h1>
 
 <h2>Moyennes par promo</h2>
-<ul>
-  <li>  </li>
-</ul>
+<p>
+	Liste des promos : <br>
+	<ul>
+		{% for promo in promos %}
+			<li>{{ promo.name }}</li>
+		{% endfor %}
+	</ul>
+</p>
+
+<p>
+	Liste des examens terminés : <br>
+	<ul>
+		{% for exam in exams_ended %}
+			<li>{{ exam }} : {{ nb_records }} rendus</li>
+		{% endfor %}
+	</ul>
+</p>
+
 {% endblock %}
