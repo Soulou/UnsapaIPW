@@ -122,7 +122,6 @@ class ExamsController extends Controller
         if($this->getRequest()->getMethod() === 'POST')
         {
             $form->bindRequest($this->getRequest());
-
             if($form->isValid())
             {
                 $exam = $record->getExam();

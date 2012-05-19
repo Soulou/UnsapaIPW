@@ -50,6 +50,23 @@ class Record
     private $file;
 
     /**
+     * Main constructor for a record
+     * @param values $values Attributes of the entity
+     */
+    public function __construct(array $values = array())
+    {
+        if(isset($values['student']))
+            $this->student = $values['student'];
+        if(isset($values['exam']))
+            $this->exam = $values['exam'];
+        if(isset($values['document']))
+            $this->document = $values['document'];
+        if(isset($values['mark']))
+            $this->mark = $values['mark'];
+    }
+
+
+    /**
      * Set mark
      *
      * @param integer $mark
