@@ -31,7 +31,9 @@
       {% for record in records_ended %}
         <li>
           <a href="{{ path("exam_show", { 'id': record.exam.id } ) }}" alt="{{ record.exam.title }}"> {{ record.exam }} </a>
-          (Note : {{ record.mark }} )
+          {% if record.mark %}  
+            (Note : {{ record.mark }} )
+          {% endif %}
         </li>
       {% endfor %}
       </ul>

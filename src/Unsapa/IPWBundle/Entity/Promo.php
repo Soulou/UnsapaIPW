@@ -27,6 +27,15 @@ class Promo
      */
     private $name;
 
+    /**
+     * Main constructor
+     *
+     * @param string $name name of the promotion
+     */
+    public function __construct($name = "")
+    {
+        $this->name = $name;
+    }
 
     /**
      * Get id
