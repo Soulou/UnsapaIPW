@@ -66,9 +66,22 @@ class Exam
     /**
      * Main constructor
      * Initialize the records array
+     * @param array $values Values of the attributes
      */
-    public function __construct()
+    public function __construct(array $values = array())
     {
+        if(isset($values['title']))
+          $this->title = $values['title'];
+        if(isset($values['promo']))
+          $this->promo = $values['promo'];
+        if(isset($values['exam_date']))
+          $this->exam_date = $values['exam_date'];
+        if(isset($values['exam_desc']))
+          $this->exam_desc = $values['exam_desc'];
+        if(isset($values['coef']))
+          $this->coef = $values['coef'];
+        if(isset($values['resp']))
+          $this->resp = $values['resp'];
         $this->records = new \Doctrine\Common\Collections\ArrayCollection();
     }
     

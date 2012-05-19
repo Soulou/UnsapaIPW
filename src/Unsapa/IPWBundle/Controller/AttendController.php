@@ -205,11 +205,11 @@ class AttendController extends Controller
     $r->setStatusCode(200);
     $r->headers->set('Content-Type', $record->getFile()->getMimeType());
     $r->headers->set('Content-Transfer-Encoding', 'binary');
-    $r->headers->set('Content-Disposition', 'attachment;filename=' 
+    $r->headers->set('Content-Disposition', 'attachment; filename="' 
       . $record->getStudent()->getFirstName()
       . $record->getStudent()->getLastName()
       . $record->getExam()->getTitle() . "."
-      . $record->getFile()->getExtension()
+      . $record->getFile()->getExtension() . '"'
     );
     $r->headers->set('Content-Length', filesize($filename));
     $r->setContent(file_get_contents($filename));
