@@ -105,6 +105,11 @@ class AttendController extends Controller
     }
     $not_exam_users = array_diff($promo_users, $exam_users);
 
+    $records = $records->filter(function($r)
+    {
+      return ($r->getDocument() != NULL);
+    });
+
     return $this->render("UnsapaIPWBundle:Attend:choice.html.twig", 
       array('exam_users' => $exam_users, 'not_exam_users' => $not_exam_users, 'exam' => $exam, 'records' => $records));
   }
