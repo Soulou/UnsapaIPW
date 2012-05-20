@@ -30,11 +30,12 @@ Unsapa\IPWBundle\Entity\Exam:
         nullable: false
       resp:
         targetEntity: Unsapa\IPWBundle\Entity\User
-        nullable: false
+        inversedBy: exams
+        joinColumn:
+            name: resp_id
+            referencedColumnName: id
+            nullable: false
     oneToMany:
       records:
         targetEntity: Unsapa\IPWBundle\Entity\Record
-        mappedBy: exam 
-          
-
-        
+        mappedBy: exam_id
