@@ -26,6 +26,11 @@ class UnsapaTest extends WebTestCase
    */
   protected $em;
   /**
+   * FOSUserBundle UserManager
+   * @var UserManager $um
+   */
+  protected $um;
+  /**
    * Browser client for functional testing
    * @var Client $client
    */
@@ -43,10 +48,11 @@ class UnsapaTest extends WebTestCase
   public function setUp()
   {
     $client = $this->createClient();
-    $dtt = new DoctrineTestHelper(static::$kernel);
-    $dtt->resetDatabase();
-    $this->em = $dtt->getEntityManager();
-    $this->validator = $dtt->getValidator();
+    $dth = new DoctrineTestHelper(static::$kernel);
+    $dth->resetDatabase();
+    $this->em = $dth->getEntityManager();
+    $this->um = $dth->getUserManager();
+    $this->validator = $dth->getValidator();
   }
 
   /**
@@ -75,6 +81,8 @@ class UnsapaTest extends WebTestCase
   {
     $td = $this->createStudent($params);
     $td->addRole("ROLE_TD");
+    $td->setFirstname("Tduser");
+    $td->setLastname("Test");
 
     $this->validate($td);
     $this->em->persist($td);
@@ -90,11 +98,14 @@ class UnsapaTest extends WebTestCase
    */
   protected function createStudent($params = array('username' => "StudentTest", 'email' => "user@example.com"))
   {
-    $st = new User();
-    $st->setUsername($params['username']);
-    $st->setEmail($params['email']);
-    $st->setPassword("passwd");
-    $st->setRoles(array("ROLE_STUDENT"));
+    $st = $this->um->createUser();
+    $st->initUser(array(
+      'username' => $params['username'],
+      'email' => $params['email'],
+      'password' => "passwd",
+      'firstname' => "Test",
+      'lastname' => "User"
+    ));
 
     $this->validate($st);
     $this->em->persist($st);
@@ -149,7 +160,7 @@ class UnsapaTest extends WebTestCase
   {
     $errors = $this->validator->validate($o);
     if($errors->count() > 0)
-      throw new \ErrorException($errors->__toString());
+      throw new \InvalidArgumentException($errors->__toString());
   }
 
   /** 

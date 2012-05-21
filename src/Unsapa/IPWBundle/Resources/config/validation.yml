@@ -1,11 +1,15 @@
 Unsapa\IPWBundle\Entity\User:
     properties:
         firstname:
+            - NotNull: ~
+            - NotBlank: ~
             - MinLength: 
                 limit: 3
             - MaxLength: 
                 limit: 64
         lastname: 
+            - NotNull: ~
+            - NotBlank: ~
             - MinLength: 
                 limit: 3
             - MaxLength: 
@@ -21,6 +25,7 @@ Unsapa\IPWBundle\Entity\Exam:
     properties:
         title:
             - NotNull: ~
+            - NotBlank: ~
             - MinLength:
                 limit: 3
         promo:
@@ -59,6 +64,7 @@ Unsapa\IPWBundle\Entity\Promo:
     properties:
         name:
             - NotNull: ~
+            - NotBlank: ~
             - MinLength: 
                 limit: 3
             - MaxLength:
