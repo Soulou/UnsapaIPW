@@ -1,7 +1,5 @@
 Unsapa\IPWBundle\Entity\User:
     properties:
-        promo:
-            - NotNull: ~
         firstname:
             - MinLength: 
                 limit: 3
@@ -56,3 +54,12 @@ Unsapa\IPWBundle\Entity\Record:
                 maxSize: 10M
                 mimeTypes: [application/pdf, application/x-pdf, application/msword, application/zip]
                 mimeTypesMessage: Types de fichier valide : PDF - DOC - DOCX - ZIP
+
+Unsapa\IPWBundle\Entity\Promo:
+    properties:
+        name:
+            - NotNull: ~
+            - MinLength: 
+                limit: 3
+            - MaxLength:
+                limit: 64

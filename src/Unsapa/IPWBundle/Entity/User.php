@@ -66,6 +66,34 @@ class User extends BaseUser
      */
     private $phone;
 
+    /**
+     * The user object must be created with FOSUserBundle UserManager
+     * 'fos_user.user_manager', method : createUser()
+     * @param array $values Attributes of the user
+     */
+    public function initUser(array $values = array())
+    {
+      if(isset($values['username']))
+        $this->setUsername($values['username']);
+      if(isset($values['password']))
+        $this->setPassword($values['password']);
+      if(isset($values['email']))
+        $this->setEmail($values['email']);
+      if(isset($values['firstname']))
+        $this->setFirstname($values['firstname']);
+      if(isset($values['lastname']))
+        $this->setLastname($values['lastname']);
+      if(isset($values['address']))
+        $this->setAddress($values['address']);
+      if(isset($values['zipcode']))
+        $this->setZipCode($values['zipcode']);
+      if(isset($values['city']))
+        $this->setCity($values['city']);
+      if(isset($values['promo']))
+        $this->setPromo($values['promo']);
+    
+      $this->setEnabled(true);
+    }
 
     /**
      * Get id
@@ -211,7 +239,7 @@ class User extends BaseUser
 
     /**
      * Set default role to ROLE_STUDENT
-     * 
+     * Doctrine call this method at the event 'onPersist'
      */
     public function setDefaultRole()
     {

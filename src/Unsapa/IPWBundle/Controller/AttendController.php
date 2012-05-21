@@ -105,6 +105,11 @@ class AttendController extends Controller
     }
     $not_exam_users = array_diff($promo_users, $exam_users);
 
+    $records = $records->filter(function($r)
+    {
+      return ($r->getDocument() != NULL);
+    });
+
     return $this->render("UnsapaIPWBundle:Attend:choice.html.twig", 
       array('exam_users' => $exam_users, 'not_exam_users' => $not_exam_users, 'exam' => $exam, 'records' => $records));
   }
@@ -205,11 +210,11 @@ class AttendController extends Controller
     $r->setStatusCode(200);
     $r->headers->set('Content-Type', $record->getFile()->getMimeType());
     $r->headers->set('Content-Transfer-Encoding', 'binary');
-    $r->headers->set('Content-Disposition', 'attachment;filename=' 
+    $r->headers->set('Content-Disposition', 'attachment; filename="' 
       . $record->getStudent()->getFirstName()
       . $record->getStudent()->getLastName()
       . $record->getExam()->getTitle() . "."
-      . $record->getFile()->getExtension()
+      . $record->getFile()->getExtension() . '"'
     );
     $r->headers->set('Content-Length', filesize($filename));
     $r->setContent(file_get_contents($filename));
