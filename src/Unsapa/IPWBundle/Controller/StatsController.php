@@ -33,6 +33,7 @@ class StatsController extends Controller
     	$exams_ended = array();
     	$nb_records = array();
     	$exams_averages = array();
+    	$marks = array();	//faire un affichage dans le twig pour tester s'il y a bien des notes
     	$now = new \DateTime('now');
     	
     	foreach($exams as $exam)
@@ -50,10 +51,11 @@ class StatsController extends Controller
         	$tmp_nb_marks = 0;
         	foreach($records as $record)
         	{
-        		if (($record->getMark()) != NULL)
+        		if (($mark=$record->getMark()) != NULL)
         		{
+        			array_push($marks, $mark);
         			$tmp_nb_marks += 1;
-        			$tmp_sum += $record->getMark();
+        			$tmp_sum += $mark;
         		}
         	}
         	
@@ -67,6 +69,6 @@ class StatsController extends Controller
         }
     	
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
-    			array('promos'=>$promos, 'exams_ended'=>$exams_ended, 'nb_records'=>$nb_records, $exams_averages=>'exams_averages'));
+    			array('promos'=>$promos, 'exams_ended'=>$exams_ended, 'nb_records'=>$nb_records,  'marks'=>$marks, $exams_averages=>'exams_averages'));
     }
 }
