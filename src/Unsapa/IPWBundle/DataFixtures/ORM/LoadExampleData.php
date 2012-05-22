@@ -218,7 +218,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     if($j < 3)
                       $date = $tmp_date->sub(new \DateInterval($int));
                     if($j > 3)
-                      $date = $tno_date->add(new \DateInterval($int));
+                      $date = $tmp_date->add(new \DateInterval($int));
 
                     $exam = $this->createExam(array(
                       'title' => "Exam_" . $promos[$i] . "_" . $tds[$k]->getUsername() . "_$j",
