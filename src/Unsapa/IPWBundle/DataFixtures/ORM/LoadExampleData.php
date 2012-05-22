@@ -118,7 +118,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     {
         $exam = new Exam($values);
         $this->em->persist($exam);
-        $td->addRole("ROLE_TD");
         $this->em->flush();
         return $exam;
     }
