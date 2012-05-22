@@ -12,32 +12,30 @@
 	  </a>
 	</div>
 	#}
-
-	<h3>Etudiants</h3>
-	<ul>
-	{% for user in users %}
-		{% if user.roles[0] == "ROLE_STUDENT" %}
-		<li>
+					
+	<h3>Etudiants</h3></li>
+	{% for user in users %}		
 		<a href="{{ path('users_show', { 'id': user.id })}}">
 			{{ user.firstname }}
 			{{ user.lastname }} : 
 			Promo {{ user.promo }}
 		</a>
-		{% endif %}
+		<br/>
 	{% endfor %}
-	</ul>
 	
-	<h3>Professeurs</h3>
-	<ul>
+	<h3>Professeurs</h3></li>
 	{% for user in users %}
-		{% if user.roles[0] == "ROLE_TD" %}
-		<li>
-		<a href="{{ path('users_show', { 'id': user.id })}}">
-			{{ user.firstname }}
-			{{ user.lastname }}
-		</a>
-		{% endif %}
+		{% for role in user.roles %}
+			{% if role == "ROLE_TD" or role == "ROLE_ADMIN" %}
+				<a href="{{ path('users_show', { 'id': user.id })}}">
+					{{ user.firstname }}
+					{{ user.lastname }}
+				</a>
+				<br/>
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
-	</ul>
+	<br/>
+	
 	
 {% endblock %}

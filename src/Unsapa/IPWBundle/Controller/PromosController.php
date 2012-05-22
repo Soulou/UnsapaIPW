@@ -49,7 +49,7 @@ class PromosController extends Controller
     	$promo = new Promo();
     	$form = $this->createForm(new PromoForm(), $promo);
     	
-    	if($request->getMethod() == "POST")
+    	if($this->getRequest()->getMethod() == "POST")
     	{
     		$form->bindRequest($this->getRequest());
     	
@@ -65,8 +65,7 @@ class PromosController extends Controller
     	return $this->render('UnsapaIPWBundle:Promos:add.html.twig', array(
     			'promo' => $promo,
     			'form' => $form->createView()
-    			));
-    	
+    			));    	
     }
 
     /**

@@ -12,13 +12,6 @@ class UsersController extends Controller
     {
     	$users = $this->getDoctrine()->getRepository("UnsapaIPWBundle:User")->findAll();
     	 
-    	if($this->get('security.context')->isGranted("ROLE_ADMIN"))
-    	{
-    		return $this->render('UnsapaIPWBundle:Users:index_admin.html.twig', array("users"=>$users));
-    	}
-    	else
-    	{
-    		return $this->render('UnsapaIPWBundle:Users:index_user.html.twig', array("users"=>$users));
-    	}
+    	return $this->render('UnsapaIPWBundle:Users:index.html.twig', array("users"=>$users));
     }
 }
