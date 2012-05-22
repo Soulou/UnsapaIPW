@@ -18,18 +18,6 @@ users_edit:
     pattern: /users/{id}/edit
     defaults: { _controller: UnsapaIPWBundle:Profile:editId }
 
-exams:
-    pattern: /exams
-    defaults: { _controller: UnsapaIPWBundle:Exams:index }
-
-exam_add:
-    pattern: /exams/add
-    defaults: { _controller: UnsapaIPWBundle:Exams:add }
-    
-exam_add_students:
-    pattern: /exams/add/students	  	
-    defaults: { _controller: UnsapaIPWBundle:Promos:listStudents }
-
 promos:
     pattern: /promos
     defaults: { _controller: UnsapaIPWBundle:Promos:index }
@@ -42,6 +30,14 @@ promos_edit:
     pattern: /promos/{id}/edit
     defaults: { _controller: UnsapaIPWBundle:Promos:edit }
     
+exams:
+    pattern: /exams
+    defaults: { _controller: UnsapaIPWBundle:Exams:index }
+
+exam_add:
+    pattern: /exams/add
+    defaults: { _controller: UnsapaIPWBundle:Exams:add }    
+    
 exam_submit:
     pattern: /exams/submit
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }
@@ -53,6 +49,10 @@ exam_show:
 exam_students:
     pattern: /exams/{id}/students
     defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
+    
+exam_add_students:
+    pattern: /exams/add/students      
+    defaults: { _controller: UnsapaIPWBundle:Promos:listStudents }
 
 exam_mark:
     pattern: /exams/{id}/marks
