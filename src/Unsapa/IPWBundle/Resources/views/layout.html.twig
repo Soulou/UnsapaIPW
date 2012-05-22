@@ -6,10 +6,11 @@
         <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
 		{% stylesheets 
 			'@UnsapaIPWBundle/Resources/public/css/application.css' 
-			'@UnsapaIPWBundle/Resources/public/css/ui-lightness/jquery-ui-1.8.20.custom.css'
+      filter="cssrewrite"
 		%}
        <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset("bundles/unsapaipw/css/ui-lightness/jquery-ui-1.8.20.custom.css") }}" />
     {% block css %}{% endblock %}
 
 		{% javascripts

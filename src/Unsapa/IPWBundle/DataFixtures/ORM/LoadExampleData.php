@@ -2,8 +2,9 @@
 /**
  * LoadExampleData.php
  *
- * @author Léo
+ * @author leo@soulou.fr
  * @date 2012/04/26
+ * @package Unsapa\IPWBundle\DataFixtures\ORM
  */
 
 namespace Unsapa\IPWBundle\DataFixtures\ORM;
@@ -21,186 +22,249 @@ use Unsapa\IPWBundle\Entity\Exam;
 use Unsapa\IPWBundle\Entity\Promo;
 use Unsapa\IPWBundle\Entity\Record;
 
+define("LOREMIPSUM", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lobortis tellus vitae dolor pellentesque laoreet. Morbi nec accumsan velit. Sed felis felis, vulputate at blandit non, ultrices ut lorem. Nullam eu nunc massa, vel imperdiet tortor. Pellentesque hendrerit cursus diam et dictum. Donec vehicula, lacus at mollis adipiscing, risus ligula dignissim mi, id fermentum augue tortor nec magna. Duis venenatis, ante non interdum cursus, neque augue viverra neque, non luctus urna libero vel risus. Duis eros augue, pellentesque ac lacinia eget, tempus in libero.");
+
+
+/**
+ * Define some fixtures to test the application
+ */
 class LoadUserData implements FixtureInterface, ContainerAwareInterface
 {
+    /**
+     * Entity manager for persistance
+     */
+    private $em;
+
+    /**
+     * User manager for user persistance
+     */
+    private $um;
+
+    /**
+     * Container for the ContainerAwareInterface
+     */
     private $container;
 
+    /**
+     * Set default container
+     * @param ContainerInterface $container
+     */
     public function setContainer(ContainerInterface $container = null)
     {
        $this->container = $container;
     }
 
+    /**
+     * Create file TestExam.pdf
+     */
+    public function createSampleFile()
+    {
+        $file = sha1("TestExam") . ".pdf";
+        copy("data/sampleDocument.pdf", "web/uploads/records/" . $file);
+    }
+
+    /**
+     *  Create promo and save it
+     *  @param string $name name of the promotion
+     *  @return Promo The newly created promotion
+     */
+    public function createPromo($name = "")
+    {
+        $p = new Promo($name);
+        $this->em->persist($p);
+        $this->em->flush();
+        return $p;
+    }
+
+    /**
+     * Create user and save it
+     * @param array $values Values of the attributes of the entity
+     * @return User The newly created Student
+     */
+    public function createUser(array $values = array())
+    {
+        $u = $this->um->createUser();
+        if(isset($values['password']))
+        {
+            $encoder = $this->container->get('security.encoder_factory')->getEncoder($u);
+            $values['password'] = $encoder->encodePassword($values['password'], $u->getSalt());
+        }
+        $u->initUser($values);
+        $this->em->persist($u);
+        $this->em->flush();
+        return $u;
+    }
+
+    /**
+     * Create a td manager and save it
+     * @param array $values Values of the attributes of the entity
+     * @return User The newly created TD manager
+     */
+    public function createTD(array $values = array())
+    {
+        $td = $this->createUser($values);
+        $td->addRole("ROLE_TD");
+        $this->em->persist($td);
+        $this->em->flush();
+        return $td;
+    }
+
+    /**
+     * Create an exam and save it to the database
+     * @param array $values Values of the attributes of the entity
+     * @return Exam The newly created exam
+     */
+    public function createExam(array $values = array())
+    {
+        $exam = new Exam($values);
+        $this->em->persist($exam);
+        $td->addRole("ROLE_TD");
+        $this->em->flush();
+        return $exam;
+    }
+
+    /**
+     * Create a record and save it to the database
+     * @param array $values Values of the attributes of the entity
+     * @return Record The newly created record
+     */
+    public function createRecord(array $values = array())
+    {
+        $record = new Record($values);
+        $this->em->persist($record);
+        $this->em->flush();
+        return $record;
+    }
+
+    /**
+     * Function called to load the data to the database
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
-        $promo1 = new Promo();
-        $promo2 = new Promo();
-        $promo3 = new Promo();
+        $this->createSampleFile();
 
-        $promo1->setName("2012");
-        $promo2->setName("2013");
-        $promo3->setName("2014");
+        $this->em = $manager;
+        $this->um = $this->container->get('fos_user.user_manager');
 
-        $manager->persist($promo1);
-        $manager->persist($promo2);
-        $manager->persist($promo3);
-        $manager->flush();
-
+        $promo1 = $this->createPromo("2012");
+        $promo2 = $this->createPromo("2013");
+        $promo3 = $this->createPromo("2014");
         $promos = array($promo1, $promo2, $promo3);
-
-        $userManager = $this->container->get('fos_user.user_manager');
         $users = array();
+
 
         for($i = 1; $i <= 10; $i++)
         {
             for($j = 0; $j < count($promos) ; $j++)
             {
-                $newUser = $userManager->createUser();
-                $newUser->setUsername("user" . $promos[$j]->getName() . $i);
-                $newUser->setUsernameCanonical("user" . $promos[$j]->getName() . $i);
-                $encoder = $this->container->get('security.encoder_factory')->getEncoder($newUser);
-                $password = $encoder->encodePassword('user' . $promos[$j]->getName() . $i, $newUser->getSalt());
-                $newUser->setPassword($password);
-                $newUser->setEmail("user" . $promos[$j]->getName() . $i . "@example.com");
-                $newUser->addRole("ROLE_USER");
-                $newUser->setEnabled(true);
-                $newUser->setFirstname("User" . $promos[$j]->getName() . $i);
-                $newUser->setLastname("Test");
-                $newUser->setAddress($i . " 5th Avenue");
-                $newUser->setZipCode($i . $i . $i . "NY");
-                $newUser->setCity("New York City");
-                $newUser->setPromo($promos[$j]);
-                $manager->persist($newUser);
-                $manager->flush();
+                $newUser = $this->createUser(array(
+                  'username' => "user" . $promos[$j]->getName() . $i,
+                  'password' => "user" . $promos[$j]->getName() . $i,
+                  'email' => "user" . $promos[$j]->getName() . $i . "@example.com",
+                  'firstname' => "User" . $promos[$j]->getName() . $i,
+                  'lastname' => "Test",
+                  'address' => $i . " 5th Avecnue",
+                  'zipcode' => $i . $i . $i . "NY",
+                  'city' => "New York City",
+                  'promo' => $promos[$j]
+                ));
+
                 array_push($users, $newUser);
             }
         }
 
         $tds = array();
-        for($i = 1; $i <= 10; $i++)
+        for($i = 1; $i <= 5; $i++)
         {
-            $newUser = $userManager->createUser();
-            $newUser->setUsername("tduser" . $i);
-            $newUser->setUsernameCanonical("tduser" . $i);
-            $encoder = $this->container->get('security.encoder_factory')->getEncoder($newUser);
-            $password = $encoder->encodePassword('tduser' . $i, $newUser->getSalt());
-            $newUser->setPassword($password);
-            $newUser->setEmail("tduser" . $i . "@example.com");
-            $newUser->addRole("ROLE_TD");
-            $newUser->setEnabled(true);
-            $newUser->setFirstname("TDuser" . $i);
-            $newUser->setLastname("Test");
-            $newUser->setAddress($i . " 5th Avenue");
-            $newUser->setZipCode($i . $i . $i . "NY");
-            $newUser->setCity("New York City");
-            $manager->persist($newUser);
-            $manager->flush();
+            $newUser = $this->createTD(array(
+              'username' => "tduser" . $i,
+              'password' => "tduser" . $i,
+              'email' => "tduser" . $i . "@example.com",
+              'firstname' => "TDuser" . $i,
+              'lastname' => "Test",
+              'address' => $i . " 5th Avecnue",
+              'zipcode' => $i . $i . $i . "NY",
+              'city' => "New York City",
+            ));
+
             array_push($tds, $newUser);
         }
 
-        $newUser = $userManager->createUser();
-        $newUser->setUsername("admin");
-        $newUser->setUsernameCanonical("admin");
-        $encoder = $this->container->get('security.encoder_factory')->getEncoder($newUser);
-        $password = $encoder->encodePassword('admin', $newUser->getSalt());
-        $newUser->setPassword($password);
-        $newUser->setEmail("admin@example.com");
-        $newUser->addRole("ROLE_ADMIN");
-        $newUser->setEnabled(true);
-        $newUser->setFirstname("Admin");
-        $newUser->setLastname("Test");
-        $newUser->setAddress($i . " 5th Avenue");
-        $newUser->setZipCode($i . $i . $i . "NY");
-        $newUser->setCity("New York City");
-        $manager->persist($newUser);
-        $manager->flush();
+        $admin = $this->createUser(array(
+            'username' => "admin" . $i,
+            'password' => "admin" . $i,
+            'email' => "admin" . $i . "@example.com",
+            'firstname' => "admin" . $i,
+            'lastname' => "Test",
+            'address' => $i . " 5th Avenue",
+            'zipcode' => $i . $i . $i . "NY",
+            'city' => "New York City",
+        ));
+        $admin->addRole("ROLE_ADMIN");
+        $this->em->persist($admin);
+        $this->em->flush();
 
-        $exam1_1 = new Exam();
-        $exam1_2 = new Exam();
-        $exam2 = new Exam();
-        $exam3 = new Exam();
+        $coefs = array(0.5,1,1.5,2);
 
-        $exams = array($exam1_1, $exam1_2, $exam2, $exam3);
-
-        $exam1_1->setPromo($promo1);
-        $exam1_2->setPromo($promo1);
-        $exam2->setPromo($promo2);
-        $exam3->setPromo($promo3);
-
-        $exam1_1->setTitle("MST");
-        $exam1_2->setTitle("MAN");
-        $exam2->setTitle("ILO");
-        $exam3->setTitle("OPT1");
-
-        $exam1_1->setExamDesc("Maths : Statistiques");
-        $exam1_2->setExamDesc("Maths : Analyse Numérique");
-        $exam2->setExamDesc("Informatique : Langage Object");
-        $exam3->setExamDesc("Option 1");
-
-        $exam1_1->setExamDate(new \DateTime("2012-05-12 14:00:00"));
-        $exam1_2->setExamDate(new \DateTime("2012-05-20 10:00:00"));
-        $exam2->setExamDate(new \DateTime("2011-12-15 15:00:00"));
-        $exam3->setExamDate(new \DateTime("2011-11-21 8:00:00"));
-
-        $exam1_1->setCoef(1.5);
-        $exam1_2->setCoef(0.5);
-        $exam2->setCoef(2);
-        $exam3->setCoef(1);
-
-        for($i = 0 ; $i < count($exams) ; $i++)
-          $exams[$i]->setResp($tds[$i]);
-
-        foreach($exams as $exam)
+        for($i = 0; $i < count($promos) ; $i++)
         {
-          if((new \DateTime('now')) > $exam->getExamDate())
-            $exam->setState("FINISH");
-          else
-            $exam->setState("PENDING");
-        }
-
-        $manager->persist($exam1_1);
-        $manager->persist($exam1_2);
-        $manager->persist($exam2);
-        $manager->persist($exam3);
-
-        $manager->flush();
-
-        for($i = 0; $i < count($users) ; $i++)
-        {
-            $record = new Record();
-            $record->setStudent($users[$i]);
-            $record->setMark(rand(2,19));
-            switch($users[$i]->getPromo()->getName())
+            for($k = 0; $k < count($tds) ; $k++)
             {
-                case "2012" :
-                  $record->setExam($exam1_1);
-                  break;
-                case "2013" :
-                  $record->setExam($exam2);
-                  break;
-                case "2014" :
-                  $record->setExam($exam3);
-                  break;
-                default : 
-                  break;
-            } 
-            $manager->persist($record);
-            $manager->flush();
-        }
-        for($i = 0; $i < count($users) ; $i++)
-        {
-            $record = new Record();
-            $record->setStudent($users[$i]);
-            $record->setMark(rand(2,19));
-            switch($users[$i]->getPromo()->getName())
-            {
-                case "2012" :
-                  $record->setExam($exam1_2);
-                  $manager->persist($record);
-                  $manager->flush();
-                  break;
-                default:
-                  break;
-            } 
+                for($j = 0; $j < 6 ; $j++)
+                {
+                    $int = $j+$k+1 . "D";
+                    $int = "P" . $int;
+                    $tmp_date = new \DateTime('now');
+                    if($j < 3)
+                      $date = $tmp_date->sub(new \DateInterval($int));
+                    if($j > 3)
+                      $date = $tno_date->add(new \DateInterval($int));
+
+                    $exam = $this->createExam(array(
+                      'title' => "Exam_" . $promos[$i] . "_" . $tds[$k]->getUsername() . "_$j",
+                      'promo' => $promos[$i],
+                      'exam_date' => $date,
+                      'exam_desc' => LOREMIPSUM,
+                      'resp' => $tds[$k],
+                      'coef' => $coefs[rand(0,3)]
+                    ));
+
+                    $users_promo = $this->container->get('doctrine')->getRepository("UnsapaIPWBundle:User")->findByPromo($promos[$i]);
+                    foreach($users_promo as $user)
+                    {
+                        if(rand(0,1) == 1)
+                            // The user has given something
+                            $document = sha1("TestExam") . ".pdf";
+                        else
+                            // The user does not have give something back
+                            $document = NULL;
+
+                        // If the exam deadline is over
+                        if($date < new \DateTime('now'))
+                        {
+                            if(rand(0,1) == 0)
+                                // Exam waiting for correction
+                                $mark = NULL;
+                            else 
+                                // Correced exam by the td responsable
+                                $mark = rand(2,19);
+                        }
+                        // If the exam is still pending
+                        else
+                        {
+                            $mark = NULL;
+                        }
+
+                        $record = $this->createRecord(array(
+                          'student' => $user,
+                          'exam' => $exam,
+                          'document' => $document,
+                          'mark' => $mark
+                        ));
+                    }
+                }
+            }
         }
     }
 }

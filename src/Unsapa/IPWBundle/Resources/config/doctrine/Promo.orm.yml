@@ -10,4 +10,6 @@ Unsapa\IPWBundle\Entity\Promo:
         name:
             type: string
             length: '32'
+            nullable: false
+            unique: true
     lifecycleCallbacks: {  }

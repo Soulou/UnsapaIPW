@@ -24,4 +24,19 @@
       {% endfor %}
     </div>
   </form>
+  {% if records|length != 0 %}
+  <div id="download_records">
+    <h3>Les étudiants suivantes ont déjà effectué un rendu : </h3>
+    <ul>
+    {% for record in records %}
+      <li>{{ record.student }} (
+        <a alt="Téléchargement du rendu" href="{{ path("download_record", {'userid' : record.student.id, 'examid' : record.exam.id } )}}">
+          Télécharger
+          <img class="download_image" src="{{ asset("bundles/unsapaipw/images/download.png")}}" alt="Image téléchargement" />
+        </a>)
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 {% endblock %}

@@ -1,4 +1,10 @@
 <?php
+/**
+ * User.php
+ * 
+ * @date 04/24/2012
+ * @package Unsapa\IPWBundle\Entity
+ */
 
 namespace Unsapa\IPWBundle\Entity;
 
@@ -7,40 +13,55 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Unsapa\IPWBundle\Entity\User
+ * Inheritated user fomr the FOSUserBundle where are include the other fields
+ * Password/Username/Email/Roles etc.
  */
 class User extends BaseUser
 {
     /**
+     * Identifier of the user
      * @var integer $id
      */
     protected $id;
 
     /**
+     * Lastname of the user
      * @var string $lastname
      */
     private $lastname;
 
     /**
+     * Firstname of the user
      * @var string $firstname
      */
     private $firstname;
 
     /**
+     * Promotion which contains the user
+     * @var Unsapa\IPWBundle\Entity\Promo
+     */
+    private $promo;
+
+    /**
+     * Address of the user
      * @var string $address
      */
     private $address;
 
     /**
+     * Zip code of the address' user
      * @var string $zipcode
      */
     private $zipcode;
 
     /**
+     * City of the address' user
      * @var string $city
      */
     private $city;
 
     /**
+     * Phone number of the user
      * @var string $phone
      */
     private $phone;
@@ -50,6 +71,34 @@ class User extends BaseUser
      */
     private $promo;
 
+    /**
+     * The user object must be created with FOSUserBundle UserManager
+     * 'fos_user.user_manager', method : createUser()
+     * @param array $values Attributes of the user
+     */
+    public function initUser(array $values = array())
+    {
+      if(isset($values['username']))
+        $this->setUsername($values['username']);
+      if(isset($values['password']))
+        $this->setPassword($values['password']);
+      if(isset($values['email']))
+        $this->setEmail($values['email']);
+      if(isset($values['firstname']))
+        $this->setFirstname($values['firstname']);
+      if(isset($values['lastname']))
+        $this->setLastname($values['lastname']);
+      if(isset($values['address']))
+        $this->setAddress($values['address']);
+      if(isset($values['zipcode']))
+        $this->setZipCode($values['zipcode']);
+      if(isset($values['city']))
+        $this->setCity($values['city']);
+      if(isset($values['promo']))
+        $this->setPromo($values['promo']);
+    
+      $this->setEnabled(true);
+    }
 
     /**
      * Get id
@@ -195,7 +244,7 @@ class User extends BaseUser
 
     /**
      * Set default role to ROLE_STUDENT
-     * 
+     * Doctrine call this method at the event 'onPersist'
      */
     public function setDefaultRole()
     {
@@ -215,10 +264,10 @@ class User extends BaseUser
     /**
      * Set promo
      *
-     * @param Unsapa\IPWBundle\Entity\Promo $promo
+     * @param Promo $promo
      * @return User
      */
-    public function setPromo(\Unsapa\IPWBundle\Entity\Promo $promo = null)
+    public function setPromo(Promo $promo = null)
     {
         $this->promo = $promo;
         return $this;

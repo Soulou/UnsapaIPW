@@ -1,4 +1,10 @@
 <?php
+/**
+ * Exam.php
+ *
+ * @date 04/24/2012
+ * @package Unsapa\IPWBundle\Entity
+ */
 
 namespace Unsapa\IPWBundle\Entity;
 
@@ -10,36 +16,75 @@ use Doctrine\ORM\Mapping as ORM;
 class Exam
 {
     /**
+     * Identifier of the exam
      * @var integer $id
      */
     private $id;
 
     /**
+     * Title of the exam
      * @var string $title
      */
     private $title;
 
     /**
+     * Td manager, responsible of the exam
+     * @var Unsapa\IPWBundle\Entity\User
+     */
+    private $resp;
+
+    /**
+     * Description of the exam
      * @var text $exam_desc
      */
     private $exam_desc;
 
     /**
+     * End date of the exam
      * @var datetime $exam_date
      */
     private $exam_date;
 
     /**
+     * Coefficient of the exam
      * @var float $coef
      */
     private $coef;
 
     /**
+     * Promotion concerned by the exam
      * @var Unsapa\IPWBundle\Entity\Promo
      */
     private $promo;
 
+    /**
+     * All the records which concerned this exam
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $records;
 
+    /**
+     * Main constructor
+     * Initialize the records array
+     * @param array $values Values of the attributes
+     */
+    public function __construct(array $values = array())
+    {
+        if(isset($values['title']))
+          $this->title = $values['title'];
+        if(isset($values['promo']))
+          $this->promo = $values['promo'];
+        if(isset($values['exam_date']))
+          $this->exam_date = $values['exam_date'];
+        if(isset($values['exam_desc']))
+          $this->exam_desc = $values['exam_desc'];
+        if(isset($values['coef']))
+          $this->coef = $values['coef'];
+        if(isset($values['resp']))
+          $this->resp = $values['resp'];
+        $this->records = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -141,10 +186,10 @@ class Exam
     /**
      * Set promo
      *
-     * @param Unsapa\IPWBundle\Entity\Promo $promo
+     * @param Promo $promo
      * @return Exam
      */
-    public function setPromo(\Unsapa\IPWBundle\Entity\Promo $promo = null)
+    public function setPromo(Promo $promo = null)
     {
         $this->promo = $promo;
         return $this;
@@ -161,27 +206,12 @@ class Exam
     }
 
     /**
-     * To string for user
-     * 
-     * @return String
-     */
-    public function __toString()
-    {
-      return $this->getTitle();
-    }
-    /**
-     * @var Unsapa\IPWBundle\Entity\User
-     */
-    private $resp;
-
-
-    /**
      * Set resp
      *
-     * @param Unsapa\IPWBundle\Entity\User $resp
+     * @param User $resp
      * @return Exam
      */
-    public function setResp(\Unsapa\IPWBundle\Entity\User $resp = null)
+    public function setResp(User $resp = null)
     {
         $this->resp = $resp;
         return $this;
@@ -196,49 +226,13 @@ class Exam
     {
         return $this->resp;
     }
-    /**
-     * @var string $state
-     */
-    private $state;
-
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     * @return Exam
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string 
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    private $records;
-
-    public function __construct()
-    {
-        $this->records = new \Doctrine\Common\Collections\ArrayCollection();
-    }
     
     /**
      * Add records
      *
-     * @param Unsapa\IPWBundle\Entity\Record $records
+     * @param Record $records
      */
-    public function addRecord(\Unsapa\IPWBundle\Entity\Record $records)
+    public function addRecord(Record $records)
     {
         $this->records[] = $records;
     }
@@ -271,5 +265,14 @@ class Exam
     public function getSmallFormatExamDate()
     {
       return ucfirst(strftime("%d/%m/%G", $this->getExamDate()->getTimestamp()));
+    }
+    /**
+     * To string for user
+     * 
+     * @return String
+     */
+    public function __toString()
+    {
+      return $this->getTitle();
     }
 }

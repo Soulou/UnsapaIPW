@@ -69,7 +69,8 @@ download_record:
 stats:
     pattern: /stats
     defaults: { _controller: UnsapaIPWBundle:Promos:stats }
-  
+
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

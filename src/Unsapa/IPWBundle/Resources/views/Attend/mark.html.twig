@@ -1,26 +1,49 @@
 {% extends "UnsapaIPWBundle::layout.html.twig" %}
 
+{% block title %}Notation des étudiants{% endblock %}
+
 {% block content %}
 <h1>Notation des étudiants</h1>
 <h2>Examen : <a alt="{{ exam.title }}" href="{{ path("exam_show", {'id':exam.id})}}">{{ exam.title }}</a></h2>
 
-{% if records|length == 0 %}
-Aucun étudiant n'a effectué un rendu.
-<a alt="gérer les étudiant" href="{{ path("exam_students", {'id':exam.id})}}">Gérer les étudiants inscrits</a>
+{% if invalid_records|length != 0 %}
+<span class="warn">
+  <ul>
+    {% for record in invalid_records %}
+      <li>La note de {{ record.student }} est invalide</li>
+    {% endfor %}
+  </ul>
+  <p>Les notes doivent être comprises entre 0 et 20</p>
+</span>
 {% endif %}
 
-<form method="POST" action="{{ path('exam_mark', {'id':exam.id})}}">
+{% if records_document|length > 0 %}
+<form id="mark_student_form" method="POST" action="{{ path('exam_mark', {'id':exam.id})}}">
   <p>
-  {% for record in records %}
+  {% for record in records_document %}
     {{ record.student.firstname }} {{ record.student.lastname }} : 
-    <a alt="télécharger le document" href="{{ path('download_record', 
-      {'userid': record.student.id, 'examid': record.exam.id })}}">
-      <img src="{{asset("bundles/unsapaipw/images/download.png")}}" width="30" alt="Télécharger le fichier"/>
-    </a>&nbsp;
     <input type="number" name="{{record.student.id}}" value="{{ record.mark }}" min="0" max="20" step="0.5"/>
+    (
+    <a alt="télécharger le document" href="{{ path('download_record', 
+      {'userid': record.student.id, 'examid': record.exam.id })}}">Télécharger le rendu
+      <img class="download_image" src="{{asset("bundles/unsapaipw/images/download.png")}}" alt="Télécharger le fichier"/>
+    </a>)
+    <br>
   {% endfor %}
   </p>
   <input type="submit" />
 </form>
+{% endif %}
+
+{% if records_empty|length > 0 %}
+<h2>Ces étudiants n'ont rien rendu :</h2>
+<div id="no_document">
+  <ul>
+  {% for record in records_empty %}
+    <li>{{ record.student }}</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
 {% endblock %}

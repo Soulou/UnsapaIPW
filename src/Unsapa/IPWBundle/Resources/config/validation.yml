@@ -1,7 +1,5 @@
 Unsapa\IPWBundle\Entity\User:
     properties:
-        promo:
-            - NotNull: ~
         firstname:
             - MinLength: 
                 limit: 3
@@ -25,8 +23,6 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - MinLength:
                 limit: 3
-        state:
-            - NotNull: ~
         promo:
             - NotNull: ~
         resp:
@@ -35,7 +31,10 @@ Unsapa\IPWBundle\Entity\Exam:
             - NotNull: ~
             - Type: 
                 type: float
-                message: Le coefficient doit être un nombre.
+        exam_date:
+            - DateTime: ~
+            - Unsapa\IPWBundle\Validator\Constraints\MinDate: 
+                limit: "now"
 
 Unsapa\IPWBundle\Entity\Record:
     properties:
@@ -44,13 +43,10 @@ Unsapa\IPWBundle\Entity\Record:
         mark:
             - Min:
                 limit: 0
-                message: La note doit être supérieure à 0
             - Max:
                 limit: 20
-                message: La note doit être inférieure à 20
             - Type:
                 type: float
-                message: La note doit être un nombre.
         exam: 
             - NotNull: ~
         file:
@@ -58,3 +54,12 @@ Unsapa\IPWBundle\Entity\Record:
                 maxSize: 10M
                 mimeTypes: [application/pdf, application/x-pdf, application/msword, application/zip]
                 mimeTypesMessage: Types de fichier valide : PDF - DOC - DOCX - ZIP
+
+Unsapa\IPWBundle\Entity\Promo:
+    properties:
+        name:
+            - NotNull: ~
+            - MinLength: 
+                limit: 3
+            - MaxLength:
+                limit: 64

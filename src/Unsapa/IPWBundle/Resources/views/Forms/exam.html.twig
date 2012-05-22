@@ -1,7 +1,8 @@
 <h1>Ajout d'un examen</h1>
 
 <form id="exam_add_form" action="{{ path('exam_add') }}" method="post" {{ form_enctype(form) }}>
-
+  {{ form_errors(form) }}
+  
   {{ form_errors(form.title) }}
   {{ form_label(form.title) }}
   {{ form_widget(form.title) }}
@@ -24,5 +25,6 @@
   {{ form_label(form.exam_desc) }}
   {{ form_widget(form.exam_desc) }}
   <br>
+  {{ form_rest(form) }}
   <input type="submit" />
 </form>

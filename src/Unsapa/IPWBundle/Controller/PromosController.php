@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file defines the controller to manage promotions
+ * @package Unsapa\IPWBundle\Controller
+ */
 
 namespace Unsapa\IPWBundle\Controller;
 
@@ -7,6 +11,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use Unsapa\IPWBundle\Entity\Record;
 use Unsapa\IPWBundle\Entity\Promo;
@@ -17,6 +22,10 @@ use Unsapa\IPWBundle\Form\PromoForm;
  */
 class PromosController extends Controller
 {
+    /**
+     * Show all the promotions
+     * Route : /promos
+     */
     public function indexAction()
     {
     	$promos = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->findAll();
@@ -30,15 +39,19 @@ class PromosController extends Controller
     		return $this->render('UnsapaIPWBundle:Promos:index_user.html.twig', array("promos"=>$promos));
     	}
     }
-    
-    public function addAction(Request $request)
+
+    /**
+     * Add a new promotion
+     * Route : /promos/add
+     */
+    public function addAction()
     {
     	$promo = new Promo();
     	$form = $this->createForm(new PromoForm(), $promo);
     	
     	if($request->getMethod() == "POST")
     	{
-    		$form->bindRequest($request);
+    		$form->bindRequest($this->getRequest());
     	
     		if($form->isValid())
     		{
@@ -55,7 +68,12 @@ class PromosController extends Controller
     			));
     	
     }
-    
+
+    /**
+     * Edit the promotion name
+     * Route /promos/{id}/edit
+     * @param integer $id Identifier of the promo
+     */
     public function editAction($id)
     {
     	$promo = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->find($id);
@@ -80,13 +98,12 @@ class PromosController extends Controller
     			'promo' => $promo,
     			'form' => $form->createView()
     			));
-    	 
     }
     
     /**
-     * route : /exams/add/students
      * Get the list of students for the current Promo
      * In JSON format
+     * Route : /exams/add/students
      */
     public function listStudentsAction()
     {
@@ -107,15 +124,13 @@ class PromosController extends Controller
     
     	return new Response(json_encode($users_return));
     }
-    
+   
     /**
-     * route : /stats
      * Get the averages of all the Promos
+     * Route : /stats
      */
     public function statsAction()
     {
-    	 
-    	 
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
     			array());
     }
