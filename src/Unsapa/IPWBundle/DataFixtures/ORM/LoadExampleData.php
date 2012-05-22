@@ -118,7 +118,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     {
         $exam = new Exam($values);
         $this->em->persist($exam);
-        $td->addRole("ROLE_TD");
         $this->em->flush();
         return $exam;
     }
@@ -192,13 +191,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         }
 
         $admin = $this->createUser(array(
-            'username' => "admin" . $i,
-            'password' => "admin" . $i,
-            'email' => "admin" . $i . "@example.com",
-            'firstname' => "admin" . $i,
+            'username' => "admin",
+            'password' => "admin",
+            'email' => "admin" . "@example.com",
+            'firstname' => "admin",
             'lastname' => "Test",
-            'address' => $i . " 5th Avenue",
-            'zipcode' => $i . $i . $i . "NY",
+            'address' =>"admin 5th Avenue",
+            'zipcode' => "000000NY",
             'city' => "New York City",
         ));
         $admin->addRole("ROLE_ADMIN");
@@ -219,7 +218,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
                     if($j < 3)
                       $date = $tmp_date->sub(new \DateInterval($int));
                     if($j > 3)
-                      $date = $tno_date->add(new \DateInterval($int));
+                      $date = $tmp_date->add(new \DateInterval($int));
 
                     $exam = $this->createExam(array(
                       'title' => "Exam_" . $promos[$i] . "_" . $tds[$k]->getUsername() . "_$j",
