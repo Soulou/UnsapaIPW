@@ -32,4 +32,4 @@ Unsapa\IPWBundle\Entity\Record:
         inversedBy: records
         joinColumn:
           name: exam_id
-          referencedColumnName: id
+          referencedColumnName: exam_id
