@@ -191,13 +191,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         }
 
         $admin = $this->createUser(array(
-            'username' => "admin" . $i,
-            'password' => "admin" . $i,
-            'email' => "admin" . $i . "@example.com",
-            'firstname' => "admin" . $i,
+            'username' => "admin",
+            'password' => "admin",
+            'email' => "admin" . "@example.com",
+            'firstname' => "admin",
             'lastname' => "Test",
-            'address' => $i . " 5th Avenue",
-            'zipcode' => $i . $i . $i . "NY",
+            'address' =>"admin 5th Avenue",
+            'zipcode' => "000000NY",
             'city' => "New York City",
         ));
         $admin->addRole("ROLE_ADMIN");
