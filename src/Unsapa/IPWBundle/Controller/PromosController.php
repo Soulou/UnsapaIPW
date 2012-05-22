@@ -124,14 +124,4 @@ class PromosController extends Controller
     
     	return new Response(json_encode($users_return));
     }
-   
-    /**
-     * Get the averages of all the Promos
-     * Route : /stats
-     */
-    public function statsAction()
-    {
-    	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
-    			array());
-    }
 }
