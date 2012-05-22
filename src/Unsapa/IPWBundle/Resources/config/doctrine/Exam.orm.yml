@@ -38,4 +38,4 @@ Unsapa\IPWBundle\Entity\Exam:
     oneToMany:
       records:
         targetEntity: Unsapa\IPWBundle\Entity\Record
-        mappedBy: exam_id
+        mappedBy: exam
