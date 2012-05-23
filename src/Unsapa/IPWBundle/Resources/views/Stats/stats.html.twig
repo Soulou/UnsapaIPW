@@ -3,39 +3,39 @@
 {% block title %}Statistiques{% endblock %}
 
 {% block content %}
+<div id="stats_content">
+	<h1>Statistiques</h1>
 
-<h1>Statistiques</h1>
-
-<h2>Moyennes par promo</h2>
-<div id="stat_tables">
-    <ul>
-        {% for stat in stats_by_promo %}
-        <li><a href="#{{stat['promo']}}">{{ stat['promo']}}</a></li>
-        {% endfor %}
-    </ul>
-    {% for stat in stats_by_promo %}
-    <div id="{{stat['promo']}}">
-            <h3>Stats pour la promo {{ stat['promo']}}</h3>
-            <table id="stats_table">
-                <th></th>
-                <th class="table_header">Coefficient</th>
-                <th class="table_header">Date de fin</th>
-                <th class="table_header">Nombre de notes</th>
-                <th class="table_header">Moyenne</th>
-                {% for exam_data in stat['exams_data'] %}
-                <tr>
-                    <th class="table_header" scope="row">{{ exam_data['exam'] }}</th>
-                    <td>{{ exam_data['exam'].coef }}</td>
-                    <td>{{ exam_data['exam'].getSmallFormatExamDate() }}</td>
-                    <td>{{ exam_data['nb_records'] }}</td>
-                    <td>{{ exam_data['average'] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    {% endfor %}
+	<h2>Moyenne par promo</h2>
+	<div id="stat_tables">
+		<ul>
+			{% for stat in stats_by_promo %}
+			<li><a href="#{{stat['promo']}}">{{ stat['promo']}}</a></li>
+			{% endfor %}
+		</ul>
+		{% for stat in stats_by_promo %}
+		<div id="{{stat['promo']}}">
+				<h3>Stats pour la promo {{ stat['promo']}}</h3>
+				<table id="stats_table">
+					<th></th>
+					<th class="table_header">Coefficient</th>
+					<th class="table_header">Date de fin</th>
+					<th class="table_header">Nombre de notes</th>
+					<th class="table_header">Moyenne</th>
+					{% for exam_data in stat['exams_data'] %}
+					<tr>
+						<th class="table_header" scope="row">{{ exam_data['exam'] }}</th>
+						<td>{{ exam_data['exam'].coef }}</td>
+						<td>{{ exam_data['exam'].getSmallFormatExamDate() }}</td>
+						<td>{{ exam_data['nb_records'] }}</td>
+						<td>{{ exam_data['average'] }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		{% endfor %}
+	</div>
 </div>
-
 {% endblock %}
 
 {% block footer_js %}

@@ -64,13 +64,13 @@
             {% endblock %}
         </div>
         <footer>
+            {% block footer_js %}
+            {% endblock %}
 			{% javascripts
 				'@UnsapaIPWBundle/Resources/public/js/application.js'
 			%}
 				<script type="text/javascript" src="{{ asset_url }}" ></script>
 			{% endjavascripts %}
-            {% block footer_js %}
-            {% endblock %}
         </footer>
     </body>
 </html>
