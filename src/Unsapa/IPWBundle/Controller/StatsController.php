@@ -28,47 +28,53 @@ class StatsController extends Controller
      */
     public function averagesAction()
     {
-    	$promos = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->findAll();
-    	$exams = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->findAll();
-    	$exams_ended = array();
-    	$nb_records = array();
-    	$exams_averages = array();
-    	$marks = array();	//faire un affichage dans le twig pour tester s'il y a bien des notes
-    	$now = new \DateTime('now');
-    	
-    	foreach($exams as $exam)
+        $promos = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->findAll();
+        $exams_ended = $this->getDoctrine()->getEntityManager()->createQuery(
+            "SELECT e FROM UnsapaIPWBundle:Exam e WHERE e.exam_date < :date")
+            ->setParameter("date", (new \Datetime('now')))
+            ->getResult();
+
+        $stats_by_promo = array();
+        foreach($promos as $promo)
         {
-          if($exam->getExamDate() < $now)
-            array_push($exams_ended, $exam);
+            $pname = $promo->getName();
+            $stats_by_promo[$pname] = array();
+            $stats_by_promo[$pname]['promo'] = $promo;
+            $stats_by_promo[$pname]['exams_data'] = array();
         }
-        
+            
+
+ 
         foreach($exams_ended as $exam)
         {
+            $exam_data = array('exam' => $exam);
+
         	$records = $exam->getRecords();
-        	array_push($nb_records, count($records));
-        	
         	$tmp_sum = 0;
         	$tmp_nb_marks = 0;
         	foreach($records as $record)
         	{
         		if (($mark=$record->getMark()) != NULL)
         		{
-        			array_push($marks, $mark);
         			$tmp_nb_marks += 1;
         			$tmp_sum += $mark;
         		}
-        	}
+            }
+
+            $exam_data['nb_records'] = $tmp_nb_marks;
         	
         	if ($tmp_nb_marks != 0)
         	{
         		$average = $tmp_sum/$tmp_nb_marks;
         	}
         	else $average = NULL;
-        	
-        	array_push($exams_averages, $average);
+
+            $exam_data['average'] = $average;
+            array_push($stats_by_promo[$exam->getPromo()->getName()]['exams_data'], $exam_data);
         }
-    	
+
+
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
-    			array('promos'=>$promos, 'exams_ended'=>$exams_ended, 'nb_records'=>$nb_records,  'marks'=>$marks, $exams_averages=>'exams_averages'));
+    			array('stats_by_promo' => $stats_by_promo));
     }
 }
