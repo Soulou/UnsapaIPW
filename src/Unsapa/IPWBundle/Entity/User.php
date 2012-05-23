@@ -239,7 +239,7 @@ class User extends BaseUser
 
     /**
      * Set default role to ROLE_STUDENT
-     * Doctrine call this method at the event 'onPersist'
+     * Doctrine call this method on the event 'onPersist'
      */
     public function setDefaultRole()
     {
