@@ -515,6 +515,11 @@ h2
   font-weight: bold;
 }
 
+#stats_content
+{
+	margin-bottom: 100px;
+}
+
 #stats_table
 {
     border-color: #aaaaaa;
