@@ -33,8 +33,8 @@
 
 body
 {
-	background-color: ;
-	margin: 0%;
+  background-color: ;
+  margin: 0%;
 }
 
 nav
@@ -62,12 +62,12 @@ nav a img
 
 h1
 {
-	text-indent: 20px;
+  text-indent: 20px;
 }
 
 h2
 {
-	text-indent: 40px;
+  text-indent: 40px;
 }
 
 #content
@@ -76,6 +76,7 @@ h2
   top: 60px;
   margin-left:120px;
   padding-left:30px;
+  padding-bottom: 100px;
 }
 
 .fos_user_content
@@ -128,9 +129,9 @@ h2
 
 #login_form input[type="submit"]
 {
-	margin-top: 5px;
-	font-size: 18px;
-	margin-left: 190px;
+  margin-top: 5px;
+  font-size: 18px;
+  margin-left: 190px;
 }
 
 #user_registration label
@@ -165,9 +166,9 @@ h2
 
 .fos_user_registration_register input[type="submit"]
 {
-	margin-top: 8px;
-	font-size: 18px;
-	margin-left: 210px;
+  margin-top: 8px;
+  font-size: 18px;
+  margin-left: 210px;
 }
 
 #user_registration_required
@@ -209,10 +210,10 @@ h2
 
 #record_submit_form input[type="submit"]
 {
-	margin-top: 20px;
-	margin-bottom: 10px;
-	font-size: 18px;
-	margin-left: 450px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  margin-left: 450px;
 }
 
 
@@ -241,14 +242,14 @@ h2
 
 #exam_add_form input[type="submit"]
 {
-	margin-top: 8px;
-	font-size: 18px;
-	margin-left: 220px;
+  margin-top: 8px;
+  font-size: 18px;
+  margin-left: 220px;
 }
 
 #promo_detail:hover
 {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 /* Autres formulaires */
@@ -278,7 +279,7 @@ h2
 
 #profil
 {
-	-webkit-border-radius: 10px;
+  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
@@ -294,16 +295,16 @@ h2
 
 #profil input[value="Éditer le profil"]
 {
-	margin-top: 20px;
-	margin-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .profil_label
 {
-	font-weight: bold;
-	float: left;
-	width: 40%;
-	text-align: right;
+  font-weight: bold;
+  float: left;
+  width: 40%;
+  text-align: right;
 }
 
 
@@ -311,7 +312,7 @@ h2
 
 .fos_user_profile_edit
 {
-	-webkit-border-radius: 10px;
+  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
@@ -326,16 +327,16 @@ h2
 
 .fos_user_profile_edit label
 {
-	font-weight: bold;
-	float: left;
-	width: 30%;
-	text-align: right;
+  font-weight: bold;
+  float: left;
+  width: 30%;
+  text-align: right;
 }
 
 .fos_user_profile_edit input[type="submit"]
 {
-	margin-top: 15px;
-	margin-bottom: 5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 
@@ -343,7 +344,7 @@ h2
 
 .fos_user_change_password
 {
-	-webkit-border-radius: 10px;
+  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
@@ -358,15 +359,15 @@ h2
 
 .fos_user_change_password label
 {
-	float: left;
-	width: 190px;
-	text-align: right;
+  float: left;
+  width: 190px;
+  text-align: right;
 }
 
 .fos_user_change_password input[type="submit"]
 {
-	margin-top: 12px;
-	margin-left: 180px;
+  margin-top: 12px;
+  margin-left: 180px;
 }
 
 
@@ -374,17 +375,17 @@ h2
 
 #admin
 {
-	margin-top: 25px;
-	margin-left: 10px;
-	padding-top: 30px;
-	padding-left: 30px;
-	font-weight: bold;
-	font-size: 18px;
+  margin-top: 25px;
+  margin-left: 10px;
+  padding-top: 30px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 #promos_list_admin
 {
-	-webkit-border-radius: 10px;
+  -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
@@ -513,11 +514,6 @@ h2
 #download_records a:hover
 {
   font-weight: bold;
-}
-
-#stats_content
-{
-	margin-bottom: 100px;
 }
 
 #stats_table
