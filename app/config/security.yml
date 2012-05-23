@@ -34,7 +34,8 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/promos/add$, role: ROLE_ADMIN }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/users, role: ROLE_STUDENT }
         - { path: ^/download/, role: ROLE_STUDENT }
         - { path: ^/record/, role: ROLE_STUDENT }
         - { path: ^/stats$, role: IS_AUTHENTICATED_ANONYMOUSLY }

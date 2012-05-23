@@ -1,0 +1,41 @@
+{% extends 'UnsapaIPWBundle::layout.html.twig' %}
+ 
+{% block title %}Utilisateurs{% endblock %}
+
+{% block content %}
+	
+	{#
+	<div id="promos_add">
+	  <a href="{{ path("promos_add") }}" alt="Ajouter une promotion">
+	    <img src="{{ asset("bundles/unsapaipw/images/plus.png") }}" width="16" alt="Image - Ajouter une promotion" \>
+	    <span class="link_img_text">Ajouter une promotion</span>
+	  </a>
+	</div>
+	#}
+					
+	<h3>Etudiants</h3></li>
+	{% for user in users %}		
+		<a href="{{ path('users_show', { 'id': user.id })}}">
+			{{ user.firstname }}
+			{{ user.lastname }} : 
+			Promo {{ user.promo }}
+		</a>
+		<br/>
+	{% endfor %}
+	
+	<h3>Professeurs</h3></li>
+	{% for user in users %}
+		{% for role in user.roles %}
+			{% if role == "ROLE_TD" or role == "ROLE_ADMIN" %}
+				<a href="{{ path('users_show', { 'id': user.id })}}">
+					{{ user.firstname }}
+					{{ user.lastname }}
+				</a>
+				<br/>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+	<br/>
+	
+	
+{% endblock %}
