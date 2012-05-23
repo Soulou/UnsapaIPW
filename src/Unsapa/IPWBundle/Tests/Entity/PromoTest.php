@@ -61,4 +61,23 @@ class PromoTest extends UnsapaTest
     $p->setName("NewNewPromo");
     $this->assertEquals("NewNewPromo", $p->getName());
   }
+
+  /**
+   * Test two promotion with the same name
+   * @expectedException PDOException
+   */
+  public function testDoubleName()
+  {
+    $this->createPromo("Double");
+    $this->createPromo("Double");
+  }
+
+  /**
+   * Test getId
+   */
+  public function testGetId()
+  {
+    $p = $this->createPromo("TestId");
+    $this->assertTrue(is_integer($p->getId()));
+  }
 }

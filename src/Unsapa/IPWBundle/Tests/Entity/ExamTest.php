@@ -40,7 +40,7 @@ class ExamsTest extends UnsapaTest
 
     $this->promo = $this->createPromo();
     $this->td = $this->createRespTD();
-    $this->date = new \DateTime('now');
+    $this->date = (new \DateTime('now'))->add(new \DateInterval("P1D"));
   }
 
   /**
@@ -90,7 +90,7 @@ class ExamsTest extends UnsapaTest
     $this->assertEquals("ExamTest", $exam->getTitle(), "The title is ExamTest");
     $this->assertEquals($this->promo, $exam->getPromo(), "The promo is the same");
 
-    $this->assertGreaterThanOrEqual($exam->getExamDate(), (new \Datetime('now')), "The date of the exam is equal or superior of the actual date");
+    $this->assertGreaterThanOrEqual((new \Datetime('now')), $exam->getExamDate(), "The date of the exam is equal or superior of the actual date");
     $this->assertEquals($this->date, $exam->getExamDate(), "The initial date and the query result date are identical");
 
     $this->assertEquals("ExamDesc", $exam->getExamDesc(), "Description is equal");
