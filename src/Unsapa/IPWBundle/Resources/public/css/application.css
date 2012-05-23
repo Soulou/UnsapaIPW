@@ -122,7 +122,7 @@ h2
 #login_form label
 {
   float:left;
-  width: 130px;
+  width: 150px;
   padding-right: 20px;
   text-align: right;
 }
@@ -137,7 +137,7 @@ h2
 #user_registration label
 {
   float:left;
-  width:125px;
+  width:140px;
   padding-right: 20px;
   text-align: right;
 }
@@ -235,7 +235,7 @@ h2
 #exam_add_form label
 {
   float: left;
-  width: 100px;
+  width: 120px;
   text-align: right;
   margin-right: 20px;
 }
