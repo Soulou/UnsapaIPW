@@ -68,7 +68,7 @@ download_record:
     
 stats:
     pattern: /stats
-    defaults: { _controller: UnsapaIPWBundle:Promos:stats }
+    defaults: { _controller: UnsapaIPWBundle:Stats:averages }
 
 
 fos_user_security:
