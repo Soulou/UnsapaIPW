@@ -12,11 +12,11 @@ users:
     
 users_show:
     pattern: /users/{id}
-    defaults: { _controller: UnsapaIPWBundle:Profile:showId }
+    defaults: { _controller: UnsapaIPWBundle:ProfileAdmin:showId }
     
 users_edit:
     pattern: /users/{id}/edit
-    defaults: { _controller: UnsapaIPWBundle:Profile:editId }
+    defaults: { _controller: UnsapaIPWBundle:ProfileAdmin:editId }
 
 promos:
     pattern: /promos

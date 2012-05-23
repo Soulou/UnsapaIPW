@@ -11,16 +11,3 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: user_registration }
-   
-    unsapa_user.profile.form.type:
-        class: Unsapa\IPWBundle\Form\Type\ProfileFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: user_profile }
-    
-    unsapa_user.profile.form.handler.default:
-        class: Unsapa\IPWBundle\Form\Handler\ProfileFormHandler
-        scope: request
-        #public: false
-        arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager"]
-        

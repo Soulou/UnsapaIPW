@@ -14,7 +14,7 @@
     </ul>
     {% for stat in stats_by_promo %}
     <div id="{{stat['promo']}}">
-            <h3>Stats pour la promo {{ stat['promo']}} (Moyenne: {{ stat['gen_average'] }})</h3>
+            <h3>Stats pour la promo {{ stat['promo']}} (Moyenne: {{ stat['gen_average']|number_format(2) }})</h3>
             <table id="stats_table">
                 <th></th>
                 <th class="table_header">Coefficient</th>
@@ -27,7 +27,7 @@
                     <td>{{ exam_data['exam'].coef }}</td>
                     <td>{{ exam_data['exam'].getSmallFormatExamDate() }}</td>
                     <td>{{ exam_data['nb_records'] }}</td>
-                    <td>{{ exam_data['average'] }}</td>
+                    <td>{{ exam_data['average']|number_format(2) }}</td>
                 </tr>
                 {% endfor %}
             </table>

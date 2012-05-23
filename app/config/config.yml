@@ -64,7 +64,3 @@ fos_user:
     registration:
         form: 
             type: user_registration
-    profile:
-        form:
-            type: user_profile
-            handler: unsapa_user.profile.form.handler.default
