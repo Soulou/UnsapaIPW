@@ -278,4 +278,8 @@ class User extends BaseUser
     {
         return $this->promo;
     }
+    public function getCurrent()
+    {
+      return "";
+    }
 }

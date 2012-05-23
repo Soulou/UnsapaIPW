@@ -1,18 +1,22 @@
-{% form_theme form theme %}
-
+{% if is_granted("ROLE_ADMIN") and user is defined %}
+<form action="{{ path('users_edit', {'id': user.id} ) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+{% else %}
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+{% endif %}
 	
-	{{ form_row(form.user.email) }}
-    {{ form_row(form.user.lastname) }}
-    {{ form_row(form.user.firstname) }}
-    {{ form_row(form.user.address) }}
-    {{ form_row(form.user.zipcode) }}
-    {{ form_row(form.user.city) }}    
-    {{ form_row(form.user.phone) }}
+  	{{ form_row(form.email) }}
+    {{ form_row(form.lastname) }}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.address) }}
+    {{ form_row(form.zipcode) }}
+    {{ form_row(form.city) }}    
+    {{ form_row(form.phone) }}
     
 	{% if is_granted("ROLE_ADMIN") %}  
-		{{ form_row(form.user.promo) }}  
-	{% endif %} 	
+		{{ form_row(form.promo) }}  
+  {% endif %} 
+
+    {{ form_rest(form) }} 
     
 	<br/>
     <div>
