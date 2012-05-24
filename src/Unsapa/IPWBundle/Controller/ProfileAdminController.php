@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Unsapa\IPWBundle\Entity\User;
-use Unsapa\IPWBundle\Form\Type\ProfileFormType;
+use Unsapa\IPWBundle\Form\Type\ProfileAdminFormType;
 
 class ProfileAdminController extends Controller
 {
@@ -30,7 +30,7 @@ class ProfileAdminController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
     	}
 
-      $form = $this->createForm(new ProfileFormType(), $user);
+      $form = $this->createForm(new ProfileAdminFormType(), $user);
 
       if($this->getRequest()->getMethod() == "POST")
       {
