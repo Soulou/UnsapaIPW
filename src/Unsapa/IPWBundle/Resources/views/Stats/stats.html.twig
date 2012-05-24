@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Statistiques</h1>
 
-<h2>Moyenne par promo</h2>
+<h2>Moyennes par promo</h2>
 <div id="stat_tables">
     <ul>
         {% for stat in stats_by_promo %}
@@ -14,7 +14,7 @@
     </ul>
     {% for stat in stats_by_promo %}
     <div id="{{stat['promo']}}">
-            <h3>Stats pour la promo {{ stat['promo']}}</h3>
+            <h3>Stats pour la promo {{ stat['promo']}} (Moyenne: {{ stat['gen_average'] }})</h3>
             <table id="stats_table">
                 <th></th>
                 <th class="table_header">Coefficient</th>

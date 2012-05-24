@@ -1,3 +1,5 @@
+
+
 <div id = "profil" class="fos_user_user_show">
     <p>
     	<span class="profil_label"> {{ 'profile.show.username'|trans({}, 'FOSUserBundle') }} : </span>
@@ -32,10 +34,15 @@
     	{{ user.phone }}
     </p>
 	<br>
-    <form method="GET" action="{{ path("fos_user_profile_edit") }}">
+
+    {% if is_granted("ROLE_ADMIN") or app.user==user %}
+    <form method="GET" action="{{ path("users_edit", { 'id': user.id }) }}">
       <input type="submit" value="Éditer le profil" />
     </form>
+    {% endif %}
+    {% if app.user==user %}
     <form method="GET" action="{{ path("fos_user_change_password") }}">
       <input type="submit" value="Changer mon mot de passe" />
     </form>
+    {% endif %}
 </div>

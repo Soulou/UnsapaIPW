@@ -24,6 +24,7 @@ profile:
         firstname: Prénom
         lastname: Nom
         phone: Téléphone
+        promo: Promotion 
         address: Adresse
         zipcode: Code postal
         city: Ville
