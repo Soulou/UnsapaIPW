@@ -35,8 +35,12 @@
     </p>
 	<br>
 
-    {% if is_granted("ROLE_ADMIN") or app.user==user %}
+    {% if is_granted("ROLE_ADMIN") %}
     <form method="GET" action="{{ path("users_edit", { 'id': user.id }) }}">
+      <input type="submit" value="Éditer le profil" />
+    </form>
+    {% else %}
+    <form method="GET" action="{{ path("fos_user_profile_edit") }}">
       <input type="submit" value="Éditer le profil" />
     </form>
     {% endif %}

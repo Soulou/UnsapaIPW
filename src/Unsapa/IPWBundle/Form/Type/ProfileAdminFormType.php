@@ -13,19 +13,19 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilder;
-use FOS\UserBundle\Form\Type\ProfileFormType as AbstractType;
+use Symfony\Component\Form\AbstractType;
 
 /**
  * Override the ProfileFormType of the FOSUserBundle to add fields to the form
  */
-class ProfileFormType extends AbstractType
+class ProfileAdminFormType extends AbstractType
 {
     /**
      * Build user profile form
      * @param FormBuilder $builder
      * @param array $options
      */
-    public function buildUserForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
             ->add('email')
