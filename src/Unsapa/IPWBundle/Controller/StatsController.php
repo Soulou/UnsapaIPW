@@ -44,7 +44,6 @@ class StatsController extends Controller
         }
             
 
- 
         foreach($exams_ended as $exam)
         {
             $exam_data = array('exam' => $exam);
@@ -70,9 +69,23 @@ class StatsController extends Controller
         	else $average = NULL;
 
             $exam_data['average'] = $average;
+            $exam_data['balanced_average'] = $average*($exam->getCoef());
             array_push($stats_by_promo[$exam->getPromo()->getName()]['exams_data'], $exam_data);
         }
-
+        
+        
+        foreach($promos as $promo)
+        {
+        	$tmp_sum_coef = 0;
+        	$tmp_sum_averages = 0;
+        	
+        	/* Pour chaque examen dans cette promo;
+        		$tmp_sum_coef += $stats_by_promo[$promo->getName()]['exams_data']['exam'].coef;
+        		$tmp_sum_averages += $stats_by_promo[$promo->getName()]['exams_data']['balanced_average'];
+        		Fin de boucle.
+        	   $promo['gen_average'] = $tmp_sum_averages / $tmp_sum_coef;
+        	*/
+        }
 
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
     			array('stats_by_promo' => $stats_by_promo));
