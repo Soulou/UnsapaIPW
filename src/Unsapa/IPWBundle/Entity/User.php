@@ -66,6 +66,7 @@ class User extends BaseUser
      */
     private $phone;
 
+
     /**
      * The user object must be created with FOSUserBundle UserManager
      * 'fos_user.user_manager', method : createUser()
@@ -276,5 +277,9 @@ class User extends BaseUser
     public function getPromo()
     {
         return $this->promo;
+    }
+    public function getCurrent()
+    {
+      return "";
     }
 }

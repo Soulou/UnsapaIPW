@@ -63,7 +63,4 @@ fos_user:
     user_class: Unsapa\IPWBundle\Entity\User
     registration:
         form: 
-            type: user_registration 
-    profile:
-        form:
-            type: user_profile
+            type: user_registration

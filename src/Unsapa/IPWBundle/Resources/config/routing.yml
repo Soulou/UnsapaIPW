@@ -5,18 +5,18 @@ homepage:
 admin:
     pattern: /admin
     defaults: { _controller: UnsapaIPWBundle:Admin:index }
-
-exams:
-    pattern: /exams
-    defaults: { _controller: UnsapaIPWBundle:Exams:index }
-
-exam_add:
-    pattern: /exams/add
-    defaults: { _controller: UnsapaIPWBundle:Exams:add }
     
-exam_add_students:
-    pattern: /exams/add/students	  	
-    defaults: { _controller: UnsapaIPWBundle:Promos:listStudents }
+users:
+    pattern: /users
+    defaults: { _controller: UnsapaIPWBundle:Users:index } 
+    
+users_show:
+    pattern: /users/{id}
+    defaults: { _controller: UnsapaIPWBundle:ProfileAdmin:showId }
+    
+users_edit:
+    pattern: /users/{id}/edit
+    defaults: { _controller: UnsapaIPWBundle:ProfileAdmin:editId }
 
 promos:
     pattern: /promos
@@ -30,6 +30,14 @@ promos_edit:
     pattern: /promos/{id}/edit
     defaults: { _controller: UnsapaIPWBundle:Promos:edit }
     
+exams:
+    pattern: /exams
+    defaults: { _controller: UnsapaIPWBundle:Exams:index }
+
+exam_add:
+    pattern: /exams/add
+    defaults: { _controller: UnsapaIPWBundle:Exams:add }    
+    
 exam_submit:
     pattern: /exams/submit
     defaults: { _controller: UnsapaIPWBundle:Exams:submit }
@@ -41,6 +49,10 @@ exam_show:
 exam_students:
     pattern: /exams/{id}/students
     defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
+    
+exam_add_students:
+    pattern: /exams/add/students      
+    defaults: { _controller: UnsapaIPWBundle:Promos:listStudents }
 
 exam_mark:
     pattern: /exams/{id}/marks
@@ -57,6 +69,7 @@ download_record:
 stats:
     pattern: /stats
     defaults: { _controller: UnsapaIPWBundle:Stats:averages }
+
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -76,4 +89,3 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-

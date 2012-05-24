@@ -6,13 +6,8 @@ services:
 #        class: %unsapa_ipw.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
 
-    user_registration_form_type:
+    unsapa_user.registration.form.type:
         class: Unsapa\IPWBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: user_registration }
-    user_profile_form_type:
-        class: Unsapa\IPWBundle\Form\Type\ProfileFormType
-        arguments: [%fos_user.model.user.class%]
-        tags:
-            - { name: form.type, alias: user_profile }

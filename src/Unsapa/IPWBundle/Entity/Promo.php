@@ -3,11 +3,10 @@
  * Promo.php
  *
  * @date 04/24/2012
- * @package Unsapa\IPWBundle\ENtity
+ * @package Unsapa\IPWBundle\Entity
  */
 
 namespace Unsapa\IPWBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
