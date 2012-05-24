@@ -46,14 +46,14 @@ exam_show:
     pattern: /exams/{id}
     defaults: { _controller: UnsapaIPWBundle:Exams:show }
 
-exam_students:
-    pattern: /exams/{id}/students
-    defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
-    
 exam_add_students:
     pattern: /exams/add/students      
     defaults: { _controller: UnsapaIPWBundle:Promos:listStudents }
 
+exam_students:
+    pattern: /exams/{id}/students
+    defaults: { _controller: UnsapaIPWBundle:Attend:examChoice }
+    
 exam_mark:
     pattern: /exams/{id}/marks
     defaults: { _controller: UnsapaIPWBundle:Attend:mark }
