@@ -79,12 +79,12 @@ class StatsController extends Controller
         	$tmp_sum_coef = 0;
         	$tmp_sum_averages = 0;
         	
-        	/* Pour chaque examen dans cette promo;
-        		$tmp_sum_coef += $stats_by_promo[$promo->getName()]['exams_data']['exam'].coef;
-        		$tmp_sum_averages += $stats_by_promo[$promo->getName()]['exams_data']['balanced_average'];
-        		Fin de boucle.
-        	   $promo['gen_average'] = $tmp_sum_averages / $tmp_sum_coef;
-        	*/
+        	foreach( $stats_by_promo[$promo->getName()]['exams_data'] as $exam_data)
+        	{
+        		$tmp_sum_coef += $exam_data['exam']->getCoef();
+        		$tmp_sum_averages += $exam_data['balanced_average'];
+        	}
+        	$stats_by_promo[$promo->getName()]['gen_average'] = $tmp_sum_averages / $tmp_sum_coef;
         }
 
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
