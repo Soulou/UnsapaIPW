@@ -27,6 +27,12 @@ class DoctrineTestHelper
    */
   private $em;
 
+  /**
+   * FOSUserBundle UserManager
+   * @var UserManager $um
+   */
+  protected $um;
+
   /*
    * Validator of Symfony
    * @var Validator $validator
@@ -45,6 +51,7 @@ class DoctrineTestHelper
     $this->kernel = $kernel;
     $this->em = DoctrineTestHelper::getEntityManager();
     $this->em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+    $this->um = $this->kernel->getContainer()->get('fos_user.user_manager');
     $this->validator = $this->kernel->getContainer()->get('validator');
   }
 
@@ -76,5 +83,14 @@ class DoctrineTestHelper
   public function getValidator()
   {
     return $this->validator;
+  }
+
+  /**
+   * Get FOS UserManager
+   * @return UserManager
+   */
+  public function getUserManager()
+  {
+    return $this->um;
   }
 }
