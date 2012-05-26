@@ -20,6 +20,18 @@
   \addcontentsline{toc}{section}{Introduction}
 
   \section{Fonctionnalités de l'application}
+    \subsection{Gestion des rôles}
+      L'application web que nous avons réalisée est un système de gestion 
+      d'examens. On distingue trois catégories d'utilisateurs:
+      \begin{itemize}
+        \item{Les étudiants : ils consultent les examens auxquels leur promotion 
+          est inscrite et déposent leurs compositions.}
+        \item{Les responsables d'examens : ils créent des examens et notent les 
+          étudiants.}
+        \item{L'administrateur : il gère l'ensemble des utilisateurs, des 
+          promotions et des examens.}
+      \end{itemize}
+
     \subsection{Les différentes \textsl{user stories}}
       \subsubsection{L'utilisateur consulte la liste des examens auxquels il est inscrit}
         \begin{verbatim}
@@ -150,9 +162,13 @@
         chose donc nous nous sommes concentrés sur des tâches plus prioritaires.
        
   \section{Organisation de l'équipe}
+  	Afin de travailler le plus efficacement possible, nous avons décidé d'utiliser l'outil collaboratif Github. Ceci nous a permis d'avoir chacun notre dépot des sources du projet et de soumettre nos modifications de façon simple.
+  	
+  	Concernant la répartition des tâches, nous avons fonctionné en déposant régulièrement des requêtes sur Github et chacun était libre de mettre en place les fonctionnalités qu'il voulait.
+  	
   \section{Schéma de données}
-    Le sujet nous imposait d'utiliser un certain nombre 
-    auxquels nous avons ajouté un certain nombre d'attributs.
+    Le sujet nous imposait d'utiliser plusieurs entitées auxquelles nous avons 
+    ajouté un certain nombre d'attributs.
 
     \begin{figure}
       \caption{Schéma relationnel}
@@ -185,13 +201,12 @@
         \item{Expiration du compte, confirmation par email etc.}
       \end{itemize}
 
-      Et enfin nous avons ajouté un champs pour notre besoin qui est une
+      Et enfin nous avons ajouté un champ pour notre besoin qui est une
       promotion, en effet, on considère qu'un étudiant appartient à une
       promotion précise.
 
     \subsection{Promo}
-      Les promotions correspondent à un regroupement d'utilisateur, dans le
-      cas d'utilisation présent, tous les étudiants d'une même année 
+      Les promotions correspondent à un regroupement d'utilisateur, dans le cas d'utilisation présent, tous les étudiants d'une même année 
       appartiennent à une promotion unique.
 
     \subsection{Exam}
@@ -205,13 +220,9 @@
 				\item{Date limite}
 				\item{Responsable : Un user responsable de TD}
 			\end{itemize}
-			Par défaut, lors de la création de l'examen, tous les étudiants de la
-			promotion sélectionnée sont concernés par l'examen, mais il est également possible
-			de modifier au cas par cas si un étudiant est affecté par l'examen.
+			Par défaut, lors de la création de l'examen, tous les étudiants de la promotion sélectionnée sont concernés par l'examen, mais il est également possible de modifier au cas par cas si un étudiant est affecté par l'examen.
     \subsection{Record}
-			L'entité Record fait le lien entre les étudiants et les examens. En effet dans un record
-			on attribue pour un étudiant et un examen, la note, ainsi que le document rendu 
-			(Fichier pdf ou word).
+			L'entité Record fait le lien entre les étudiants et les examens. En effet dans un record on attribue pour un étudiant et un examen, la note, ainsi que le document rendu (Fichier pdf ou word).
 
 			On a donc :
 			\begin{itemize}
@@ -221,10 +232,7 @@
 				\item{Document}
 			\end{itemize}
 
-			Ainsi un Record avec la note et le document NULL, correspond au fait qu'un étudiant doit
-			effectuer un rendu pour un tel examen. Quand il rend quelque chose, on peuple le champs
-			'Document'. Et ensuite quand l'examen est terminé le responsable de l'examen peut associer 
-			une note.
+			Ainsi un Record avec la note et le document NULL, correspond au fait qu'un étudiant doit effectuer un rendu pour un tel examen. Quand il rend quelque chose, on peuple le champ 'Document'. Et ensuite quand l'examen est terminé le responsable de l'examen peut associer une note.
 
 
   \section{Réalisation Technique}
@@ -232,8 +240,7 @@
       Nous avons utilisé un Bundle d'extension nommé : 
       \href{https://github.com/FriendsOfSymfony/FOSUserBundle}{UserBundle}.
       
-      Ce bundle constitue la brique applicative qui permet d'effectuer toutes
-      les actions nécessaires à presque tous les projets, c'est-à-dire :
+      Ce bundle constitue la brique applicative qui permet d'effectuer toutes les actions nécessaires à presque tous les projets, c'est-à-dire :
       \begin{itemize}
         \item{Inscription}
         \item{Authentification}
@@ -242,17 +249,14 @@
         \item{Gestion du profil}
         \item{Changement de mot de passe}
       \end{itemize}
-      Nous évitant du travail laborieux qui ne sert pas sur le plan métier de
-      l'application.
+      Nous évitant du travail laborieux qui ne sert pas sur le plan métier de l'application.
 
     \subsection{Les tests avec PHPUnit}
-			Nous avons principalement testé les différentes entités. Grâce à PHPUnit nous
-			avons généré la couverture en tests de notre code.
+			Nous avons principalement testé les différentes entités. Grâce à PHPUnit nous avons généré la couverture en tests de notre code.
 
 			\href{http://ares-ensiie.eu/~unbekandt2011/UnsapaIPW/cov}{Couverture des tests}
     \subsection{La documentation développeur avec phpDocumentor}
-			Tout notre code a été documenté en utilisant phpDocumentor. On peut trouvé cette
-			documentation à l'adresse :
+			Tout notre code a été documenté en utilisant phpDocumentor. On peut trouvé cette documentation à l'adresse :
 
 			\href{http://ares-ensiie.eu/~unbekandt2011/UnsapaIPW/doc}{Documentation développeur}
 
