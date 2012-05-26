@@ -30,7 +30,7 @@ class StatsController extends Controller
     {
         $promos = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Promo")->findAll();
         $exams_ended = $this->getDoctrine()->getEntityManager()->createQuery(
-            "SELECT e FROM UnsapaIPWBundle:Exam e WHERE e.exam_date < :date")
+            "SELECT e,re FROM UnsapaIPWBundle:Exam e JOIN e.records re WHERE e.exam_date < :date")
             ->setParameter("date", (new \Datetime('now')))
             ->getResult();
 
