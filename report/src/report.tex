@@ -23,6 +23,7 @@
     \subsection{Gestion des rôles}
       L'application web que nous avons réalisée est un système de gestion 
       d'examens. On distingue trois catégories d'utilisateurs:
+
       \begin{itemize}
         \item{Les étudiants : ils consultent les examens auxquels leur promotion 
           est inscrite et déposent leurs compositions.}
@@ -90,6 +91,7 @@
         \end{verbatim}
       \subsubsection{L'utilisateur associe des étudiants à un examen}
         Pour celà il y a 3 possibilités :
+
         \begin{itemize}
           \item{
               Lors de l'ajout d'un examen, il choisit une promotion. Par défaut
@@ -148,8 +150,14 @@
       \subsubsection{Un utilisateur peut gérer les promos}
         Il existe un utilisateur ayant le rôle d'administrateur sur le site. Il
         a accès à un panneau d'administration, où il va pouvoir 
-        ajouter/modifier/supprimer des promotions, voir/modifier/(dé)sactiver des
-        comptes utilisateurs.
+        ajouter/modifier/supprimer des promotions, voir/modifier/(dé)sactiver/changer de rôle
+        les comptes utilisateurs.
+
+        \begin{verbatim}
+          Route : /admin
+          Controller : AdminController
+          Action : indexAction
+        \end{verbatim}
     \subsection{Ce que nous n'avons pas fait}
       \subsubsection{Génération des mots de passe}
         Il est demandé dans le sujet de générer aléatoirement un mot de passe lors 
@@ -160,7 +168,18 @@
         (concrètement le controller, le formtype, le handler et le template). Nous
         avons considéré que c'était beaucoup de temps de travail pour pas grand
         chose donc nous nous sommes concentrés sur des tâches plus prioritaires.
-       
+      \subsection{3 états pour les examens}
+        Le sujet demandait à ce qu'un examen puisse être :
+
+        \begin{itemize}
+          \item{En création}
+          \item{En cours}
+          \item{Clos}
+        \end{itemize}
+
+        Dans notre application, nous nous basons sur la date d'échéance de l'examen
+        En l'occurrence, un examen dont la date n'est pas encore passé est "en cours"
+        tandis qu'un examen dans la date est passé est "clos" et la notation a commencé
   \section{Organisation de l'équipe}
   	Afin de travailler le plus efficacement possible, nous avons décidé d'utiliser l'outil collaboratif Github. Ceci nous a permis d'avoir chacun notre dépot des sources du projet et de soumettre nos modifications de façon simple.
   	
@@ -171,13 +190,13 @@
     ajouté un certain nombre d'attributs.
 
     \begin{figure}
-      \caption{Schéma relationnel}
       \includegraphics[width=0.9\textwidth]{./data.png}
+      \caption{Schéma relationnel}
     \end{figure}
 
     \begin{figure}
-      \caption{Modèle physique de base de données}
       \includegraphics[width=0.9\textwidth]{./db.png}
+      \caption{Modèle physique de base de données}
     \end{figure}
 
     \subsection{User}
