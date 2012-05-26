@@ -3,39 +3,57 @@
 {% block title %}Utilisateurs{% endblock %}
 
 {% block content %}
+	<table>
+	<thead>
+		<tr>
+			<th>Etudiants</th>
+			<th>Professeurs</th>
+		</tr>
+	</thead>
 	
-	{#
-	<div id="promos_add">
-	  <a href="{{ path("promos_add") }}" alt="Ajouter une promotion">
-	    <img src="{{ asset("bundles/unsapaipw/images/plus.png") }}" width="16" alt="Image - Ajouter une promotion" \>
-	    <span class="link_img_text">Ajouter une promotion</span>
-	  </a>
-	</div>
-	#}
-					
-	<h3>Etudiants</h3></li>
-	{% for user in users %}		
-		<a href="{{ path('users_show', { 'id': user.id })}}">
-			{{ user.firstname }}
-			{{ user.lastname }} : 
-			Promo {{ user.promo }}
-		</a>
-		<br/>
-	{% endfor %}
-	
-	<h3>Professeurs</h3></li>
+	<tbody>
+	{% set show=0 %}
+	<td valign=top>
 	{% for user in users %}
 		{% for role in user.roles %}
-			{% if role == "ROLE_TD" or role == "ROLE_ADMIN" %}
+			{% if role == "ROLE_STUDENT" %}
+				{% set show=1 %}
+			{% elseif role == "ROLE_TD" %}
+				{% set show=2 %}
+			{% elseif role == "ROLE_ADMIN" %}
+				{% set show=3 %}
+			{% endif %}
+		{% endfor %}
+			{% if show==1 %}		
+				<a href="{{ path('users_show', { 'id': user.id })}}">
+					{{ user.firstname }}
+					{{ user.lastname }} : 
+					Promo {{ user.promo }}
+				</a><br/>
+			{% endif %}
+	{% endfor %}
+	</td>
+
+	<td valign=top>
+	{% for user in users %}
+		{% for role in user.roles %}
+			{% if role == "ROLE_STUDENT" %}
+				{% set show=1 %}
+			{% elseif role == "ROLE_TD" %}
+				{% set show=2 %}
+			{% elseif role == "ROLE_ADMIN" %}
+				{% set show=3 %}
+			{% endif %}
+		{% endfor %}
+			{% if show==2 or show==3 %}
 				<a href="{{ path('users_show', { 'id': user.id })}}">
 					{{ user.firstname }}
 					{{ user.lastname }}
-				</a>
-				<br/>
+				</a><br/>
 			{% endif %}
-		{% endfor %}
 	{% endfor %}
-	<br/>
+	</td>
+	</tbody>
 	
-	
+	</table>	
 {% endblock %}
