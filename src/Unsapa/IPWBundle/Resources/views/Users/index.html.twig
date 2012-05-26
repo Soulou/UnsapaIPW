@@ -7,7 +7,8 @@
 	<thead>
 		<tr>
 			<th>Etudiants</th>
-			<th>Professeurs</th>
+      <th>Professeurs</th>
+      <th>Administrateurs</th>
 		</tr>
 	</thead>
 	
@@ -45,7 +46,26 @@
 				{% set show=3 %}
 			{% endif %}
 		{% endfor %}
-			{% if show==2 or show==3 %}
+			{% if show==2 %}
+				<a href="{{ path('users_show', { 'id': user.id })}}">
+					{{ user.firstname }}
+					{{ user.lastname }}
+				</a><br/>
+			{% endif %}
+	{% endfor %}
+	</td>
+	<td valign=top>
+	{% for user in users %}
+		{% for role in user.roles %}
+			{% if role == "ROLE_STUDENT" %}
+				{% set show=1 %}
+			{% elseif role == "ROLE_TD" %}
+				{% set show=2 %}
+			{% elseif role == "ROLE_ADMIN" %}
+				{% set show=3 %}
+			{% endif %}
+		{% endfor %}
+			{% if show == 3 %}
 				<a href="{{ path('users_show', { 'id': user.id })}}">
 					{{ user.firstname }}
 					{{ user.lastname }}

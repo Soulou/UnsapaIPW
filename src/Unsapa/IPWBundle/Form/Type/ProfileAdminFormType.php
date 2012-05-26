@@ -36,6 +36,11 @@ class ProfileAdminFormType extends AbstractType
             ->add('zipcode')
             ->add('city')
             ->add('phone')
+            ->add('roles', 'choice', array('multiple' => true,
+              'choices' => array('ROLE_STUDENT' => 'ROLE_STUDENT',
+                                 'ROLE_TD' => 'ROLE_TD',
+                                 'ROLE_ADMIN' => 'ROLE_ADMIN')))
+            ->add('enabled', 'checkbox', array('required'=>false))
         ;
     }
 
