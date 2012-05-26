@@ -3,3 +3,10 @@
 {% block fos_user_content %}
 {% include "UnsapaIPWBundle:Profile:edit_content.html.twig" %}
 {% endblock fos_user_content %}
+
+{% block footer_js %}
+  {% javascripts 
+  '@UnsapaIPWBundle/Resources/public/js/profile_edit.js' %}
+    <script type="text/javascript" src="{{ asset_url}}"></script>
+  {% endjavascripts %}
+{% endblock %}

@@ -10,7 +10,9 @@
     {{ form_row(form.phone) }}
     
 	{% if is_granted("ROLE_ADMIN") %}  
-		{{ form_row(form.promo) }}  
+    {{ form_row(form.promo) }}  
+    {{ form_row(form.enabled) }}
+    {{ form_row(form.roles) }}
   {% endif %} 
 
     {{ form_row(form._token) }} 
