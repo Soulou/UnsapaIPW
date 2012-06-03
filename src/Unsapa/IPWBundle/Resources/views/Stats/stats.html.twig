@@ -8,20 +8,20 @@
 <h2>Moyennes par promo</h2>
 <div id="stat_tables">
     <ul>
-        {% for stat in stats_by_promo %}
-        <li><a href="#{{stat['promo']}}">{{ stat['promo']}}</a></li>
+        {% for stat in stats_by_promo|keys %}
+        <li><a href="#{{stat }}">{{ stats_by_promo[stat]['promo'] }}</a></li>
         {% endfor %}
     </ul>
-    {% for stat in stats_by_promo %}
-    <div id="{{stat['promo']}}">
-            <h3>Stats pour la promo {{ stat['promo']}} (Moyenne: {{ stat['gen_average']|number_format(2) }})</h3>
+    {% for stat in stats_by_promo|keys %}
+    <div id="{{ stat }}">
+            <h3>Stats pour la promo {{ stats_by_promo[stat]['promo']}} (Moyenne: {{ stats_by_promo[stat]['gen_average']|number_format(2) }})</h3>
             <table id="stats_table">
                 <th></th>
                 <th class="table_header">Coefficient</th>
                 <th class="table_header">Date de fin</th>
                 <th class="table_header">Nombre de notes</th>
                 <th class="table_header">Moyenne</th>
-                {% for exam_data in stat['exams_data'] %}
+                {% for exam_data in stats_by_promo[stat]['exams_data'] %}
                 <tr>
                     <th class="table_header" scope="row">{{ exam_data['exam'] }}</th>
                     <td>{{ exam_data['exam'].coef }}</td>
