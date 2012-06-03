@@ -122,7 +122,7 @@ h2
 #login_form label
 {
   float:left;
-  width: 150px;
+  width: 160px;
   padding-right: 20px;
   text-align: right;
 }
@@ -137,7 +137,7 @@ h2
 #user_registration label
 {
   float:left;
-  width:140px;
+  width:160px;
   padding-right: 20px;
   text-align: right;
 }
@@ -219,7 +219,7 @@ h2
 
 /* Formulaire d'ajout d'examen */
 
-#exam_add_form
+#exam_add_form,#exam_edit_form
 {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -232,7 +232,7 @@ h2
   margin-left: 5px;
 }
 
-#exam_add_form label
+#exam_add_form,#exam_edit_form label
 {
   float: left;
   width: 120px;
@@ -240,7 +240,7 @@ h2
   margin-right: 20px;
 }
 
-#exam_add_form input[type="submit"]
+#exam_add_form,#exam_edit_form input[type="submit"]
 {
   margin-top: 8px;
   font-size: 18px;
@@ -289,6 +289,7 @@ h2
   margin-top: 25px;
   margin-left: 10px;
   padding-top: 5px;
+  padding-right: 50px;
   padding-bottom: 20px;
   text-indent: 8%;
 }
@@ -303,7 +304,7 @@ h2
 {
   font-weight: bold;
   float: left;
-  width: 40%;
+  width: 50%;
   text-align: right;
 }
 
@@ -349,7 +350,7 @@ h2
   -o-border-radius: 10px;
   border-radius: 10px;
   
-  width: 400px;
+  width: 150%;
   background-color: #FCCA88;
   margin-top: 25px;
   margin-left: 10px;
@@ -360,7 +361,7 @@ h2
 .fos_user_change_password label
 {
   float: left;
-  width: 190px;
+  width: 250px;
   text-align: right;
 }
 
