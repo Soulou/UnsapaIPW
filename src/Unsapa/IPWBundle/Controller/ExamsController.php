@@ -11,6 +11,7 @@ namespace Unsapa\IPWBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Unsapa\IPWBundle\Form\Type\ExamType;
 use Unsapa\IPWBundle\Entity\Record;
@@ -168,7 +169,26 @@ class ExamsController extends Controller
     public function indexAction()
     {
       $user = $this->get('security.context')->getToken()->getUser();
-      if($this->get('security.context')->isGranted("ROLE_TD"))
+      if($this->get('security.context')->isGranted("ROLE_ADMIN"))
+      {
+        $exams = $this->getDoctrine()
+          ->getRepository('UnsapaIPWBundle:Exam')
+          ->findAll();
+
+        $exams_pending = array();
+        $exams_ended = array();
+        $now = new \DateTime('now');
+        foreach($exams as $exam)
+        {
+          if($exam->getExamDate() >= $now)
+            array_push($exams_pending, $exam);
+          if($exam->getExamDate() < $now)
+            array_push($exams_ended, $exam);
+        }
+        return $this->render('UnsapaIPWBundle:Exams:index_admin.html.twig',
+          array('exams_pending' => $exams_pending, 'exams_ended' => $exams_ended));
+      }
+      else if($this->get('security.context')->isGranted("ROLE_TD"))
       {
         $exams = $this->getDoctrine()
           ->getRepository('UnsapaIPWBundle:Exam')
@@ -207,5 +227,90 @@ class ExamsController extends Controller
         return $this->render('UnsapaIPWBundle:Exams:index_student.html.twig', 
           array('records_pending' => $records_pending, 'records_ended' => $records_ended));
       }
+    }
+
+    public function editAction($id)
+    {
+      $exam = $this->getDoctrine()->getRepository("UnsapaIPWBundle:Exam")->find($id);
+      if($exam == NULL)
+        throw $this->createNotFoundException('Cet examen n\'existe pas');
+
+      if($this->get('security.context')->getToken()->getUser() != $exam->getResp() 
+        && !$this->get('security.context')->isGranted("ROLE_ADMIN"))
+        throw new AccessDeniedHttpException("Vous n'avez pas accès à cette resource");
+
+      $form = $this->createForm(new ExamType(), $exam);
+
+      if($this->getRequest()->getMethod() == "POST")
+      {
+        $oldPromo = $exam->getPromo();
+        try
+        {
+          $form->bindRequest($this->getRequest());
+          $error_date = false;
+        } catch (\ErrorException $e)
+        {
+          if($form->has("exam_date"))
+          {
+            $child = $form->get("exam_date");
+            $child->addError(new FormError("La date n'est pas valide"));
+            $error_date = true;
+          }
+        }
+
+        if(!$error_date && $form->isValid())
+        {
+          $manager = $this->get('doctrine')->getEntityManager();
+          $manager->persist($exam);
+          $manager->flush();
+
+          if($oldPromo != $exam->getPromo())
+          {
+            $records = $manager->createQuery(
+              "SELECT re FROM UnsapaIPWBundle:Record re JOIN re.student st WHERE st.promo = :promo")
+              ->setParameter("promo", $oldPromo)
+              ->getResult();
+            foreach($records as $r)
+            {
+              echo "Delete record " . $r->getStudent() . " " . $r->getExam();
+              $manager->remove($r);
+            }
+            $manager->flush();
+          }
+
+          $keys = $this->getRequest()->request->keys();
+          $users = array();
+          for($i = 0; $i < count($keys); $i++)
+          {
+            if(substr($keys[$i], 0, 4) == "user")
+            {
+              $id = substr($keys[$i], 4);
+              $user = $this->getDoctrine()->getRepository("UnsapaIPWBundle:User")->find($id);
+              if($user)
+              {
+                array_push($users, $user);
+              }
+            }
+          }
+
+          if(count($users) == 0)
+          {
+            $users = $this->get('doctrine')
+              ->getRepository("UnsapaIPWBundle:User")
+              ->findByPromo($exam->getPromo());
+          }
+
+          foreach($users as $user)
+          {
+            $record = new Record();
+            $record->setStudent($user);
+            $record->setExam($exam);
+            $manager->persist($record);
+            $manager->flush();
+          }
+          return $this->redirect($this->generateUrl('exams'), 301);
+        }
+      }
+      return $this->render('UnsapaIPWBundle:Exams:edit.html.twig', array('exam' => $exam, 'form' => $form->createView()));
     }
 }
