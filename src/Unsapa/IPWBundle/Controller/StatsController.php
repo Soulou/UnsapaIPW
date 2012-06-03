@@ -37,7 +37,7 @@ class StatsController extends Controller
         $stats_by_promo = array();
         foreach($promos as $promo)
         {
-            $pname = $promo->getName();
+            $pname = strtr($promo->getName(), " ", "_");
             $stats_by_promo[$pname] = array();
             $stats_by_promo[$pname]['promo'] = $promo;
             $stats_by_promo[$pname]['exams_data'] = array();
@@ -58,9 +58,9 @@ class StatsController extends Controller
         			$tmp_nb_marks += 1;
         			$tmp_sum += $mark;
         		}
-            }
+          }
 
-            $exam_data['nb_records'] = $tmp_nb_marks;
+          $exam_data['nb_records'] = $tmp_nb_marks;
         	
         	if ($tmp_nb_marks != 0)
         	{
@@ -68,23 +68,27 @@ class StatsController extends Controller
         	}
         	else $average = NULL;
 
-            $exam_data['average'] = $average;
-            $exam_data['balanced_average'] = $average*($exam->getCoef());
-            array_push($stats_by_promo[$exam->getPromo()->getName()]['exams_data'], $exam_data);
+          $exam_data['average'] = $average;
+          $exam_data['balanced_average'] = $average*($exam->getCoef());
+          array_push($stats_by_promo[$exam->getPromo()->getName()]['exams_data'], $exam_data);
         }
         
         
         foreach($promos as $promo)
         {
+          $promo_name = strtr($promo->getName(), " ", "_");
         	$tmp_sum_coef = 0;
         	$tmp_sum_averages = 0;
         	
-        	foreach( $stats_by_promo[$promo->getName()]['exams_data'] as $exam_data)
+        	foreach( $stats_by_promo[$promo_name]['exams_data'] as $exam_data)
         	{
         		$tmp_sum_coef += $exam_data['exam']->getCoef();
         		$tmp_sum_averages += $exam_data['balanced_average'];
-        	}
-        	$stats_by_promo[$promo->getName()]['gen_average'] = $tmp_sum_averages / $tmp_sum_coef;
+          }
+          if($tmp_sum_coef != 0)
+            $stats_by_promo[$promo_name]['gen_average'] = $tmp_sum_averages / $tmp_sum_coef;
+          else
+            $stats_by_promo[$promo_name]['gen_average'] = 0;
         }
 
     	return $this->render('UnsapaIPWBundle:Stats:stats.html.twig',
