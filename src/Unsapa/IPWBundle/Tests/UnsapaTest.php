@@ -121,12 +121,12 @@ class UnsapaTest extends WebTestCase
    * @param User $resp
    * @return Exam We want a new instance in each test.
    */
-  protected function createExam($promo, $resp, $date = NULL)
+  protected function createExam($promo, $resp, $date = NULL, $title = "ExamTest")
   {
     if($date == NULL)
-      $date = new \Datetime('now');
+      $date = (new \Datetime('now'))->add((new \DateInterval("P1D")));
     $exam = new Exam(array(
-      'title' => "ExamTest",
+      'title' => $title,
       'promo' => $promo,
       'exam_date' => $date,
       'exam_desc' => "ExamDesc",

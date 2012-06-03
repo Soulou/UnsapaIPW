@@ -194,6 +194,7 @@ class Record
             return;
         }
         $this->file->move($this->getDocumentUploadRootDir(), $this->document);
+        // Functionnal test on uploadAciton is necessary to test this last instruction
         unset($this->file);
     }
 
@@ -242,7 +243,7 @@ class Record
      **/
     public function getDocumentWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getDocument();
+        return $this->getDocumentUploadDir().'/'.$this->getDocument();
     }
 
     /**
