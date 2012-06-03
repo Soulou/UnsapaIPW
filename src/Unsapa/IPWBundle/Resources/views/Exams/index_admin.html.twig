@@ -1,0 +1,27 @@
+{% extends "UnsapaIPWBundle::layout.html.twig" %}
+
+{% block title %}Mes examens{% endblock %}
+
+{% block content %}
+<h1>Liste des examens</h1>
+<h2>Les examens en cours</h2>
+<div id="exams_pending">
+  <ul>
+  {% for exam in exams_pending %}
+    <li>
+      <a href="{{ path("exam_edit", { 'id': exam.id }) }}" alt="{{ exam }}">{{ exam }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+<h2>Les examens <strong>terminés</strong> :</h2>
+<div id="exams_ended">
+  <ul>
+  {% for exam in exams_ended %}
+    <li>
+      {{ exam }}
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
